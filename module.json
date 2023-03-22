@@ -1,0 +1,22 @@
+{
+	"cjc_version": "0.37.2",
+	"organization": "huangjie84@huawei",
+	"name": "uuid",
+	"description": "This library is used to generate UUIDs.",
+	"version": "0.0.1",
+	"requires": {
+		"cryptocj": {
+			"organization": "cangjie",
+			"version": "0.0.6",
+			"path": "./cryptocj"
+		}
+	},
+	"package_requires": {},
+	"foreign_requires": {},
+	"output_type": "dynamic",
+	"command_option": "--diagnostic-format=noColor",
+	"condition_option": {},
+	"link_option": "",
+	"cross_compile_configuration": {},
+	"package_configuration": {}
+}

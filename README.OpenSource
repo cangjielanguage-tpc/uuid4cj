@@ -1,11 +1,11 @@
 [
     {
-        "Name": " xxx",
+        "Name": " java-uuid-generator ",
         "License": " Apache License ",
         "License File": " LICENSE ",
         "Version Number": " v2.0 ",
-        "Owner": "xxx"
-        "Upstream URL": "https://github.com/xxx",
-        "Description": " xxx."
+        "Owner": " Tatu Saloranta "
+        "Upstream URL": " https://github.com/cowtowncoder/java-uuid-generator ",
+        "Description": " JUG is a set of Java classes for working with UUIDs: generating UUIDs using any of standard methods, outputting efficiently, sorting and so on. "
     }
 ]
