@@ -1,3 +1,13 @@
-.git/
-.gitee/
-.vscode/
+/.vscode
+/.git
+/.idea
+/module-resolve.json
+/build
+/bin
+/ci_test/
+/ci_lib/
+*.gcda
+*.gcno
+/output
+/cryptocj
+/test2

@@ -1,132 +1,173 @@
 <div align="center">
-<h1>库名</h1>
+<h1>UUID</h1>
 </div>
 
 <p align="center">
 <img alt="" src="https://img.shields.io/badge/release-v0.0.1-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v0.30.4-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjcov-50%25-red" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v0.37.2-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjcov-0%25-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
 
-## 介绍
+## <img alt="" src="./doc/assets/readme-icon-introduction.png" style="display: inline-block;" width=3%/> 介绍
 
-介绍库或者框架符合的标准，应用领域，解决什么问题。有哪些主要的特点，与同类库相比有哪些优点。
+UUID（通用唯一标识符），也称为GUID（全局唯一标识符）。UUID长度为128位，可以保证跨空间和时间的唯一性。
 
-### 特性
+参考地址：https://github.com/cowtowncoder/java-uuid-generator 版本 4.1.0 
 
-- 🚀 特性1
+**特性**：
 
-- 🚀 特性2
+- 🚀 基于名称生成 UUID 
 
-- 💪 特性3
+- 💪 基于时间/位置重新排序生成 UUID
 
-- 🛠️ 特性4
+- 🚀 基于当前时间戳、随机数、机器 MAC 地址生成 UUID
 
-- 🌍 特性5
+- 🌍 基于随机数生成 UUID
 
-- 💡  特性6
+- 💡 基于时间纪元生成 UUID 
 
-### 路线
+## <img alt="" src="./doc/assets/readme-icon-framework.png" style="display: inline-block;" width=3%/> 架构
 
-<p align="center">
-<img src="./doc/assets/milestone.png" width="100%" >
-</p>
-路线图roadmap在 doc/framework-roadmap-logo.pptx 中有源文件。
+![design](./doc/assets/design.png)
 
+1. 格式
 
-## 软件架构
+      在其规范的文本表示中，UUID 的 16 个 8 位字节表示为 32 个十六进制数字，由连字符 '-' 分隔成五组显示，形式为“8-4-4-4-12”总共 36 个字符（32 个十六进制数字和 4 个连字符）。
 
-### 架构图
+      例如：
 
-<p align="center">
-<img src="./doc/assets/framework.png" width="60%" >
-</p>
+      ```
+      123e4567-e89b-12d3-a456-426655440000
+      ```
 
-架构图文字说明，包括模块说明、架构层次等详细说明。
+2. 变体
+
+      变体字段确定UUID的布局。也就是说所有其他位的解释取决于变体的设置。变体字段由UUID的第8个字节的高3位。RFC 4122定义了4种变体：
+
+      x表示不关心值。
+
+      | Msb0 | Msb1 | Msb2 | 描述                                              |
+      | ---- | ---- | ---- | ------------------------------------------------- |
+      | 0    | x    | x    | 变体0，保留，NCS向后兼容性。                      |
+      | 1    | 0    | x    | 变体1，RFC 4122 UUID定义，也就是2.1.2描述的布局。 |
+      | 1    | 1    | x    | 变体2，保留，Microsoft Corporation向后兼容性。    |
+      | 1    | 1    | x    | 保留供将来定义使用。                              |
+
+      2.1 变体2布局
+
+      | 名称                      | 长度 （字节） | 字节索引 | 说明                                                 |
+      | ------------------------ | ------------ | ------- | --------------------------------------------------- |
+      | time_low                  | 4             | 0-3      | 整数：低位 32 bits 时间                              |
+      | time_mid                  | 2             | 4-5      | 整数：中间位 16 bits 时间                            |
+      | time_hi_and_version       | 2             | 6-7      | 最高有效位中的 4 bits“版本”，后面是高 12 bits 的时间 |
+      | clock_seq_hi_and_reserved | 1             | 8        | 最高有效位为 1-3 bits“变体”，后跟13-15 bits 时钟序列 |
+      | clock_seq_low             | 1             | 9        | 时钟序列的低位                                       |
+      | node                      | 6             | 10-15    | 48 bits 节点 ID                                      |
+
+3. 版本
+
+      对于变体1和变体2，标准中定义了5个版本。
+
+      版本数值位与第6个字节的高4位，即time_hi_and_version 字段的第4到第7位。
+
+      | Msb0 | Msb1 | Msb2 | Msb3 | Version | 意义                             |
+      | ---- | ---- | ---- | ---- | ------- | -------------------------------- |
+      | 0    | 0    | 0    | 1    | 1       | 基于时间的UUID                   |
+      | 0    | 0    | 1    | 0    | 2       | 基于时间的UUID，DEC安全版本      |
+      | 0    | 0    | 1    | 1    | 3       | 基于名称空间和MD5散列算法的UUID  |
+      | 0    | 1    | 0    | 0    | 4       | 基于随机数的UUID                 |
+      | 0    | 1    | 0    | 1    | 5       | 基于名称空间和SHA1散列算法的UUID |
+
+      3.1 版本4算法
+
+      版本4 UUID是从真正随机数或伪随机数生成UUID。
+
+      算法如下：
+
+      将时钟_seq_hi_and_reserve的两个最高有效位（位6和位7）分别设置为零和1。
+
+      将time_hi_and_version字段的四个最高有效位（位12至15）设置为版本4版本号。
+
+      将所有其他位设置为随机（或伪随机）选择的值。
+
+4. 字符串形式
+
+      4.1 标注形式
+
+      ```
+      UUID                   = time-low "-" time-mid "-"
+                                    time-high-and-version "-"
+                                    clock-seq-and-reserved
+                                    clock-seq-low "-" node
+            time-low               = 4hexOctet
+            time-mid               = 2hexOctet
+            time-high-and-version  = 2hexOctet
+            clock-seq-and-reserved = hexOctet
+            clock-seq-low          = hexOctet
+            node                   = 6hexOctet
+            hexOctet               = hexDigit hexDigit
+            hexDigit =
+                  "0" / "1" / "2" / "3" / "4" / "5" / "6" / "7" / "8" / "9" /
+                  "a" / "b" / "c" / "d" / "e" / "f" /
+                  "A" / "B" / "C" / "D" / "E" / "F"
+      ```
+
+      4.2 URN形式
+
+      ```
+      urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
+      ```
 
 ### 源码目录
 
 ```shell
 .
-├── README.md
 ├── doc
-│   ├── assets
-│   ├── cjcov
-│   ├── design.md
-│   ├── proposal.md
-│   └── xxx_lib.md
 ├── src
-│   └── Template.cj
+│   ├── uuid
 └── test
-    ├── HLT
-    ├── LLT
-    └── UT
+│   ├── HLT
+│   ├── LLT
+│   └── UT
+├── CHANGELOG.md
+├── gitee_gate.cfg
+├── LICENSE.txt
+├── module.json
+├── README.md
+├── README.OpenSource
 ```
 
-- `doc`  文档目录，用于存放设计、API接口等文档
-- `src`  源码目录
-- `test` 测试目录
+- `doc` 存放库的设计文档、使用文档、LLT 用例覆盖报告
+- `src` 是库源码目录
+- `test` 存放 HLT 测试用例、LLT 自测用例和 UT 单元测试用例
 
 ### 接口说明
 
-主要类和函数接口说明详见 [API](./doc/api.md)
+主要核心类和全局函数说明,详情见 [API](./doc/feature_api.md)
 
+## <img alt="" src="./doc/assets/readme-icon-compile.png" style="display: inline-block;" width=3%/> 使用说明
 
-## 使用说明
+### 编译
 
-### 编译构建
-
-描述具体的编译过程：
-
-```shell
-cpm update
-cpm build
+```
+cpm build 
 ```
 
 ### 功能示例
-#### xxx 功能示例
 
-功能示例描述:
+#### XX使用样例
 
-示例代码如下：
-
-```cangjie
-import xxx.*
-main() {
- xxxx
-}
 ```
 
-执行结果如下：
+```
+执行结果:
 
-```shell
-xxx
 ```
 
-#### xxxx 功能示例
-
-功能示例描述:
-
-示例代码如下：
-
-```cangjie
-import xxx.*
-main() {
- xxxx
-}
 ```
 
-执行结果如下：
+## <img alt="" src="./doc/assets/readme-icon-contribute.png" style="display: inline-block;" width=3%/>参与贡献
 
-```shell
-xxx
-```
-
-## 开源协议
-xx License
-
-## 参与贡献
-
-欢迎给我们提交PR，欢迎给我们提交Issue，欢迎参与任何形式的贡献。
+欢迎给我们提交 PR，欢迎给我们提交 issue，欢迎参与任何形式的贡献。
