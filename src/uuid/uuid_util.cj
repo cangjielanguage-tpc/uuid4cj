@@ -131,7 +131,7 @@ public class UUIDUtil {
         return ll2
     }
     
-
+    @overflowWrapping
     public static func typeOf(uuid: UUID): ?UUIDType {
         // Ok: so 4 MSB of byte at offset 6...
         let l: Int64 = uuid.getMostSignificantBits()
