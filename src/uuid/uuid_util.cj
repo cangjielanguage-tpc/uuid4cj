@@ -1,5 +1,13 @@
+/*
+ * Copyright (c) Cangjie Library Team 2023-2023. All rights resvered.
+ */
+
 package uuid
 
+/*
+ * The class is UUIDUtil
+ * @since 0.37.2
+ */
 public class UUIDUtil {
     public static let BYTE_OFFSET_CLOCK_LO: Int32 = 0
     public static let BYTE_OFFSET_CLOCK_MID: Int32 = 4
@@ -9,17 +17,35 @@ public class UUIDUtil {
     public static let BYTE_OFFSET_VARIATION: Int32 = 8
     private static let NIL_UUID: UUID = UUID.nilUUID()
     private static let MAX_UUID: UUID = UUID(-1, -1)
- 
-    public init() { }
-
+    
+    /**
+     * one that is all zeroes.
+     *
+     * @return UUID
+     */
     public static func nilUUID(): UUID {
         return NIL_UUID
     }
 
+    /**
+     * Accessor for so-call "Max UUID"
+     * one that is all one bits
+     *
+     * @return UUID
+     */
     public static func maxUUID(): UUID {
         return MAX_UUID
     }
-
+    
+    /**
+     * Factory method for creating UUIDs from the canonical string representation.
+     *
+     * @param id - String that contains the canonical representation of the UUID to build;
+     *             36-char string. Hex-chars may be in upper-case too; 
+     *             UUID class will always output them in lowercase.
+     *              
+     * @return UUID
+     */
     public static func uuid(id: String): UUID {
         if (id.size != 36) {
             throw UUIDException("UUID has to be represented by the standard 36-char representation")
@@ -76,18 +102,44 @@ public class UUIDUtil {
         }		
         return UUID(hi, lo)
     }
-    //need 16 bytes
+
+    /**
+     * Factory method for constructing {@link UUID} instance from given 16 bytes.
+     * NOTE: since absolutely no validation is done for contents, this method should
+     * only be used if contents are known to be valid.
+     *
+     * @param bytes - Valid arrays
+     * @return UUID
+     */
     public static func uuid(bytes: Array<Int8>): UUID {
         checkUUIDByteArray(bytes, 0)
         let l1: Int64 = gatherLong(bytes, 0)
         let l2: Int64 = gatherLong(bytes, 8)
         return UUID(l1, l2)
     }
+
+    /**
+     * Factory method for constructing {@link UUID} instance from given
+     * 16 bytes.
+     * NOTE: since absolutely no validation is done for contents, this method should
+     * only be used if contents are known to be valid.
+     * 
+     * @param bytes Array that contains sequence of 16 bytes that contain a valid UUID
+     * @param offset Offset of the first of 16 bytes
+     * @return UUID
+     */
     public static func uuid(bytes: Array<Int8>, offset: Int32): UUID {
         checkUUIDByteArray(bytes, offset)
         return UUID(gatherLong(bytes, offset), gatherLong(bytes, offset + 8))
     }
 
+    /**
+     * Helper method for constructing UUID instances with appropriate type
+     * 
+     * @param types - UUIDType
+     * @param uuidBytes - 16 bytes array
+     * @return UUID
+     */
     @overflowWrapping
     public static func constructUUID(types: UUIDType, uuidBytes: Array<Int8>): UUID {
         // first, ensure type is ok
@@ -100,7 +152,14 @@ public class UUIDUtil {
         uuidBytes[Int64(BYTE_OFFSET_VARIATION)] = Int8(b)
         return uuid(uuidBytes)
     }
-
+    
+    /**
+     * Helper method for constructing UUID instances with appropriate type
+     * 
+     * @param l1 - the least significant 64 bits of this UUID's 128 bit value.
+     * @param l2 - the most significant 64 bits of this UUID's 128 bit value.
+     * @return UUID
+     */
     public static func constructUUID(types: UUIDType, l1: Int64, l2: Int64): UUID {
         var ll1: Int64 = l1
         var ll2: Int64 = l2
@@ -112,11 +171,25 @@ public class UUIDUtil {
         ll2 |= (2 << 62) // set 2 MSB to '10'
         return UUID(ll1, ll2)
     }
-
+    
+    /**
+     * Initialize the least significant 64 bits of the 128 bit value of this UUID based on type
+     * 
+     * @param l1 - the least significant 64 bits of this UUID's 128 bit value.
+     * @param types - UUIDType.
+     * @return Int64
+     */
     public static func initUUIDFirstLong(l1: Int64, types: UUIDType): Int64 {
         return initUUIDFirstLong(l1, Int32(types.raw()))
     }
 
+    /**
+     * Initialize the least significant 64 bits of the 128 bit value of this UUID based on type
+     * 
+     * @param l1 - the least significant 64 bits of this UUID's 128 bit value.
+     * @param rawType - UUIDType.raw()
+     * @return Int64
+     */
     public static func initUUIDFirstLong(l1: Int64, rawType: Int32): Int64 {
         var ll1: Int64 = l1
         ll1 &= (!0xF000) // remove high nibble of 6th byte
@@ -124,6 +197,12 @@ public class UUIDUtil {
         return ll1
     }
 
+    /**
+     * Initialize the least significant 64 bits of the 128 bit value
+     * 
+     * @param l2 - the least significant 64 bits of this UUID's 128 bit value.
+     * @return Int64
+     */
     public static func initUUIDSecondLong(l2: Int64): Int64 {
         var ll2: Int64 = l2
         ll2 = rightShift((ll2 << 2), 2) // remove 2 MSB
@@ -131,6 +210,14 @@ public class UUIDUtil {
         return ll2
     }
     
+    /**
+     * Method for determining which type of UUID given UUID is.
+     * 
+     * @param uuid - UUID to check
+     * 
+     * @return UUIDType - UUIDType
+     *                    NoneValueException  
+     */
     @overflowWrapping
     public static func typeOf(uuid: UUID): ?UUIDType {
         // Ok: so 4 MSB of byte at offset 6...
@@ -164,6 +251,13 @@ public class UUIDUtil {
         return Option<UUIDType>.None
     }
 
+    /**
+     * Get the Array of UUID
+     * 
+     * @param uuid - UUID to check
+     * 
+     * @return Array<Int8>
+     */
     @overflowWrapping
     public static func asByteArray(uuid: UUID): Array<Int8> {
         let hi: Int64 = uuid.getMostSignificantBits()
@@ -176,10 +270,25 @@ public class UUIDUtil {
         return result
     }
 
+    /**
+     * if you have longer buffer already
+     * 
+     * @param uuid - UUID to check
+     * @param buffer - buffer
+     * @return Unit
+     */
     public static func toByteArray(uuid: UUID, buffer: Array<Int8>): Unit {
         toByteArray(uuid, buffer, 0)
     }
 
+    /**
+     * if you have longer buffer already,append at position {@code offset}
+     * 
+     * @param uuid - UUID to check
+     * @param buffer - buffer
+     * @param offset - position
+     * @return Unit
+     */
     @overflowWrapping
     public static func toByteArray(uuid: UUID, buffer: Array<Int8>, offset: Int32): Unit {
         checkUUIDByteArray(buffer, offset)
