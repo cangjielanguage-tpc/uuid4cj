@@ -9,6 +9,11 @@
 			"organization": "cangjie",
 			"version": "0.0.6",
 			"path": "./cryptocj"
+		},
+		"charset": {
+			"organization": "zft",
+			"version": "0.0.1",
+			"path": "./charset"
 		}
 	},
 	"package_requires": {},

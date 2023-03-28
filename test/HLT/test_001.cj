@@ -1,5 +1,6 @@
 //3rd_party_lib:uuid/build/uuid
 //3rd_party_lib:jwt/ci_lib/cryptocj
+//3rd_party_lib:jwt/ci_lib/charset
 
 from std import unittest.*
 from std import unittest.testmacro.*
