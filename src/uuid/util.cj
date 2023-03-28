@@ -72,3 +72,29 @@ func rightShift(value: Int64, bits: Int64): Int64 {
     let b = max >> (bits - 1)
     return b & (value >> bits)
 }
+
+/*
+ * Array<UInt8> -> Array<Int8>
+ */
+
+@overflowWrapping
+func UInt8ToInt8(arr: Array<UInt8>): Array<Int8> {
+    var res: Array<Int8> = Array<Int8>(arr.size, item: 0)
+    for( i in 0..arr.size) {
+        res[i] = Int8(arr[i])
+    }
+    return res
+}
+
+/*
+ * Array<Int8> -> Array<UInt8>
+ */
+
+@overflowWrapping
+func Int8ToUInt8(arr: Array<Int8>): Array<UInt8> {
+    var res: Array<UInt8> = Array<UInt8>(arr.size, item: 0)
+    for( i in 0..arr.size) {
+        res[i] = UInt8(arr[i])
+    }
+    return res
+}

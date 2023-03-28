@@ -83,7 +83,7 @@ public class UUID <: ToString {
      */
     public static func nameUUIDFromBytes(name: Array<UInt8>): UUID {
         var md: MessageDigest = MessageDigest(DigestType.MD5)
-        var md5Bytes: Array<UInt8> = md.digest(name)
+        var md5Bytes: Array<UInt8> = md.digest(input: name)
         md5Bytes[6]  &= 0x0f  /* clear version        */
         md5Bytes[6]  |= 0x30  /* set to version 3     */
         md5Bytes[8]  &= 0x3f  /* clear variant        */
