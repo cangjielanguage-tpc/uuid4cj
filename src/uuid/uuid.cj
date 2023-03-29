@@ -19,7 +19,7 @@ public class UUID <: ToString {
         var msb: Int64 = 0
         var lsb: Int64 = 0
         if(data.size != 16) {
-            throw UUIDException("data must be 16 bytes in length")
+            throw IllegalArgumentException("data must be 16 bytes in length")
         }
         var k: Int64 = 0
         for(i in 0..8) {
@@ -101,7 +101,7 @@ public class UUID <: ToString {
     public static func fromString(name: String): UUID {
         let components: Array<String> = name.split("-")
         if (components.size != 5) {
-            throw UUIDException("Invalid UUID string: " + name)
+            throw IllegalArgumentException("Invalid UUID string: " + name)
         }
         var k: Int64 = 0
         for( i in 0..5) {
@@ -224,7 +224,7 @@ public class UUID <: ToString {
      */
     public func timestamp(): Int64 {
         if (version() != 1) {
-            throw UUIDException("Not a time-based UUID")
+            throw UnsupportedOperationException("Not a time-based UUID")
         }
 
         return (mostSigBits & 0x0FFF) << 48 | ((mostSigBits >> 16) & 0x0FFFF) << 32 | rightShift(mostSigBits, 32)
@@ -245,7 +245,7 @@ public class UUID <: ToString {
      */
     public func clockSequence(): Int32 {
         if (version() != 1) {
-            throw UUIDException ("Not a time-based UUID")
+            throw UnsupportedOperationException ("Not a time-based UUID")
         }
         return Int32(rightShift((leastSigBits & 0x3FFF000000000000), 48))
     }  
@@ -265,7 +265,7 @@ public class UUID <: ToString {
      */
     public func node(): Int64 {
         if (version() != 1) {
-            throw UUIDException("Not a time-based UUID")
+            throw UnsupportedOperationException("Not a time-based UUID")
         }
 
         return leastSigBits & 0x0000FFFFFFFFFFFF

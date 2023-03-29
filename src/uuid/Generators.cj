@@ -1,9 +1,13 @@
 /*
- * @Copyright (c) Huawei Technologies Co., Ltd. 2022-2022. All rights reserved.
+ * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2023. All rights reserved.
  */
 
 package uuid
 
+/*
+ * The class is UUID generators
+ * @since 0.37.2
+ */
 public class Generators{
 
 
@@ -15,14 +19,47 @@ public class Generators{
         return  RandomBasedGenerator(rnd)
     }
 
+    /*
+     * Factory method for constructing UUID generator that uses specified
+     * random number generator for constructing UUIDs according to standard
+     * method number 5, but without using a namespace.
+     * Digester to use will be SHA-1 as recommened by UUID spec.
+     *
+     * @return NameBasedGenerator
+     */
     public static func nameBasedGenerator(): NameBasedGenerator {
         return NameBasedGenerator(Option<UUID>.None, Option<MessageDigest>.None, Option<UUIDType>.None)
     }
 
+    /**
+     * Factory method for constructing UUID generator that uses specified
+     * random number generator for constructing UUIDs according to standard
+     * method number 5, with specified namespace (or without one if null
+     * is specified).
+     * Digester to use will be SHA-1 as recommened by UUID spec.
+     * 
+     * @param namespace UUID that represents namespace to use; see
+     *   {@link NameBasedGenerator} for 'standard' namespaces specified by
+     *   UUID specs
+     * @return NameBasedGenerator
+     */
     public static func nameBasedGenerator(namespace: UUID): NameBasedGenerator {
         return NameBasedGenerator(namespace, Option<MessageDigest>.None, Option<UUIDType>.None)
     }
 
+    /**
+     * Factory method for constructing UUID generator that uses specified
+     * random number generator for constructing UUIDs according to standard
+     * method number 3 or 5, with specified namespace (or without one if null
+     * is specified), using specified digester.
+     * If digester is passed as null, a SHA-1 digester will be constructed.
+     * 
+     * @param namespace UUID that represents namespace to use; see
+     *   {@link NameBasedGenerator} for 'standard' namespaces specified by
+     *   UUID specs
+     * @param digester Digester to use; should be a MD5 or SHA-1 digester.
+     * @return NameBasedGenerator
+     */
     public static func nameBasedGenerator(namespace: UUID, digester: MessageDigest): NameBasedGenerator {
         return NameBasedGenerator(namespace, digester, Option<UUIDType>.None)
     }

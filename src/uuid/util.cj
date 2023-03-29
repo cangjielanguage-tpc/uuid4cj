@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Cangjie Library Team 2023-2024. All rights resvered.
+ * Copyright (c) Cangjie Library Team 2023-2023. All rights resvered.
  */
 
 /**
@@ -11,10 +11,10 @@
 package uuid
 
 /*
- * The class is uuid exception handling
+ * The class is Unsupported Operation exception
  * @since 0.37.2
  */
-public class UUIDException <: Exception {
+public class UnsupportedOperationException <: Exception {
     init() {
         super()
     }
@@ -22,7 +22,6 @@ public class UUIDException <: Exception {
         super(messages)
     }
 }
-
 
 /*
  * The class is uuid exception handling
