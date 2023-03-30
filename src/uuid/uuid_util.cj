@@ -48,7 +48,7 @@ public class UUIDUtil {
      */
     public static func uuid(id: String): UUID {
         if (id.size != 36) {
-            throw UUIDException("UUID has to be represented by the standard 36-char representation")
+            throw NumberFormatException("UUID has to be represented by the standard 36-char representation")
         }
 
         var lo: Int64 = 0
@@ -62,7 +62,7 @@ public class UUIDUtil {
             // Need to bypass hyphens:
             if( i == 8 || i == 13 || i == 18 || i == 23) {
                 if (id.charAt(i) != '-') {
-                        throw UUIDException("UUID has to be represented by the standard 36-char representation")
+                        throw NumberFormatException("UUID has to be represented by the standard 36-char representation")
                     }
                 i++
             }
@@ -77,7 +77,7 @@ public class UUIDUtil {
             } else if (c >= 'A' && c <= 'F') {
                 curr = Int32(UInt32(c) - UInt32('A') + 10)
             } else {
-                throw UUIDException("Non-hex character at #${i}: '${c}' (value ${UInt32(c).format("0x")})")
+                throw NumberFormatException("Non-hex character at #${i}: '${c}' (value ${UInt32(c).format("0x")})")
             }
             curr = (curr << 4)
             i++
@@ -90,7 +90,7 @@ public class UUIDUtil {
             } else if (c >= 'A' && c <= 'F') {
                 curr |= Int32(UInt32(c) - UInt32('A') + 10)
             } else {
-                throw UUIDException("Non-hex character at #${i}: '${c}' (value ${UInt32(c).format("0x")})")
+                throw NumberFormatException("Non-hex character at #${i}: '${c}' (value ${UInt32(c).format("0x")})")
             }
             if (j < 8) {
             	hi = (hi << 8) | Int64(curr)
@@ -324,13 +324,13 @@ public class UUIDUtil {
 
     private static func checkUUIDByteArray(bytes: Array<Int8>, offset: Int32): Unit {
         if (bytes.size == 0) {
-            throw UUIDException("Invalid bytes passed: can not be null")
+            throw IllegalArgumentException("Invalid bytes passed: can not be null")
         }
         if (offset < 0) {
-            throw UUIDException("Invalid offset (${offset}) passed: can not be negative")
+            throw IllegalArgumentException("Invalid offset (${offset}) passed: can not be negative")
         }
         if ((offset + 16) > Int32(bytes.size)) {
-            throw UUIDException("Invalid offset (${offset}) passed: not enough room in byte array (need 16 bytes)")
+            throw IllegalArgumentException("Invalid offset (${offset}) passed: not enough room in byte array (need 16 bytes)")
         }
     }    
 }

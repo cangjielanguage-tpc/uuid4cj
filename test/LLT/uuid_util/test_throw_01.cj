@@ -7,7 +7,7 @@ main() {
     var s: Array<Int8> = [104, 101, 108, 108, 111, 119, 111, 114, 108]
     try {
         UUIDUtil.uuid(s)
-    } catch(e: UUIDException) {
+    } catch(e: IllegalArgumentException) {
         if(!e.toString().contains("Invalid offset (0) passed: not enough room in byte array (need 16 bytes)")) {
             return -1
         }

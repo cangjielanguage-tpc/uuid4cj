@@ -40,7 +40,7 @@ func testToByteArraySmall(): Int32 {
         let test_uuid = UUIDUtil.nilUUID()
         let uuid_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH - 1, item: 0)
         UUIDUtil.toByteArray(test_uuid, uuid_array, 0)
-    }catch(e: UUIDException) {
+    }catch(e: IllegalArgumentException) {
         if(!e.toString().contains("Exception: Invalid offset (0) passed: not enough room in byte array (need 16 bytes)")) {
             return -3
         }
@@ -55,7 +55,7 @@ func testToByteArrayNegativeIndex(): Int32 {
         let test_uuid = UUIDUtil.nilUUID()
         let uuid_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH, item: 0)
         UUIDUtil.toByteArray(test_uuid, uuid_array, -1)
-    }catch(e: UUIDException) {
+    }catch(e: IllegalArgumentException) {
         if(!e.toString().contains("Exception: Invalid offset (-1) passed: can not be negative")) {
             return -3
         }
@@ -70,7 +70,7 @@ func testToByteArrayBigIndex(): Int32 {
         let test_uuid = UUIDUtil.nilUUID()
         let uuid_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH, item: 0)
         UUIDUtil.toByteArray(test_uuid, uuid_array, Int32(UUID_BYTE_ARRAY_LENGTH))
-    }catch(e: UUIDException) {
+    }catch(e: IllegalArgumentException) {
         if(!e.toString().contains("Exception: Invalid offset (16) passed: not enough room in byte array (need 16 bytes)")) {
             return -3
         }
@@ -86,7 +86,7 @@ func testToByteArrayArrayIndex(): Int32 {
         let test_uuid = UUIDUtil.nilUUID()
         let uuid_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH, item: 0)
         UUIDUtil.toByteArray(test_uuid, uuid_array, 1)
-    }catch(e: UUIDException) {
+    }catch(e: IllegalArgumentException) {
         if(!e.toString().contains("Exception: Invalid offset (1) passed: not enough room in byte array (need 16 bytes)")) {
             return -3
         }

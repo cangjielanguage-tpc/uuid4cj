@@ -28,7 +28,7 @@ main() {
 func badStringUUIDConstructorHelper(s: String): Int32 {
     try {
         UUIDUtil.uuid(s)
-    }catch(e: UUIDException) {
+    }catch(e: NumberFormatException) {
         if(!e.toString().contains("UUID has to be represented by the standard 36-char representation")) {
             return -1
         }

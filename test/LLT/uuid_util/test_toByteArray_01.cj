@@ -32,7 +32,7 @@ func testToByteArrayNull(): Int32 {
     try {
         let uuid1 = UUIDUtil.nilUUID()
         UUIDUtil.toByteArray(uuid1, Array<Int8>())
-    }catch(e: UUIDException) {
+    }catch(e: IllegalArgumentException) {
         if(!e.toString().contains("Exception: Invalid bytes passed: can not be null")) {
             return -1
         }
@@ -47,7 +47,7 @@ func testToByteArraySmall(): Int32 {
         let uuid2 = UUIDUtil.nilUUID()
         let arr: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH - 1, item: 0)
         UUIDUtil.toByteArray(uuid2, arr)
-    }catch(e: UUIDException) {
+    }catch(e: IllegalArgumentException) {
         if(!e.toString().contains("Exception: Invalid offset (0) passed: not enough room in byte array (need 16 bytes)")) {
             return -3
         }
