@@ -157,17 +157,133 @@ cpm build
 
 ### 功能示例
 
-#### XX使用样例
+#### 基于名称 MD5 生成 UUID 使用样例
+
+```cangjie
+from uuid import uuid.*
+
+main() {   
+    var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
+    var name: NameBasedGenerator = Generators.nameBasedGenerator(namespace, MessageDigest(DigestType.MD5))
+    let uuid: UUID = name.generate("helloworld")
+    println("UUIDType: ${name.getType().raw()}")
+    println("基于MD5摘要生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
 
 ```
-
-```
-执行结果:
-
+UUIDType: 3
+基于MD5摘要生成的UUID: c464cb54-da68-36d5-a15b-6ebbd2bd02ec
 ```
 
+#### 基于名称 SHA1 生成 UUID 使用样例
+
+```cangjie
+from uuid import uuid.*
+
+main() {   
+    var name: NameBasedGenerator = Generators.nameBasedGenerator()
+    let uuid: UUID = name.generate("helloworld")
+    println("UUIDType: ${name.getType().raw()}")
+    println("基于SHA1摘要生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 5
+基于SHA1摘要生成的UUID: 6adfb183-a4a2-594a-af92-dab5ade762a4
 ```
 
+```cangjie
+from uuid import uuid.*
+
+main() {   
+    var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
+    var name: NameBasedGenerator = Generators.nameBasedGenerator(namespace)
+    let uuid: UUID = name.generate("helloworld")
+    println("UUIDType: ${name.getType().raw()}")
+    println("基于SHA1摘要生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 5
+基于SHA1摘要生成的UUID: 4684684f-d5ae-5e83-95e4-adecc6bb2135
+```
+
+```cangjie
+from uuid import uuid.*
+
+main() {   
+    var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
+    var name: NameBasedGenerator = Generators.nameBasedGenerator(namespace, MessageDigest(DigestType.SHA1))
+    let uuid: UUID = name.generate("helloworld")
+    println("UUIDType: ${name.getType().raw()}")
+    println("基于SHA1摘要生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 5
+基于SHA1摘要生成的UUID: 4684684f-d5ae-5e83-95e4-adecc6bb2135
+```
+#### 基于随机数 生成 UUID 使用样例
+
+```cangjie
+from uuid import uuid.*
+from crypto import crypto.SecureRandom
+from std import random.*
+
+main() {  
+
+    let _random: Random = Random()
+    let b: RandomBasedGenerator = Generators.randomBasedGenerator(_random)
+    let uuid: UUID = b.generate()
+    println("基于Random随机生成的UUID: ${uuid.toString()}")
+    if(uuid.version() != 4) {
+        return -1
+    }
+    return 0
+    
+}
+```
+执行结果如下：
+
+```
+UUIDType: 4
+基于Random随机生成的UUID: c259ecfd-bbf0-4e28-8ea2-03d10194b80a
+```
+```cangjie
+from uuid import uuid.*
+from crypto import crypto.SecureRandom
+from std import random.*
+
+main() {  
+    
+    let _sRandom: SecureRandom = LazyRandom.sharedSecureRandom();
+    let a: RandomBasedGenerator = Generators.randomBasedGenerator(_sRandom)
+    let uuid: UUID = a.generate()
+    println("基于SecureRandom随机生成的UUID: ${uuid.toString()}")
+    if(uuid.version() != 4) {
+        return -1
+    }
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 4
+基于SecureRandom随机生成的UUID: 1c290f65-05c7-4426-a90f-6505c7f426e6
+```
 ## <img alt="" src="./doc/assets/readme-icon-contribute.png" style="display: inline-block;" width=3%/>参与贡献
 
 欢迎给我们提交 PR，欢迎给我们提交 issue，欢迎参与任何形式的贡献。
