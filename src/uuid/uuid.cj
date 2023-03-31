@@ -197,7 +197,7 @@ public class UUID <: ToString {
      * The variant number has the following meaning:
      *
      * 0    Reserved for NCS backward compatibility
-     * 2    <a href="http://www.ietf.org/rfc/rfc4122.txt">4122</a>
+     * 2    4122
      * (Leach-Salz), used by this class
      * 6    Reserved, Microsoft Corporation backward compatibility
      * 7    Reserved for future definition
