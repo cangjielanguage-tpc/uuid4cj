@@ -20,6 +20,8 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
 
     private var _asString = Option<String>.None
 
+    
+
     public init(addrStr:String){
 
         let len = addrStr.size
@@ -96,7 +98,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
             throw  NumberFormatException("Ethernet address has to consist of 6 bytes")
         }
         var l:Int64 = Int64(addr[0] & 0xFF)
-        for (i in 0..6) {
+        for (i in 1..6) {
             l = (l << 8) | Int64(addr[i] & 0xFF)
         }
         _address = l
@@ -131,12 +133,9 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         return EthernetAddress(addr)
     }
 
-
     public static func constructMulticastAddress():EthernetAddress{
         return constructMulticastAddress(_randomNumberGenerator())
     }
-
-
 
     static let m1: MultiConditionMonitor = MultiConditionMonitor()
 
@@ -149,18 +148,15 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         return EthernetAddress(dummy)
     }
 
-
     public func asByteArray():Array<UInt8>{
         var result:Array<UInt8> = Array<UInt8>(6,item:0)
         toByteArray(result)
         return result
     }
 
-
     public func toByteArray():Array<UInt8>{
         return asByteArray()
     }
-
 
     public func toByteArray(array:Array<UInt8>):Unit{
         if (array.size < 6) {
@@ -169,27 +165,26 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         toByteArray(array, 0)
     }
 
-
-    public func toByteArray(array:Array<UInt8>,pos:Int64):Unit{
-         if (pos < 0 || (pos + 6) > array.size) {
+    @overflowWrapping
+    public func toByteArray(uuidBytesArray:Array<UInt8>,pos:Int64):Unit{
+         if (pos < 0 || (pos + 6) > uuidBytesArray.size) {
             throw  IllegalArgumentException("Illegal offset ("+pos.toString()+"), need room for 6 bytes")
         }
         var temppos = pos
         var i:Int32 = Int32(_address >> 32)
+        uuidBytesArray[temppos] = UInt8(i >> 8)
         temppos++
-        array[temppos] = UInt8(i >> 8)
+        uuidBytesArray[temppos] = UInt8(i)
         temppos++
-        array[temppos] = UInt8(i)
         i = Int32(_address)
+        uuidBytesArray[temppos] = UInt8(i >> 24)
         temppos++
-        array[temppos] = UInt8(i >> 24)
+        uuidBytesArray[temppos] = UInt8(i >> 16)
         temppos++
-        array[temppos] = UInt8(i >> 16)
+        uuidBytesArray[temppos] = UInt8(i >> 8)
         temppos++
-        array[temppos] = UInt8(i >> 8)
-        array[temppos] = UInt8(i)
+        uuidBytesArray[temppos] = UInt8(i)
     }
-
 
     public func toLong():Int64{
         return _address
@@ -199,21 +194,17 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         return ((Int32(_address >> 40)) & 0x01) != 0
     }
 
-
     public func isLocallyAdministeredAddress():Bool{
         return ((Int32(_address >> 40)) & 0x02) != 0
     }
 
-
-
     public operator func ==(anothor: EthernetAddress): Bool{
          if(this._address == anothor._address){
             return true
+            
          }
         return false
     }
-
-
 
     public operator func !=(anothor: EthernetAddress): Bool{
         if(this._address != anothor._address){
@@ -222,22 +213,9 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         return false
     }
 
-
     public func hashCode(): Int64{
         return Int64(_address) ^ Int64(rightShift(_address,32))
     }
-
-
-    // public func compare(rhs: EthernetAddress): Ordering{
-    //     let l = this._address - rhs._address
-    //     if(l>0){
-    //         return Ordering.GT
-    //     }else if(l == 0){
-    //         return Ordering.EQ
-    //     }else{
-    //         return Ordering.LT
-    //     }
-    // }
 
     public func toString(): String{
         var str = _asString
@@ -265,28 +243,21 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         return str.getOrThrow()
     }
 
-
-
-
     static let m: MultiConditionMonitor = MultiConditionMonitor()
-
 
     protected static func _randomNumberGenerator():SecureRandom{
         synchronized(m) {
-            if(let Some(i) = _rnd){
-
-            }else{
-                _rnd = Option<SecureRandom>.Some(SecureRandom())
+            _rnd = match (_rnd) {
+                case Some(v) => _rnd
+                case None => SecureRandom()
             }
             return _rnd.getOrThrow()
         }
     }
 
-
     private func _appendHex(sb:StringBuilder,hex:Int64):Unit{
         sb.append(HEX_CHARS[(hex >> 4) & 0xF])
         sb.append(HEX_CHARS[(hex & 0x0f)])
     }
-
 
 }

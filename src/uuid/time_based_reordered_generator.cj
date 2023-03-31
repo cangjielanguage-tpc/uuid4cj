@@ -27,10 +27,6 @@ public class TimeBasedReorderedGenerator <: NoArgGenerator{
         _ethernetAddress.getOrThrow().toByteArray(uuidBytes, 10)
 
         let clockSeq:Int32 = timer.getClockSequence()
-        //uuidBytes[UUIDUtil.BYTE_OFFSET_CLOCK_SEQUENCE] = UInt8(clockSeq >> 8)
-        //uuidBytes[UUIDUtil.BYTE_OFFSET_CLOCK_SEQUENCE+1] = UInt8(clockSeq)
-        // long l2 = UUIDUtil.gatherLong(uuidBytes, 8)
-        // _uuidL2 = UUIDUtil.initUUIDSecondLong(l2)
         _timer = timer
     }
 
