@@ -20,18 +20,6 @@ public class TimeBasedEpochGenerator{
         return UUIDType.TIME_BASED_EPOCH
     }
 
-
-
-    // public func generate():UUID{
-    //     let rawTimestamp:Int64 = Time.now().unixTimeStamp().nanoseconds() / 1000 /1000
-    //     var rnd:Array<UInt8> = Array<UInt8>(10,item:0)
-    //     var newRnd:Array<UInt8> = _random.nextUInt8s(rnd)
-    //     var l1 = (rawTimestamp << 16) | _toShort(newRnd, 8)
-    //     var l2 = _toLong(newRnd, 0)
-    //     return UUIDUtil.constructUUID(UUIDType.TIME_BASED_EPOCH, l1, l2)
-    // }
-
-
     protected static func  _toLong(buffer:Array<UInt8>,offset:Int64):Int64{
         var l1:Int64 = _toInt(buffer, offset)
         var l2:Int64 = _toInt(buffer, offset+4)

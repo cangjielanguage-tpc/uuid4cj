@@ -7,7 +7,6 @@ package uuid
 from charset import charset.*
 from charset import charset.unicode.*
 from charset import charset.encoding.*
-from std import log.*
 
 /**
  * Implementation of UUID generator that uses one of name-based generation methods

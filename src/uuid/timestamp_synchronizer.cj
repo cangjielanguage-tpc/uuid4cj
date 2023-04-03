@@ -6,9 +6,7 @@ package uuid
 
 public abstract class TimestampSynchronizer{
 
-    protected init(){
-
-    }
+    protected init(){}
 
     protected func initialize():Int64
 

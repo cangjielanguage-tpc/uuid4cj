@@ -12,12 +12,9 @@ main() {
     let b: RandomBasedGenerator = Generators.randomBasedGenerator(_random)
     let uuid: UUID = b.generate()
 
-    println(uuid.toString())
-    println(uuid.getMostSignificantBits())
-    println(uuid.getLeastSignificantBits())
-    
-    // if(uuid.version() != 4) {
-    //     return -1
-    // }
+    if(uuid.version() != 4) {
+        return -1
+    }
     return 0
+    
 }

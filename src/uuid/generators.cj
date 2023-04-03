@@ -10,6 +10,8 @@ package uuid
  */
 public class Generators{
 
+    protected static var _sharedTimer = Option<UUIDTimer>.None
+
 
     public static func randomBasedGenerator(rnd: Random):RandomBasedGenerator{
         return  RandomBasedGenerator(rnd)
@@ -63,4 +65,30 @@ public class Generators{
     public static func nameBasedGenerator(namespace: UUID, digester: MessageDigest): NameBasedGenerator {
         return NameBasedGenerator(namespace, digester, Option<UUIDType>.None)
     }
+
+    public static func timeBasedGenerator():TimeBasedGenerator{
+        return  timeBasedGenerator(Option<EthernetAddress>.None);
+    }
+
+    public static func timeBasedGenerator(ethernetAddress: Option<EthernetAddress>):TimeBasedGenerator{
+        return  timeBasedGenerator(ethernetAddress, Option<UUIDTimer>.None);
+    }
+
+    public static func timeBasedGenerator(ethernetAddress: Option<EthernetAddress>, timer: Option<UUIDTimer>):TimeBasedGenerator{
+        let timerTT = match (timer) {
+            case Some(v) => timer
+            case None => sharedTimer()
+        }
+        return  TimeBasedGenerator(ethernetAddress, timerTT.getOrThrow());
+    }
+
+    private static func sharedTimer(): Option<UUIDTimer> {
+        _sharedTimer = match (_sharedTimer) {
+            case Some(v) => _sharedTimer
+            case None => UUIDTimer(Random(UInt64( Time.now().unixTimeStamp().milliseconds())), Option<TimestampSynchronizer>.None);
+        }
+
+        return _sharedTimer;
+    }
+
 }
