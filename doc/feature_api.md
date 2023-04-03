@@ -182,6 +182,15 @@ UUIDType: 5
 ```cangjie
 /**
  * 构造 UUID 生成器的工厂方法，该方法使用指定的随机数生成器，根据标准方法 UUIDType 为 4 构造 UUID，
+ * 默认使用crypto包提供用于生成加密安全的伪随机数类 SecureRandom。
+ * 
+ * 返回值 RandomBasedGenerator- 基于随机数的生成器
+ */
+public static func randomBasedGenerator(): RandomBasedGenerator
+```
+```cangjie
+/**
+ * 构造 UUID 生成器的工厂方法，该方法使用指定的随机数生成器，根据标准方法 UUIDType 为 4 构造 UUID，
  * 使用random 包提供用于生成伪随机数的类 Random。
  * 
  * 参数 rnd- Random对象
@@ -201,7 +210,34 @@ public static func randomBasedGenerator(rnd: SecureRandom): RandomBasedGenerator
 ```
 
 #### 1.3.2 示例
-##### 1.3.2.1 randomBasedGenerator(rnd: Random) 使用示例
+##### 1.3.2.1 randomBasedGenerator() 使用示例
+```cangjie
+from uuid import uuid.*
+from crypto import crypto.SecureRandom
+from std import random.*
+
+main() {  
+    
+    let c: RandomBasedGenerator = Generators.randomBasedGenerator()
+    let uuid: UUID = c.generate()
+
+    if(uuid.version() != 4) {
+        return -1
+    }
+
+    if(c.getType().raw() != 4) {
+        return -2
+    }
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 4
+基于SecureRandom随机生成的UUID: 1c290f65-05c7-4426-a90f-6505c7f426e6
+```
+##### 1.3.2.2 randomBasedGenerator(rnd: Random) 使用示例
 ```cangjie
 from uuid import uuid.*
 from crypto import crypto.SecureRandom
@@ -226,7 +262,7 @@ main() {
 UUIDType: 4
 基于Random随机生成的UUID: c259ecfd-bbf0-4e28-8ea2-03d10194b80a
 ```
-##### 1.3.2.2 randomBasedGenerator(rnd: SecureRandom) 使用示例
+##### 1.3.2.3 randomBasedGenerator(rnd: SecureRandom) 使用示例
 ```cangjie
 from uuid import uuid.*
 from crypto import crypto.SecureRandom

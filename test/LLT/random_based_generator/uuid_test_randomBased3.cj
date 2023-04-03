@@ -7,14 +7,16 @@ from crypto import crypto.SecureRandom
 from std import random.*
 
 main() {  
-
-    let _random: Random = Random()
-    let b: RandomBasedGenerator = Generators.randomBasedGenerator(_random)
-    let uuid: UUID = b.generate()
+    
+    let c: RandomBasedGenerator = Generators.randomBasedGenerator()
+    let uuid: UUID = c.generate()
 
     if(uuid.version() != 4) {
         return -1
     }
+
+    if(c.getType().raw() != 4) {
+        return -2
+    }
     return 0
-    
 }

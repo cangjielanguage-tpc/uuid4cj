@@ -596,4 +596,17 @@ public class UUIDClock {
 }
 
 ```
+#### 6.7.5 LazyRandom
+
+SecureRandom类提供的随机数
+
+```
+public class LazyRandom {
+    /*
+     * 获取SecureRandom类以提供随机数
+     */
+    public func sharedSecureRandom(): SecureRandom
+}
+
+```
 
