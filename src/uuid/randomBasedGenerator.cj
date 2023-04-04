@@ -70,14 +70,14 @@ public class RandomBasedGenerator <: NoArgGenerator{
      *
      * @return UUIDType
      */
-    public func getType(): UUIDType { return UUIDType.RANDOM_BASED}
+    public override func getType(): UUIDType { return UUIDType.RANDOM_BASED}
 
     /**
      * Generate UUID through random OR SecureRandom
      *
      * @return UUID
      */  
-    public func generate():UUID { 
+    public override func generate():UUID { 
         let r1: Int64
         let r2: Int64
         

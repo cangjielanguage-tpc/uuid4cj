@@ -297,7 +297,7 @@ public class UUID <: ToString {
      * 使用指定的数据构造一个 UUID
      *
      * 参数  mostSigBits- 最高有效64位
-     * 参数  leastSigBits - 最高有效64位
+     * 参数  leastSigBits - 最低有效64位
      */
     public init(mostSigBits: Int64, leastSigBits: Int64)
 
@@ -525,7 +525,7 @@ public class UUIDUtil {
     /**
      * 用于构造具有适当类型的 UUID 实例的 Helper 方法
      * 
-     * 参数 l1 - 该 UUID 的 128 比特值的最低有效 64 比特
+     * 参数 l1 - 该 UUID 的 128 比特值的最高有效 64 比特
      * 参数 l2 - 该 UUID 的 128 比特值的最低有效 64 比特
      * 返回值 UUID
      */
@@ -676,7 +676,45 @@ public class NameBasedGenerator <: StringArgGenerator {
 }
 ```
 
-### 2.4 MessageDigest
+### 2.4 RandomBasedGenerator
+
+利用 Random类或者SecureRandom类提供的随机数 对指定字符串生成摘要，利用摘要值生成唯一 UUID。
+
+```cangjie
+public class RandomBasedGenerator <: NoArgGenerator {
+
+    /**
+     * 初始化
+     *
+     * 参数 rnd - 使用random 包提供用于生成伪随机数的类 Random
+     */
+    public init(rnd: Random)
+
+    /**
+     * 初始化
+     *
+     * 参数 rnd - 使用crypto包提供用于生成加密安全的伪随机数类 SecureRandom
+     */
+    public init(rnd: SecureRandom)
+
+    /**
+     * 获取UUIDType
+     *
+     * 返回值 UUIDType
+     */
+    public override func getType(): UUIDType
+
+    /**
+     * 通过random 或者 SecureRandom 随机生成 UUID
+     *
+     * 参数 name - string
+     * 返回值 UUID
+     */    
+    public override func generate(): UUID
+}
+```
+
+### 2.5 MessageDigest
 
 提供 MD5 和 SHA1 摘要
 
@@ -708,6 +746,31 @@ public class MessageDigest {
      * 返回值 DigestType - 摘要类型
      */
     public func getAlgorithm(): DigestType
+}
+```
+
+### 2.6 UUIDType
+
+提供 UUID 的类型
+
+```cangjie
+public enum UUIDType {
+    | TIME_BASED
+    | DCE
+    | NAME_BASED_MD5
+    | RANDOM_BASED
+    | NAME_BASED_SHA1
+    | TIME_BASED_REORDERED
+    | TIME_BASED_EPOCH
+    | FREE_FORM
+    | UNKNOWN
+
+    /*
+     * 获取UUID类型
+     *
+     * 返回值 Int64 - UUID类型
+     */
+    public func raw(): Int64
 }
 ```
 
