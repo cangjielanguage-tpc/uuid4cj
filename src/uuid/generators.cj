@@ -12,11 +12,37 @@ public class Generators{
 
     protected static var _sharedTimer = Option<UUIDTimer>.None
 
+    /**
+     * Factory method for constructing UUID generator that uses default (shared)
+     * random number generator for constructing UUIDs according to standard
+     * method number 4.
+     * 
+     * @return RandomBasedGenerator
+     */
+    public static func randomBasedGenerator():RandomBasedGenerator{
+        return  RandomBasedGenerator(LazyRandom.sharedSecureRandom())
+    }
 
+    /*
+     * Factory method for constructing UUID generator that uses specified
+     * random number generator for constructing UUIDs according to standard
+     * method number 4.
+     *
+     * @param rnd - Random to use
+     * @return RandomBasedGenerator
+     */
     public static func randomBasedGenerator(rnd: Random):RandomBasedGenerator{
         return  RandomBasedGenerator(rnd)
     }
 
+    /*
+     * Factory method for constructing UUID generator that uses specified
+     * random number generator for constructing UUIDs according to standard
+     * method number 4.
+     *
+     * @param rnd - SecureRandom to use
+     * @return RandomBasedGenerator
+     */
     public static func randomBasedGenerator(rnd: SecureRandom):RandomBasedGenerator{
         return  RandomBasedGenerator(rnd)
     }

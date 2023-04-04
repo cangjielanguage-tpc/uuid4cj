@@ -243,6 +243,29 @@ from crypto import crypto.SecureRandom
 from std import random.*
 
 main() {  
+    
+    let c: RandomBasedGenerator = Generators.randomBasedGenerator()
+    let uuid: UUID = c.generate()
+
+    println("基于SecureRandom随机生成的UUID: ${uuid.toString()}")
+    if(uuid.version() != 4) {
+        return -1
+    }
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 4
+基于SecureRandom随机生成的UUID: 1c290f65-05c7-4426-a90f-6505c7f426e6
+```
+```cangjie
+from uuid import uuid.*
+from crypto import crypto.SecureRandom
+from std import random.*
+
+main() {  
 
     let _random: Random = Random()
     let b: RandomBasedGenerator = Generators.randomBasedGenerator(_random)

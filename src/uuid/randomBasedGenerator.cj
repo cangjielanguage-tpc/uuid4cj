@@ -1,31 +1,82 @@
 /*
- * @Copyright (c) Huawei Technologies Co., Ltd. 2022-2022. All rights reserved.
+ * Copyright (c) Cangjie Library Team 2023-2023. All rights resvered.
  */
 
 package uuid
 
+/**
+ * Implementation of UUID generator that uses generation method 4.
+ *<p>
+ * Note on random number generation when using {@link SecureRandom} for random number
+ * generation: the first time {@link SecureRandom} object is used, there is noticeable delay between
+ * calling the method and getting the reply. This is because SecureRandom
+ * has to initialize itself to reasonably random state. Thus, if you
+ * want to lessen delay, it may be be a good idea to either get the
+ * first random UUID asynchronously from a separate thread, or to
+ * use the other generateRandomBasedUUID passing a previously initialized
+ * SecureRandom instance.
+ *
+ * @since 37.2
+ */
 public class RandomBasedGenerator <: NoArgGenerator{
 
+    /**
+     * Default shared random number generator, used if no random number generator
+     * is explicitly specified for instance
+     */
     protected let _sharedRandom: Random = Random()
+
+    /**
+     * SecureRandom number generator that this generator uses.
+     */
     protected let _sRandom: SecureRandom
+
+    /**
+     * Random number generator that this generator uses.
+     */
     protected let _random: Random
+
+    /**
+     * Looks like {@link SecureRandom} implementation is more efficient
+     * using single call access (compared to basic {@link java.util.Random}),
+     * so let's use that knowledge to our benefit.
+     */
     protected let _secureRandom: Bool 
 
-
+    /**
+     * @param rnd - Random number generator to use for generating UUIDs; if null,
+     *   shared default generator is used. Note that it is strongly recommend to
+     *   use a good random number generator; for example, SecureRandom.
+     */
     public init(rnd: Random) {
         _secureRandom = false;
         _random = rnd
         _sRandom = LazyRandom.sharedSecureRandom();
     }
 
+    /**
+     * @param rnd - SecureRandom number generator to use for generating UUIDs; if null,
+     *   shared default generator is used. Note that it is strongly recommend to
+     *   use a good random number generator; for example, SecureRandom.
+     */
     public init(rnd: SecureRandom) {
         _secureRandom = true;
         _sRandom = rnd
         _random = Random()
     }
 
+    /**
+     * Get UUIDType
+     *
+     * @return UUIDType
+     */
     public func getType(): UUIDType { return UUIDType.RANDOM_BASED}
 
+    /**
+     * Generate UUID through random OR SecureRandom
+     *
+     * @return UUID
+     */  
     public func generate():UUID { 
         let r1: Int64
         let r2: Int64
