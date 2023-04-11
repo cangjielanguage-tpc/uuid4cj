@@ -117,4 +117,26 @@ public class Generators{
         return _sharedTimer;
     }
 
+    /**
+     * Factory method for constructing UUID generator that generates UUID using
+     * variant 7 (Unix Epoch time+random based).
+     *
+     * @return TimeBasedEpochGenerator
+     */
+    public static func timeBasedEpochGenerator(): TimeBasedEpochGenerator {
+        return TimeBasedEpochGenerator()
+    }
+
+    /**
+     * Factory method for constructing UUID generator that generates UUID using
+     * variant 7 (time+random based), using specified Ethernet address
+     * as the location part of UUID.
+     * No additional external synchronization is used.
+     *
+     * @param random - Random
+     * @return TimeBasedEpochGenerator
+     */
+    public static func timeBasedEpochGenerator(random: Random): TimeBasedEpochGenerator {
+        return TimeBasedEpochGenerator(random)
+    }
 }
