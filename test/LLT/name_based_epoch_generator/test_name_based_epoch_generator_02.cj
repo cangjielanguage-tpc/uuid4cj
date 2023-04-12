@@ -6,6 +6,7 @@ from std import random.*
 
 main() {    
     var uuid: TimeBasedEpochGenerator = Generators.timeBasedEpochGenerator(Random())
+    uuid.generate()
     if(uuid.getType().raw() != 7) {
         return -1
     }
