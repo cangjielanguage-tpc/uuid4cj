@@ -139,4 +139,41 @@ public class Generators{
     public static func timeBasedEpochGenerator(random: Random): TimeBasedEpochGenerator {
         return TimeBasedEpochGenerator(random)
     }
+
+    /**
+     * Factory method for constructing UUID generator that generates UUID using
+     * variant 6 (time+location based, reordered for DB locality).
+     *
+     * @return TimeBasedReorderedGenerator
+     */
+    public static func timeBasedReorderedGenerator(): TimeBasedReorderedGenerator {
+        return TimeBasedReorderedGenerator(Option<EthernetAddress>.None, sharedTimer().getOrThrow())
+    }
+
+    /**
+     * Factory method for constructing UUID generator that generates UUID using
+     * variant 6 (time+location based, reordered for DB locality), using specified
+     * Ethernet address as the location part of UUID. No additional external
+     * synchronization is used.
+     *
+     * @param ethernetAddress - Ethernet address
+     * @return TimeBasedReorderedGenerator
+     *
+     */
+    public static func timeBasedReorderedGenerator(ethernetAddress: ?EthernetAddress): TimeBasedReorderedGenerator{
+        return TimeBasedReorderedGenerator(ethernetAddress, sharedTimer().getOrThrow())
+    }
+
+    /**
+     * Factory method for constructing UUID generator that generates UUID using
+     * variant 6 (time+location based, reordered for DB locality), using specified
+     * Ethernet address as the location part of UUID
+     *
+     * @param ethernetAddress - Ethernet address
+     * @param timer - UUIDTimer
+     * @return TimeBasedReorderedGenerator 
+     */
+    public static func timeBasedReorderedGenerator(ethernetAddress: EthernetAddress, timer: UUIDTimer): TimeBasedReorderedGenerator {
+        return TimeBasedReorderedGenerator(ethernetAddress, timer)
+    }
 }

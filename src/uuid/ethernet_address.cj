@@ -217,6 +217,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         return Int64(_address) ^ Int64(rightShift(_address,32))
     }
 
+    @overflowWrapping
     public func toString(): String{
         var str = _asString
         if(let Some(i) = str){
@@ -231,7 +232,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         b.append(':')
         _appendHex(b, Int64(i1))
         b.append(':')
-        _appendHex(b, Int64(2 >> 24))
+        _appendHex(b, Int64(i2 >> 24))
         b.append(':')
         _appendHex(b, Int64(i2 >> 16))
         b.append(':')
