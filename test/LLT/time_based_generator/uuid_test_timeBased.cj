@@ -14,5 +14,8 @@ main() {
     if(uuid.version() != 1) {
         return -1
     }
+    if(uuid.variant() != 2) {
+        return -2
+    }
     return 0
 }

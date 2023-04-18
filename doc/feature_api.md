@@ -286,6 +286,168 @@ main() {
 UUIDType: 4
 基于SecureRandom随机生成的UUID: 1c290f65-05c7-4426-a90f-6505c7f426e6
 ```
+
+### 1.4 UUIDType 为 6 —— 基于时间的重新排序生成唯一 UUID
+
+使用基于时间/位置生成的 UUID 的生成器的实现，重新排序以改进数据库局部性。
+
+#### 1.4.1 主要接口
+
+```cangjie
+/**
+ * 构造 UUID 生成器的工厂方法
+ * 
+ * 返回值 TimeBasedReorderedGenerator- 基于时间的重新排序生成器
+ */
+public static func timeBasedReorderedGenerator(): TimeBasedReorderedGenerator
+
+/**
+ * 使用硬件地址构造 UUID 生成器的工厂方法
+ * 
+ * 参数 ethernetAddress- EthernetAddress对象，用于生成硬件地址
+ * 返回值 TimeBasedReorderedGenerator- 基于时间的重新排序生成器
+ */
+public static func timeBasedReorderedGenerator(ethernetAddress: EthernetAddress): TimeBasedReorderedGenerator
+
+/**
+ * 使用硬件地址和时间构造 UUID 生成器的工厂方法
+ * 
+ * 参数 ethernetAddress- EthernetAddress 对象，用于生成硬件地址
+ * 参数 timer- UUIDTimer 对象，用于生成时间
+ * 返回值 TimeBasedReorderedGenerator- 基于时间的重新排序生成器
+ */
+public static func timeBasedReorderedGenerator(ethernetAddress: EthernetAddress, timer: UUIDTimer): TimeBasedReorderedGenerator
+```
+
+#### 1.4.2 示例
+##### 1.4.2.1 timeBasedReorderedGenerator() 使用示例
+
+```cangjie
+from uuid import uuid.*
+
+main() {  
+    var time: TimeBasedReorderedGenerator = Generators.timeBasedReorderedGenerator()
+    let uuid: UUID = time.generate()
+    println("UUIDType: ${time.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 6
+生成的UUID: 1eddccb0-d3a9-6c62-aa57-558bc85f0a6d
+```
+
+##### 1.4.2.2 timeBasedReorderedGenerator(ethernetAddress: EthernetAddress) 使用示例
+
+```cangjie
+from uuid import uuid.*
+
+main() {  
+    var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
+    var time: TimeBasedReorderedGenerator = Generators.timeBasedReorderedGenerator(address)
+    var uuid: UUID = time.generate()
+    println("UUIDType: ${time.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 6
+生成的UUID: 1eddccc0-0829-64ae-aaf8-87f59306d30c
+```
+
+##### 1.4.2.3 timeBasedReorderedGenerator(ethernetAddress: EthernetAddress, timer: UUIDTimer) 使用示例
+
+```cangjie
+from uuid import uuid.*
+
+main() {  
+    var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
+    var timer: UUIDTimer = UUIDTimer(Random(), Option<FileBasedTimestampSynchronizer>.None)
+    var time: TimeBasedReorderedGenerator = Generators.timeBasedReorderedGenerator(address, timer)
+    var uuid: UUID = time.generate()
+    println("UUIDType: ${time.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 6
+生成的UUID: 1eddccca-4e78-6aa5-96c5-87f59306d30c
+```
+
+### 1.5 UUIDType 为 7 —— 基于时间的纪元生成唯一 UUID
+
+使用基于 Unix 纪元时间戳生成 UUID。
+
+#### 1.4.1 主要接口
+
+```cangjie
+/**
+ * 构造 UUID 生成器的工厂方法
+ * 
+ * 返回值 TimeBasedEpochGenerator- 基于时间纪元生成器
+ */
+public static func timeBasedEpochGenerator(): TimeBasedEpochGenerator
+
+/**
+ * 构造 UUID 生成器的工厂方法
+ * 
+ * 参数 random- Random 随机数
+ * 返回值 TimeBasedEpochGenerator- 基于时间纪元生成器
+ */
+public static func timeBasedEpochGenerator(random: Random): TimeBasedEpochGenerator
+```
+
+#### 1.5.2 示例
+##### 1.5.2.1 timeBasedEpochGenerator() 使用示例
+
+```cangjie
+from uuid import uuid.*
+
+main() {  
+    var time: TimeBasedEpochGenerator = Generators.timeBasedEpochGenerator()
+    let uuid: UUID = time.generate()
+    println("UUIDType: ${time.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 7
+生成的UUID: 01878d39-54c2-7db7-aa02-cb98e6732ee4
+```
+
+##### 1.5.2.2 timeBasedEpochGenerator(ethernetAddress: EthernetAddress) 使用示例
+
+```cangjie
+from uuid import uuid.*
+from std import random.*
+
+main() {  
+    var time: TimeBasedEpochGenerator = Generators.timeBasedEpochGenerator(Random())
+    var uuid: UUID = time.generate()
+    println("UUIDType: ${time.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 7
+生成的UUID: 01878d39-58d2-7162-80e2-a635375f7673
+```
+
 ## 2 其他接口
 
 ### 2.1 基础 UUID 类
@@ -774,4 +936,78 @@ public enum UUIDType {
 }
 ```
 
+### 2.7 TimeBasedReorderedGenerator
+
+使用基于时间/位置生成 UUID 生成器的实现，重新排序以改进数据库局部性。
+
+```cangjie
+public class TimeBasedReorderedGenerator <: NoArgGenerator {
+
+    /**
+     * 初始化
+     *
+     * 参数 ethAddr - 用于生成的硬件地址
+     * 参数 timer - 用于同步访问时间戳的对象         
+     */
+    @overflowWrapping
+    public init(ethAddr: ?EthernetAddress, timer: UUIDTimer)
+
+    /**
+     * 获取UUIDType
+     *
+     * 返回值 UUIDType
+     */
+    public override func getType(): UUIDType
+    
+    /**
+     * 获取用于生成的硬件地址
+     *
+     * 返回值 EthernetAddress - 硬件地址
+     */
+    public func getEthernetAddress(): EthernetAddress
+
+    /**
+     * 生成 UUID
+     *
+     * 返回值 UUID
+     */ 
+    @overflowWrapping   
+    public func generate(): UUID
+}
+```
+
+### 2.8 TimeBasedReorderedGenerator
+
+使用基于时间纪元生成 UUID。
+
+```cangjie
+public class TimeBasedEpochGenerator <: NoArgGenerator {
+
+    /**
+     * 初始化        
+     */
+    public init()
+
+    /**
+     * 初始化
+     *
+     * 参数 rnd - Random 随机数        
+     */
+    public init(rnd: Random)
+
+    /**
+     * 获取UUIDType
+     *
+     * 返回值 UUIDType
+     */
+    public override func getType(): UUIDType
+    
+    /**
+     * 生成 UUID
+     *
+     * 返回值 UUID
+     */   
+    public func generate(): UUID
+}
+```
 

@@ -109,9 +109,13 @@ public class Generators{
     }
 
     private static func sharedTimer(): Option<UUIDTimer> {
-        _sharedTimer = match (_sharedTimer) {
-            case Some(v) => _sharedTimer
-            case None => UUIDTimer(Random(UInt64( Time.now().unixTimeStamp().milliseconds())), Option<TimestampSynchronizer>.None);
+        try {
+            _sharedTimer = match (_sharedTimer) {
+                case Some(v) => _sharedTimer
+                case None => UUIDTimer(Random(UInt64( Time.now().unixTimeStamp().milliseconds())), Option<FileBasedTimestampSynchronizer>.None);
+            }
+        } catch (e: IllegalArgumentException) {
+            throw IllegalArgumentException("Failed to create UUIDTimer with specified synchronizer: " + e.toString())
         }
 
         return _sharedTimer;
@@ -160,7 +164,7 @@ public class Generators{
      * @return TimeBasedReorderedGenerator
      *
      */
-    public static func timeBasedReorderedGenerator(ethernetAddress: ?EthernetAddress): TimeBasedReorderedGenerator{
+    public static func timeBasedReorderedGenerator(ethernetAddress: EthernetAddress): TimeBasedReorderedGenerator{
         return TimeBasedReorderedGenerator(ethernetAddress, sharedTimer().getOrThrow())
     }
 
@@ -176,4 +180,6 @@ public class Generators{
     public static func timeBasedReorderedGenerator(ethernetAddress: EthernetAddress, timer: UUIDTimer): TimeBasedReorderedGenerator {
         return TimeBasedReorderedGenerator(ethernetAddress, timer)
     }
+
 }
+

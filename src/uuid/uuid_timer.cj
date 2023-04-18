@@ -8,7 +8,7 @@ from std import log.*
 
 public class UUIDTimer {
 
-    private let logger: SimpleLogger = SimpleLogger()
+    private let _logger: SimpleLogger = SimpleLogger()
 
     private static let kClockOffset:Int64 = 0x01b21dd213814000
 
@@ -18,7 +18,7 @@ public class UUIDTimer {
 
     private static let kMaxClockAdvance:Int64 = 100
 
-    protected var _syncer = Option<TimestampSynchronizer>.None
+    protected var _syncer = Option<FileBasedTimestampSynchronizer>.None
 
     protected var _random = Random()
 
@@ -36,11 +36,11 @@ public class UUIDTimer {
 
     private static let MAX_WAIT_COUNT:Int32 = 50
 
-    public init(rnd:Random,sync:Option<TimestampSynchronizer>){
+    public init(rnd:Random,sync:Option<FileBasedTimestampSynchronizer>){
         this(rnd, sync,UUIDClock())
     }
 
-    public init(rnd:Random,sync:Option<TimestampSynchronizer>,clock:UUIDClock){
+    public init(rnd:Random,sync:Option<FileBasedTimestampSynchronizer>,clock:UUIDClock){
         _random = rnd
         _syncer = sync
         _clock = clock
@@ -69,7 +69,7 @@ public class UUIDTimer {
         var systime: Int64 = _clock.currentTimeMillis()
 
         if(systime < _lastSystemTimestamp) {
-            logger.warn("System time going backwards! (got value ${systime}, last  ${_lastSystemTimestamp})")
+            _logger.warn("System time going backwards! (got value ${systime}, last  ${_lastSystemTimestamp})")
             _lastSystemTimestamp = systime
 
         }
@@ -81,9 +81,13 @@ public class UUIDTimer {
                 let actDiff: Int64 = _lastUsedTimestamp - systime
                 let origTime: Int64 = systime
                 systime = _lastUsedTimestamp + 1
+
+                _logger.warn("Timestamp over-run: need to reinitialize random sequence");
+
                 initCounters(_random);
 
                 if (actDiff >= kMaxClockAdvance) {
+                    slowDown(origTime, actDiff);
                 }
             }
 
@@ -135,5 +139,40 @@ public class UUIDTimer {
         uuidBytes[Int64(UUIDUtil.BYTE_OFFSET_CLOCK_LO+2)] = UInt8(rightShift(Int64(clockLo), 8));
         uuidBytes[Int64(UUIDUtil.BYTE_OFFSET_CLOCK_LO+3)] = UInt8(clockLo);
     }
+
+    protected func slowDown(startTime: Int64, actDiff: Int64) {
+
+        let ratio: Int64 = actDiff / kMaxClockAdvance
+        var delay: Int64
+
+        if(ratio < 2) {
+            delay = 1
+        } else if (ratio < 10) {
+            delay = 2
+        } else if (ratio < 600) {
+            delay = 3;
+        } else {
+            delay = 5;
+        }
+
+        _logger.warn("Need to wait for " + delay.toString() + " milliseconds; virtual clock advanced too far in the future")
+        let waitUntil: Int64 = startTime + delay
+        var counter: Int32 = 0
+        do {
+            try {
+                sleep(delay * 1000 * 1000)
+            } catch (ie: InterruptedException ){
+                throw InterruptedException("Failed to sleep ");
+            }
+            delay = 1
+            
+            counter++
+            if (counter > MAX_WAIT_COUNT) {
+                break
+            }
+        } while (Int64( Time.now().unixTimeStamp().milliseconds()) < waitUntil)
+
+    }
+
 
 }

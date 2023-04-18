@@ -1,0 +1,126 @@
+/*
+ * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2023. All rights reserved.
+ */
+
+package uuid
+
+from std import fs.*
+from std import io.SeekPosition
+
+public class LockedFile {
+
+    private let logger: SimpleLogger = SimpleLogger()
+
+    static let DEFAULT_LENGTH: Int32 = 22
+
+    static let READ_ERROR: Int64 = 0
+
+    var mFile: File 
+
+    var mWriteArray: Array<UInt8> = Array<UInt8>(22, item: 0)
+    
+    var mLastTimestamp: Int64 = 0
+
+    static let HEX_DIGITS: String  = "0123456789abcdef"
+
+    public init (f: File) {
+        mFile = f
+    }
+
+    
+    public func deactivate() {
+       mFile = Option<File>.None.getOrThrow()
+    }
+
+    public func readStamp(): Int64{
+        var size: Int64
+        try {
+            size = mFile.length
+        } catch (ioe: Exception) {
+            logger.error("Failed to read file size")
+            return READ_ERROR
+        }
+
+        if (size > 100) {
+            size = 100
+        }
+
+        var uArray: Array<UInt8> = Array<UInt8>(mFile.length, item: 0)
+        try {
+            mFile.read(uArray)
+        } catch (ie: Exception) {
+            logger.error("Failed to read file")
+            return READ_ERROR
+        }
+
+        var charArray: Array<Char> = Array<Char>(uArray.size, item: Char(0))
+
+        for( i in 0..uArray.size) {
+            // uint8 -> char
+           charArray[i] = Char(uArray[i])
+        }
+        // charArray -> String
+        var dataStr: String = String(charArray)
+        dataStr = dataStr.trim()
+
+        var result: Int64 = -1
+        var err: String = ""
+
+        if ((!dataStr.startsWith("[0"))
+            || (dataStr.size < 3)
+            || dataStr.charAt(2).toLowerCase() != 'x') {
+            err = "does not start with '[0x' prefix"
+        } else {
+            let ix: Int64 = dataStr.indexOf(']', 3).getOrThrow()
+            if (ix <= 0) {
+                err = "does not end with ']' marker"
+            } else {
+                var hex: String = dataStr.substring(3, Int64(ix - 3))
+                if (hex.size > 16) {
+                    err = "length of the (hex) timestamp too long; expected 16"
+                } else {
+                    try {
+                        result = Int64.parse("0x" + hex.toString())
+                    } catch (iae: IllegalArgumentException) {
+                        err = "parse fail"
+                    }
+                }
+            }
+        }
+        if (result < 0) {
+            logger.error("timestamp file contents wrong timestamp ${err}");
+            return READ_ERROR;
+        }
+        mLastTimestamp = result
+        return result
+    }
+
+    public func writeStamp (stamp: Int64) {
+        if (stamp <= mLastTimestamp) {
+            if (stamp == mLastTimestamp) {
+                logger.warn("(file '') Trying to re-write existing timestamp (${stamp})")
+                return
+            }
+        }
+
+        mWriteArray[0] = UInt8(UInt32('['))
+        mWriteArray[1] = UInt8(UInt32('0'))
+        mWriteArray[2] = UInt8(UInt32('x'))
+        mWriteArray[19] = UInt8(UInt32(']'))
+        mWriteArray[20] = UInt8(UInt32('\r'))
+        mWriteArray[21] = UInt8(UInt32('\n'))
+
+        var stampTemp: Int64 = stamp
+        for(i in 18..2 : -1) {
+            var val: Int64 = stampTemp & 0x0f
+            // Char -> uint8
+            mWriteArray[i] = UInt8(UInt32(HEX_DIGITS.charAt(val)))
+
+            stampTemp = (stampTemp >> 4)
+        }
+        mFile.seek(SeekPosition.Begin(0))
+        mFile.write(mWriteArray)
+
+    }
+
+}

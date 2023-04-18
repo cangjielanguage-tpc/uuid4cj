@@ -18,13 +18,15 @@ UUID（通用唯一标识符），也称为GUID（全局唯一标识符）。UUI
 
 **特性**：
 
-- 🚀 基于名称生成 UUID 
+- 🚀 基于时间/位置生成 UUID 
 
-- 💪 基于时间/位置重新排序生成 UUID
+- 💪 基于名称（MD5）生成 UUID
 
-- 🚀 基于当前时间戳、随机数、机器 MAC 地址生成 UUID
+- 🚀 基于随机数生成 UUID
 
-- 🌍 基于随机数生成 UUID
+- 💪 基于名称（SHA1）生成 UUID
+
+- 🌍 基于时间的重新排序生成 UUID
 
 - 💡 基于时间纪元生成 UUID 
 
@@ -307,6 +309,115 @@ main() {
 UUIDType: 4
 基于SecureRandom随机生成的UUID: 1c290f65-05c7-4426-a90f-6505c7f426e6
 ```
+
+#### 基于时间的重新排序生成 UUID 使用样例
+
+样例一
+
+```
+from uuid import uuid.*
+
+main() {  
+    var time: TimeBasedReorderedGenerator = Generators.timeBasedReorderedGenerator()
+    let uuid: UUID = time.generate()
+    println("UUIDType: ${time.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 6
+生成的UUID: 1eddccb0-d3a9-6c62-aa57-558bc85f0a6d
+```
+
+样例二
+
+```
+from uuid import uuid.*
+
+main() {  
+    var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
+    var time: TimeBasedReorderedGenerator = Generators.timeBasedReorderedGenerator(address)
+    var uuid: UUID = time.generate()
+    println("UUIDType: ${time.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 6
+生成的UUID: 1eddccc0-0829-64ae-aaf8-87f59306d30c
+```
+
+样例三
+
+```
+from uuid import uuid.*
+
+main() {  
+    var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
+    var timer: UUIDTimer = UUIDTimer(Random(), Option<FileBasedTimestampSynchronizer>.None)
+    var time: TimeBasedReorderedGenerator = Generators.timeBasedReorderedGenerator(address, timer)
+    var uuid: UUID = time.generate()
+    println("UUIDType: ${time.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 6
+生成的UUID: 1eddccca-4e78-6aa5-96c5-87f59306d30c
+```
+
+#### 基于时间纪元生成 UUID 使用样例
+
+样例一
+
+```
+from uuid import uuid.*
+
+main() {  
+    var time: TimeBasedEpochGenerator = Generators.timeBasedEpochGenerator()
+    let uuid: UUID = time.generate()
+    println("UUIDType: ${time.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 7
+生成的UUID: 01878d39-54c2-7db7-aa02-cb98e6732ee4
+```
+
+样例二
+
+```
+from uuid import uuid.*
+from std import random.*
+
+main() {  
+    var time: TimeBasedEpochGenerator = Generators.timeBasedEpochGenerator(Random())
+    var uuid: UUID = time.generate()
+    println("UUIDType: ${time.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 7
+生成的UUID: 01878d39-58d2-7162-80e2-a635375f7673
+```
+
 ## <img alt="" src="./doc/assets/readme-icon-contribute.png" style="display: inline-block;" width=3%/>参与贡献
 
 欢迎给我们提交 PR，欢迎给我们提交 issue，欢迎参与任何形式的贡献。
