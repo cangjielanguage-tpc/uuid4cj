@@ -10,7 +10,7 @@ from std import fs.*
 from std import format.Formatter
 
 main() {  
-    let filePath1: Path = Path("./ggg.txt")
+    let filePath1: String = "./ggg.txt"
 
     var file1: File
 
@@ -20,7 +20,7 @@ main() {
         file1 = File(filePath1, OpenOption.Create(true))
     }
 
-    let filePath2: Path = Path("./zzz.txt")
+    let filePath2: String = "./zzzz.txt"
 
     var file2: File
 
@@ -30,18 +30,35 @@ main() {
         file2 = File(filePath2, OpenOption.Create(true))
     }
 
+
     var oFile: Option<FileBasedTimestampSynchronizer> =  FileBasedTimestampSynchronizer(file1, file2)
 
-    let a: TimeBasedGenerator = Generators.timeBasedGenerator(Option<EthernetAddress>.None, UUIDTimer(Random(UInt64( Time.now().unixTimeStamp().milliseconds())), oFile))
+    let a: TimeBasedGenerator = Generators.timeBasedGenerator(oFile)
+
+    let b: TimeBasedGenerator = Generators.timeBasedGenerator(Option<FileBasedTimestampSynchronizer>.None)
+
     let uuid: UUID = a.generate()
+
+    let uuid2: UUID = b.generate()
+
+    file1.close()
+    file2.close()
 
     if(uuid.version() != 1) {
         return -1
     }
+
     if(uuid.variant() != 2) {
         return -2
     }
-    file1.close()
-    file2.close()
+
+    if(uuid2.version() != 1) {
+        return -3
+    }
+
+    if(uuid2.variant() != 2) {
+        return -4
+    }
+    
     return 0
 }

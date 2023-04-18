@@ -92,27 +92,64 @@ public class Generators{
         return NameBasedGenerator(namespace, digester, Option<UUIDType>.None)
     }
 
+    /**
+     * Factory method for constructing UUID generator that generates UUID using
+     * variant 1 (time+location based).
+     *
+     * using specified Ethernet address
+     * No additional external synchronization is used.
+     *
+     * @return TimeBasedGenerator
+     */
     public static func timeBasedGenerator():TimeBasedGenerator{
-        return  timeBasedGenerator(Option<EthernetAddress>.None);
+        return  timeBasedGenerator(Option<UUIDTimer>.None);
     }
 
-    public static func timeBasedGenerator(ethernetAddress: Option<EthernetAddress>):TimeBasedGenerator{
-        return  timeBasedGenerator(ethernetAddress, Option<UUIDTimer>.None);
+    /**
+     * Factory method for constructing UUID generator that generates UUID using
+     * variant 1 (time+location based).
+     *
+     * using specified Ethernet address
+     * specified FileBasedTimestampSynchronizer instance
+     *
+     * @param timer - Option<FileBasedTimestampSynchronizer>
+     * @return TimeBasedGenerator
+     */
+    public static func timeBasedGenerator(sync: Option<FileBasedTimestampSynchronizer>):TimeBasedGenerator{
+        var timer: UUIDTimer
+
+        try {
+            timer = UUIDTimer(SecureRandom(), sync)
+        } catch (e: Exception) {
+            throw IllegalArgumentException("Failed to create UUIDTimer with specified synchronizer: " + e.toString())
+        }
+        
+        return  TimeBasedGenerator(Option<EthernetAddress>.None, timer);
     }
 
-    public static func timeBasedGenerator(ethernetAddress: Option<EthernetAddress>, timer: Option<UUIDTimer>):TimeBasedGenerator{
+    /**
+     * Factory method for constructing UUID generator that generates UUID using
+     * variant 1 (time+location based). 
+     *
+     * using specified Ethernet address
+     * specified UUIDTimer instance
+     *
+     * @param timer - Option<UUIDTimer>
+     * @return TimeBasedGenerator
+     */
+    public static func timeBasedGenerator(timer: Option<UUIDTimer>):TimeBasedGenerator{
         let timerTT = match (timer) {
             case Some(v) => timer
             case None => sharedTimer()
         }
-        return  TimeBasedGenerator(ethernetAddress, timerTT.getOrThrow());
+        return  TimeBasedGenerator(Option<EthernetAddress>.None, timerTT.getOrThrow());
     }
 
     private static func sharedTimer(): Option<UUIDTimer> {
         try {
             _sharedTimer = match (_sharedTimer) {
                 case Some(v) => _sharedTimer
-                case None => UUIDTimer(Random(UInt64( Time.now().unixTimeStamp().milliseconds())), Option<FileBasedTimestampSynchronizer>.None);
+                case None => UUIDTimer(SecureRandom(), Option<FileBasedTimestampSynchronizer>.None);
             }
         } catch (e: IllegalArgumentException) {
             throw IllegalArgumentException("Failed to create UUIDTimer with specified synchronizer: " + e.toString())

@@ -368,7 +368,7 @@ from uuid import uuid.*
 
 main() {  
     var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
-    var timer: UUIDTimer = UUIDTimer(Random(), Option<FileBasedTimestampSynchronizer>.None)
+    var timer: UUIDTimer = UUIDTimer(SecureRandom(), Option<FileBasedTimestampSynchronizer>.None)
     var time: TimeBasedReorderedGenerator = Generators.timeBasedReorderedGenerator(address, timer)
     var uuid: UUID = time.generate()
     println("UUIDType: ${time.getType().raw()}")
@@ -446,6 +446,160 @@ main() {
 ```
 UUIDType: 7
 生成的UUID: 01878d39-58d2-7162-80e2-a635375f7673
+```
+
+### 1.6 UUIDType 为 1 —— 基于时间+默认地址生成唯一 UUID
+
+基于时间+默认地址生成唯一 UUID。
+
+#### 1.6.1 主要接口
+
+```cangjie
+/**
+ * 构造 UUID 生成器的工厂方法
+ * 
+ * 返回值 TimeBasedGenerator- 基于时间+默认地址生成器
+ */
+public static func timeBasedGenerator(): TimeBasedGenerator
+
+/**
+ * 构造 UUID 生成器的工厂方法
+ * 
+ * 参数 sync- Option<FileBasedTimestampSynchronizer> 使用文件来存储时间戳
+ * 返回值 TimeBasedGenerator- 基于时间+默认地址生成器
+ */
+public static func timeBasedGenerator(sync: Option<FileBasedTimestampSynchronizer>): TimeBasedGenerator
+
+/**
+ * 构造 UUID 生成器的工厂方法
+ * 
+ * 参数 timer- Option<UUIDTimer> 时间戳管理类
+ * 返回值 TimeBasedGenerator- 基于时间+默认地址生成器
+ */ 
+public static func timeBasedGenerator(timer: Option<UUIDTimer>): TimeBasedGenerator
+```
+
+#### 1.6.2 示例
+##### 1.6.2.1 timeBasedGenerator() 使用示例
+
+```cangjie
+from uuid import uuid.*
+
+main() {  
+    let time: TimeBasedGenerator = Generators.timeBasedGenerator()
+    let uuid: UUID = time.generate()
+
+    println("UUIDType: ${time.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 1
+生成的UUID: 01878d39-54c2-7db7-aa02-cb98e6732ee4
+```
+
+##### 1.6.2.2 timeBasedGenerator(sync: Option<FileBasedTimestampSynchronizer>) 使用示例
+
+```cangjie
+from uuid import uuid.*
+from crypto import crypto.SecureRandom
+from std import random.*
+from std import time.*
+from std import fs.*
+from std import format.Formatter
+
+main() {  
+    let filePath1: Path = Path("./ggg.txt")
+
+    var file1: File
+
+    if (File.exists(filePath1)) {
+        file1 = File(filePath1, OpenOption.Open(true, true))
+    } else {
+        file1 = File(filePath1, OpenOption.Create(true))
+    }
+
+    let filePath2: Path = Path("./zzz.txt")
+
+    var file2: File
+
+    if (File.exists(filePath2)) {
+        file2 = File(filePath2, OpenOption.Open(true, true))
+    } else {
+        file2 = File(filePath2, OpenOption.Create(true))
+    }
+
+    var oFile: Option<FileBasedTimestampSynchronizer> =  FileBasedTimestampSynchronizer(file1, file2)
+
+    let a: TimeBasedGenerator = Generators.timeBasedGenerator(oFile)
+
+    let b: TimeBasedGenerator = Generators.timeBasedGenerator(Option<FileBasedTimestampSynchronizer>.None)
+
+    let uuid: UUID = a.generate()
+
+    let uuid2: UUID = b.generate()
+
+    println("UUIDType: ${a.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+
+    println("UUIDType: ${b.getType().raw()}")
+    println("生成的UUID2: ${uuid2.toString()}")
+
+    file1.close()
+    file2.close()
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 1
+生成的UUID: 01878d39-58d2-7162-80e2-a635375f7673
+
+UUIDType: 1
+生成的UUID2: 01878d39-58d2-7162-80e2-a635375f7674
+```
+
+##### 1.6.2.3 timeBasedGenerator(timer: Option<UUIDTimer>) 使用示例
+
+```cangjie
+from uuid import uuid.*
+from crypto import crypto.SecureRandom
+from std import random.*
+from std import time.*
+
+main() {
+
+    var timer = UUIDTimer(SecureRandom(), Option<FileBasedTimestampSynchronizer>.None)
+    let a: TimeBasedGenerator = Generators.timeBasedGenerator(timer)
+
+    let b: TimeBasedGenerator = Generators.timeBasedGenerator(Option<UUIDTimer>.None)
+
+
+    let uuid: UUID = a.generate()
+
+    let uuid2: UUID = b.generate()
+
+    println("UUIDType: ${a.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+
+    println("UUIDType: ${b.getType().raw()}")
+    println("生成的UUID2: ${uuid2.toString()}")
+    
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 1
+生成的UUID: 01878d39-58d2-7162-80e2-a635375f7675
+
+UUIDType: 1
+生成的UUID2: 01878d39-58d2-7162-80e2-a635375f7676
 ```
 
 ## 2 其他接口
