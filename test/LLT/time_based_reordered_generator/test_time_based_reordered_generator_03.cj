@@ -6,7 +6,7 @@ from std import random.*
 
 main() {    
     var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
-    var timer: UUIDTimer = UUIDTimer(Random(), Option<TimestampSynchronizer>.None)
+    var timer: UUIDTimer = UUIDTimer(Random(), Option<FileBasedTimestampSynchronizer>.None)
     var uuid: TimeBasedReorderedGenerator = Generators.timeBasedReorderedGenerator(address, timer)
     uuid.generate()
     if(uuid.getType().raw() != 6) {
