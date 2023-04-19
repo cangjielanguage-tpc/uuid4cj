@@ -5,15 +5,24 @@
 from uuid import uuid.*
 from crypto import crypto.SecureRandom
 from std import random.*
+from std import time.*
+from std import fs.*
+from std import format.Formatter
 
 main() {  
-    
-    let a: TimeBasedGenerator = Generators.timeBasedGenerator()
+
+
+    var oFile: Option<FileBasedTimestampSynchronizer> =  FileBasedTimestampSynchronizer()
+
+    let a: TimeBasedGenerator = Generators.timeBasedGenerator(oFile)
+
+
     let uuid: UUID = a.generate()
 
     if(uuid.version() != 1) {
         return -1
     }
+
     if(uuid.variant() != 2) {
         return -2
     }

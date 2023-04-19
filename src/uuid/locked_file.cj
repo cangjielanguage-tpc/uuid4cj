@@ -49,7 +49,7 @@ public class LockedFile {
         try {
             mFile.read(uArray)
         } catch (ie: Exception) {
-            logger.error("Failed to read file")
+            logger.error("file Failed to read ${mFile.length} bytes")
             return READ_ERROR
         }
 

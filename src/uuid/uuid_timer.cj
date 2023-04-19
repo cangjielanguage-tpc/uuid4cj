@@ -20,7 +20,7 @@ public class UUIDTimer {
 
     protected var _syncer = Option<FileBasedTimestampSynchronizer>.None
 
-    protected var _random = Random()
+    protected var _random = SecureRandom()
 
     protected var _clock = UUIDClock()
 
@@ -36,11 +36,11 @@ public class UUIDTimer {
 
     private static let MAX_WAIT_COUNT:Int32 = 50
 
-    public init(rnd:Random,sync:Option<FileBasedTimestampSynchronizer>){
+    public init(rnd:SecureRandom,sync:Option<FileBasedTimestampSynchronizer>){
         this(rnd, sync,UUIDClock())
     }
 
-    public init(rnd:Random,sync:Option<FileBasedTimestampSynchronizer>,clock:UUIDClock){
+    public init(rnd:SecureRandom,sync:Option<FileBasedTimestampSynchronizer>,clock:UUIDClock){
         _random = rnd
         _syncer = sync
         _clock = clock
@@ -56,7 +56,7 @@ public class UUIDTimer {
         _firstUnsafeTimestamp = 0
     }
 
-    private func initCounters(rnd:Random):Unit{
+    private func initCounters(rnd:SecureRandom):Unit{
         _clockSequence = rnd.nextInt32()
         _clockCounter = (_clockSequence >> 16) & 0xFF
     }
@@ -105,8 +105,8 @@ public class UUIDTimer {
         if ( isSyncer && systime >= _firstUnsafeTimestamp) {
             try {
                 _firstUnsafeTimestamp = _syncer.getOrThrow().update(systime);
-            } catch (ioe: InterruptedException) {
-                throw InterruptedException("Failed to synchr`onize timestamp: ");
+            } catch (ioe: Exception) {
+                throw Exception("Failed to synchronize timestamp");
             }
         }
 
@@ -141,7 +141,6 @@ public class UUIDTimer {
     }
 
     protected func slowDown(startTime: Int64, actDiff: Int64) {
-
         let ratio: Int64 = actDiff / kMaxClockAdvance
         var delay: Int64
 
@@ -155,7 +154,7 @@ public class UUIDTimer {
             delay = 5;
         }
 
-        _logger.warn("Need to wait for " + delay.toString() + " milliseconds; virtual clock advanced too far in the future")
+        _logger.warn("Need to wait for ${delay.toString()} milliseconds; virtual clock advanced too far in the future")
         let waitUntil: Int64 = startTime + delay
         var counter: Int32 = 0
         do {

@@ -1,5 +1,5 @@
 /*
- * @Copyright (c) Huawei Technologies Co., Ltd. 2022-2022. All rights reserved.
+ * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2023. All rights reserved.
  */
 
 package uuid
@@ -168,7 +168,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
     @overflowWrapping
     public func toByteArray(uuidBytesArray:Array<UInt8>,pos:Int64):Unit{
          if (pos < 0 || (pos + 6) > uuidBytesArray.size) {
-            throw  IllegalArgumentException("Illegal offset ("+pos.toString()+"), need room for 6 bytes")
+            throw  IllegalArgumentException("Illegal offset (${pos}), need room for 6 bytes")
         }
         var temppos = pos
         var i:Int32 = Int32(_address >> 32)

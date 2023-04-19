@@ -30,15 +30,15 @@ public class TimeBasedGenerator <: NoArgGenerator{
         _timer = timer
     }
 
-    public func getType():UUIDType{
-        return UUIDType.TIME_BASED_REORDERED
+    public override func getType(): UUIDType{
+        return UUIDType.TIME_BASED
     }
 
     public func getEthernetAddress():EthernetAddress{
         return _ethernetAddress.getOrThrow()
     }
 
-    public func generate():UUID{
+    public override func generate():UUID{
         let rawTimestamp:Int64 = _timer.getTimestamp()
 
         let clockHi:Int64 = Int64(rightShift(rawTimestamp,32))

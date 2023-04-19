@@ -10,9 +10,9 @@ public class FileBasedTimestampSynchronizer <: TimestampSynchronizer {
     
     static let DEFAULT_UPDATE_INTERVAL: Int64 = 10 * 1000
 
-    private static let DEFAULT_LOCK_FILE_NAME1: String = "uuid1.lck"
+    private static let DEFAULT_LOCK_FILE_NAME1: String = "uuid1.txt"
 
-    private static let DEFAULT_LOCK_FILE_NAME2: String = "uuid2.lck"
+    private static let DEFAULT_LOCK_FILE_NAME2: String = "uuid2.txt"
 
     private var mInterval:Int64 = DEFAULT_UPDATE_INTERVAL
 
@@ -23,7 +23,7 @@ public class FileBasedTimestampSynchronizer <: TimestampSynchronizer {
     var mFirstActive: Bool = false
 
     public init(){
-        this(File(DEFAULT_LOCK_FILE_NAME1, OpenOption.Open(true, true)), File(DEFAULT_LOCK_FILE_NAME2, OpenOption.Open(true, true)))
+        this(openFile(DEFAULT_LOCK_FILE_NAME1), openFile(DEFAULT_LOCK_FILE_NAME2))
     }
 
     public init(lockFile1: File, lockFile2: File){
@@ -64,7 +64,6 @@ public class FileBasedTimestampSynchronizer <: TimestampSynchronizer {
             mFirstActive = false
             result = ts2
         }
-
         if (result <= 0) {
             logger.warn("Could not determine safe timer starting point: assuming current system time is acceptable")
         } else {
@@ -100,5 +99,15 @@ public class FileBasedTimestampSynchronizer <: TimestampSynchronizer {
         }
         mFirstActive = !mFirstActive
         return nextAllowed
+    }
+
+    private static func openFile(filePath: String): File{
+        let file: File
+        if (File.exists(filePath)) {
+            file = File(filePath, OpenOption.Open(true, true))
+        } else {
+            file = File(filePath, OpenOption.Create(true))
+        }
+        return file
     }
 }
