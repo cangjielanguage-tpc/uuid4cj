@@ -1165,3 +1165,171 @@ public class TimeBasedEpochGenerator <: NoArgGenerator {
 }
 ```
 
+### 2.9 EthernetAddress
+
+用于生成符合地址格式的地址
+
+```cangjie
+public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>{
+    
+    /**
+     * 字符串构造函数
+     *
+     * 参数 - 符合地址格式的地址，像（00:C0:F0:3D:5B:7C）
+     * 请注意，字符串不区分大小写，并且前导为零，可以省略，
+     * 00:C0:F0:3D:5B:7C 和 0:C0:F0:3D:5B:7C 等效
+     */  
+    public init(addrStr: String)
+
+    /**
+     * 数组构造函数
+     *
+     * 参数 - 6 位字节数组
+     *        不符合则会报错 Ethernet address has to consist of 6 bytes
+     */ 
+    public init(addr: Array<UInt8>)
+
+    /**
+     * Int64 类型的构造函数
+     *
+     * 参数 - Int64
+     */ 
+    public init(addr: Int64)
+
+    /**
+     * 复制地址
+     *
+     * 返回值 - EthernetAddress
+     */
+    public func clone(): EthernetAddress
+
+    /**
+     * 构造一个新的 EthernetAddress，给定包含地址的 UInt8 数组表示
+     *
+     * 参数 addr - 地址的数组表示（小于或大于6个字节长度的数组无效）
+     * 返回值 - EthernetAddress
+     */
+    public static func valueOf(addr: Array<UInt8>): EthernetAddress
+
+    /**
+     * 构造一个新的 EthernetAddress，给定包含地址的 Int32 数组表示
+     *
+     * 参数 addr - 地址的数组表示（小于或大于6个字节长度的数组无效）
+     * 返回值 - EthernetAddress
+     */
+    public static func valueOf(addr: Array<Int32>): EthernetAddress
+
+    /**
+     * 构造一个新的 EthernetAddress，给定包含地址的 string 表示
+     *
+     * 参数 addrStr - 地址的字符串表示
+     * 返回值 - EthernetAddress
+     */
+    public static func valueOf(addrStr: String)
+
+    /**
+     * 构造一个新的 EthernetAddress，给定包含地址的 Int64 表示
+     *
+     * 参数 addrStr - 地址的 Int64 表示
+     * 返回值 - EthernetAddress
+     */
+    public static func valueOf(addr: Int64)
+
+    /**
+     * 构造一个随机的 EthernetAddress
+     *
+     * 返回值 - EthernetAddress
+     */
+    public static func constructMulticastAddress(): EthernetAddress
+
+    /**
+     * 构造一个随机的 EthernetAddress
+     *
+     * 参数 rnd - 安全随机数
+     * 返回值 - EthernetAddress
+     */
+    public static func constructMulticastAddress(rnd: SecureRandom): EthernetAddress
+
+    /**
+     * 返回字节数组类型的 EthernetAddress
+     *
+     * 返回值 - Array<UInt8>
+     */
+    public func asByteArray(): Array<UInt8>
+
+    /**
+     * 返回字节数组类型的 EthernetAddress，作用同 asByteArray
+     *
+     * 返回值 - Array<UInt8>
+     */
+    public func toByteArray(): Array<UInt8>
+
+    /**
+     * 将地址转成 UInt8 数组
+     *
+     * 参数 array - 字节数组
+     * 返回值 - Unit
+     */
+    public func toByteArray(array: Array<UInt8>): Unit
+
+    /**
+     * 将地址转成 UInt8 数组
+     *
+     * 参数 array - 字节数组
+     * 参数 pos - 位置
+     * 返回值 - Unit
+     */
+    @overflowWrapping
+    public func toByteArray(uuidBytesArray: Array<UInt8>, pos: Int64): Unit
+
+    /**
+     * 获取地址 Int64 值
+     *
+     * 返回值 - Int64
+     */
+    public func toLong(): Int64
+
+    /**
+     * 检查地址是否引用多播地址
+     *
+     * 返回值 - Bool
+     */
+    public func isMulticastAddress(): Bool
+
+    /**
+     * 检查地址是否引用本地管理地址
+     *
+     * 返回值 - Bool
+     */
+    public func isLocallyAdministeredAddress(): Bool
+
+    /**
+     * 判断地址是否相等
+     *
+     * 返回值 - Bool
+     */
+    public operator func ==(anothor: EthernetAddress): Bool
+
+    /**
+     * 判断地址是否不等
+     *
+     * 返回值 - Bool
+     */
+    public operator func !=(anothor: EthernetAddress): Bool
+
+    /**
+     * 获取地址哈希值
+     *
+     * 返回值 - Int64
+     */
+    public func hashCode(): Int64
+
+    /**
+     * 获取地址 String 形式
+     *
+     * 返回值 - String
+     */
+    @overflowWrapping
+    public func toString(): String
+}
+```
