@@ -40,20 +40,6 @@ public class InterruptedException <: Exception {
  * The class is uuid exception handling
  * @since 0.37.2
  */
-public class ReadWriteException <: Exception {
-    init() {
-        super()
-    }
-    init(messages: String) {
-        super(messages)
-    }
-}
-
-
-/*
- * The class is uuid exception handling
- * @since 0.37.2
- */
 public class NumberFormatException <: Exception {
     init() {
         super()
