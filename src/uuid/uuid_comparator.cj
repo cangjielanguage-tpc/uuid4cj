@@ -5,15 +5,10 @@
 package uuid
 
 /**
- * Default UUID comparator is not very useful, since
- * it just does blind byte-by-byte comparison which does not work well
- * for time+location - based UUIDs. Additionally it also uses signed
- * comparisons for longs which can lead to unexpected behavior
+ * Default UUID comparator is not very useful
  * This comparator does implement proper lexical ordering: starting with
- * type (different types are collated
- * separately), followed by time and location (for time/location based),
- * and simple lexical (byte-by-byte) ordering for name/hash and random
- * variants.
+ * type, followed by time and location, and simple lexical (byte-by-byte) 
+ * ordering for name/hash and random variants.
  * 
  * @since 0.38.2
  */
@@ -38,41 +33,41 @@ public class UUIDComparator {
     static func staticCompare(u1: UUID, u2: UUID): Int32 {
         // First: major sorting by types
         let types: Int32 = u1.version()
-        var diff: Int32 = types - u2.version()
-        if (diff != 0) {
-            return diff
+        var diffs: Int32 = types - u2.version()
+        if (diffs != 0) {
+            return diffs
         }
         // Second: for time-based variant, order by time stamp:
         if (Int64(types) == UUIDType.TIME_BASED.raw()) {
-            diff = compareULongs(u1.timestamp(), u2.timestamp())
-            if (diff == 0) {
+            diffs = compareULongs(u1.timestamp(), u2.timestamp())
+            if (diffs == 0) {
                 // or if that won't work, by other bits lexically
-                diff = compareULongs(u1.getLeastSignificantBits(), u2.getLeastSignificantBits())
+                diffs = compareULongs(u1.getLeastSignificantBits(), u2.getLeastSignificantBits())
             }
         } else {
             // note: java.util.UUIDs compares with sign extension, IMO that's wrong, so:
-            diff = compareULongs(u1.getMostSignificantBits(),
+            diffs = compareULongs(u1.getMostSignificantBits(),
                     u2.getMostSignificantBits())
-            if (diff == 0) {
-                diff = compareULongs(u1.getLeastSignificantBits(),
+            if (diffs == 0) {
+                diffs = compareULongs(u1.getLeastSignificantBits(),
                         u2.getLeastSignificantBits())
             }
         }
-        return diff
+        return diffs
     }
 
     @overflowWrapping
     static func compareULongs(l1: Int64, l2: Int64): Int32 {
-        var diff: Int32 = compareUInts(Int32(l1 >> 32), Int32(l2 >> 32))
-        if (diff == 0) {
-            diff = compareUInts(Int32(l1), Int32(l2))
+        var diffs: Int32 = compareUInts(Int32(l1 >> 32), Int32(l2 >> 32))
+        if (diffs == 0) {
+            diffs = compareUInts(Int32(l1), Int32(l2))
         }
-        return diff
+        return diffs
     }
 
     static func compareUInts(i1: Int32, i2: Int32):Int32 {
         /* if both have same sign, normal comparison (by subtraction) works fine
-         * but if signs don't agree need to resolve differently
+         * but if signs don't agree need to resolve diffserently
          */
         if (i1 < 0) {
             if(i2 < 0) {

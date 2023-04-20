@@ -1333,3 +1333,25 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
     public func toString(): String
 }
 ```
+### 2.10 UUIDComparator
+
+比较两个 UUID
+
+```
+public class UUIDComparator {
+
+    /**
+     * UUID 比较
+     *
+     * 参数 u1 - UUID
+     * 参数 u2 - UUID
+     * 返回 Int32 - 结果 >0 表示 ui > u2
+     *              结果 <0 表示 ui < u2
+     *              结果 = 0 表示 ui = u2
+     */
+    public static func compare(u1: UUID, u2:UUID): Int32 {
+        return staticCompare(u1, u2)
+    }
+
+}
+```
