@@ -9,7 +9,7 @@ from std import format.Formatter
 
 main() {  
 
-    let filePath: Path = Path("./uuuu.txt")
+    let filePath: Path = Path("./uuuu_write.txt")
     var file1: File 
     if (File.exists(filePath)) {
         file1 = File(filePath, OpenOption.Open(true, true))

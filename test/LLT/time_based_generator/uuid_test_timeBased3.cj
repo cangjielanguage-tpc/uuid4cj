@@ -10,7 +10,7 @@ from std import fs.*
 from std import format.Formatter
 
 main() {  
-    let filePath1: String = "./ggg.txt"
+    let filePath1: String = "./ggg_3.txt"
 
     var file1: File
 
@@ -20,7 +20,7 @@ main() {
         file1 = File(filePath1, OpenOption.Create(true))
     }
 
-    let filePath2: String = "./zzzz.txt"
+    let filePath2: String = "./zzz_3.txt"
 
     var file2: File
 

@@ -33,14 +33,12 @@ public class LockedFile {
     }
 
     public func readStamp(): Int64{
-        var size: Int64
-        try {
-            size = mFile.length
-        } catch (ioe: Exception) {
-            logger.error("Failed to read file size")
-            return READ_ERROR
+        var size: Int64 = mFile.length
+        if (size == 0) {
+            logger.warn("Missing or empty file, can not read timestamp value");
+            return READ_ERROR;
         }
-
+        
         if (size > 100) {
             size = 100
         }

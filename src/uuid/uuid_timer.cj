@@ -1,5 +1,5 @@
 /*
- * @Copyright (c) Huawei Technologies Co., Ltd. 2022-2022. All rights reserved.
+ * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2023. All rights reserved.
  */
 
 package uuid
@@ -67,13 +67,11 @@ public class UUIDTimer {
 
     public func getTimestamp(): Int64{
         var systime: Int64 = _clock.currentTimeMillis()
-
         if(systime < _lastSystemTimestamp) {
             _logger.warn("System time going backwards! (got value ${systime}, last  ${_lastSystemTimestamp})")
             _lastSystemTimestamp = systime
 
         }
-
         if (systime <= _lastUsedTimestamp) {
             if (_clockCounter < kClockMultiplier) {
                 systime = _lastUsedTimestamp;
@@ -118,28 +116,6 @@ public class UUIDTimer {
         return systime;
     }
 
-    @overflowWrapping
-    protected func getAndSetTimestamp(uuidBytes: Array<UInt8>)
-    {
-        let timestamp: Int64 = getTimestamp();
-
-        uuidBytes[Int64(UUIDUtil.BYTE_OFFSET_CLOCK_SEQUENCE)] = UInt8(_clockSequence);
-        uuidBytes[Int64(UUIDUtil.BYTE_OFFSET_CLOCK_SEQUENCE+1)] = UInt8( (_clockSequence >> 8));
-
-        let clockHi: Int32 = Int32(rightShift(timestamp, 32));
-        let clockLo: Int32 = Int32(timestamp);
-
-        uuidBytes[Int64(UUIDUtil.BYTE_OFFSET_CLOCK_HI)] = UInt8(rightShift(Int64(clockHi), 24));
-        uuidBytes[Int64(UUIDUtil.BYTE_OFFSET_CLOCK_HI+1)] = UInt8(rightShift(Int64(clockHi), 16));
-        uuidBytes[Int64(UUIDUtil.BYTE_OFFSET_CLOCK_MID)] = UInt8(rightShift(Int64(clockHi), 8));
-        uuidBytes[Int64(UUIDUtil.BYTE_OFFSET_CLOCK_MID+1)] = UInt8(clockHi);
-
-        uuidBytes[Int64(UUIDUtil.BYTE_OFFSET_CLOCK_LO)] = UInt8(rightShift(Int64(clockLo), 24));
-        uuidBytes[Int64(UUIDUtil.BYTE_OFFSET_CLOCK_LO+1)] = UInt8(rightShift(Int64(clockLo), 16));
-        uuidBytes[Int64(UUIDUtil.BYTE_OFFSET_CLOCK_LO+2)] = UInt8(rightShift(Int64(clockLo), 8));
-        uuidBytes[Int64(UUIDUtil.BYTE_OFFSET_CLOCK_LO+3)] = UInt8(clockLo);
-    }
-
     protected func slowDown(startTime: Int64, actDiff: Int64) {
         let ratio: Int64 = actDiff / kMaxClockAdvance
         var delay: Int64
@@ -172,6 +148,4 @@ public class UUIDTimer {
         } while (Int64( Time.now().unixTimeStamp().milliseconds()) < waitUntil)
 
     }
-
-
 }

@@ -40,7 +40,6 @@ public class TimeBasedGenerator <: NoArgGenerator{
 
     public override func generate():UUID{
         let rawTimestamp:Int64 = _timer.getTimestamp()
-
         let clockHi:Int64 = Int64(rightShift(rawTimestamp,32))
         let clockLo:Int64 = Int64(rawTimestamp)
 
@@ -50,7 +49,7 @@ public class TimeBasedGenerator <: NoArgGenerator{
         midhi |= 0x1000
         var midhiL:Int64 = Int64(midhi);
         midhiL = rightShift((midhiL << 32), 32)
-        var l1: Int64 = (Int64(clockLo) << 32) | midhi
+        var l1: Int64 = (Int64(clockLo) << 32) | midhiL
         return UUID(l1, _uuidL2)
     }
 
