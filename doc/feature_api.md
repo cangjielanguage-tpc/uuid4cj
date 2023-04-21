@@ -703,12 +703,9 @@ public class UUID <: ToString {
     /**
      * 返回 UUID 的变体值
      *
-     * UUID 的变体描述了 UUID 的布局。变体值的意义如下：
+     * UUID 的变体描述了 UUID 的布局。变体值的可能值及意义如下：
      *
-     * 0 变体0，保留，NCS向后兼容性
-     * 1 变体1，IETF RFC 4122  (Leach-Salz)，UUID 类型使用该布局
-     * 2 变体2，保留，Microsoft Corporation 向后兼容性
-     * 3 保留供将来定义使用
+     * 2 - 变体2，保留，Microsoft Corporation 向后兼容性
      *
      * 返回值 Int32 - 此 UUID 的变体
      */
@@ -848,18 +845,18 @@ public class UUIDUtil {
     public static func constructUUID(types: UUIDType, l1: Int64, l2: Int64): UUID
     
     /**
-     * 据类型初始化此 UUID 的 128 位值中的最低有效 64 位
+     * 据类型初始化此 UUID 的 128 位值中的最高有效 64 位
      * 
-     * 参数 l1 - 该 UUID 的 128 位的最低有效 64 位
+     * 参数 l1 - 该 UUID 的 128 位的最高有效 64 位
      * 参数 types - UUIDType
      * 返回值 Int64
      */
     public static func initUUIDFirstLong(l1: Int64, types: UUIDType): Int64
 
     /**
-     * 根据类型初始化此 UUID 的 128 位值中的最低有效 64 位
+     * 根据类型初始化此 UUID 的 128 位值中的最高有效 64 位
      * 
-     * 参数 l1 - UUID 的 128 位值中的最低有效 64 位
+     * 参数 l1 - UUID 的 128 位值中的最高有效 64 位
      * 参数 rawType - UUIDType.raw() 值
      * 返回值 Int64
      */
@@ -878,8 +875,7 @@ public class UUIDUtil {
      * 
      * 参数 uuid - 要检查的 UUID
      * 
-     * 返回值 UUIDType - UUIDType
-     *                  NoneValueException  
+     * 返回值 ？UUIDType - Option<UUIDType>             
      */
     @overflowWrapping
     public static func typeOf(uuid: UUID): ?UUIDType
@@ -1023,7 +1019,6 @@ public class RandomBasedGenerator <: NoArgGenerator {
     /**
      * 通过random 或者 SecureRandom 随机生成 UUID
      *
-     * 参数 name - string
      * 返回值 UUID
      */    
     public override func generate(): UUID
@@ -1084,7 +1079,16 @@ public enum UUIDType {
     /*
      * 获取UUID类型
      *
-     * 返回值 Int64 - UUID类型
+     * 返回值 Int64 - UUID类型对应值如下：
+     *       TIME_BASED => 1
+     *       DCE => 2
+     *       NAME_BASED_MD5 => 3
+     *       RANDOM_BASED => 4
+     *       NAME_BASED_SHA1 => 5
+     *       TIME_BASED_REORDERED => 6
+     *       TIME_BASED_EPOCH => 7
+     *       FREE_FORM => 8
+     *       UNKNOWN => 0     
      */
     public func raw(): Int64
 }
@@ -1354,4 +1358,55 @@ public class UUIDComparator {
     }
 
 }
+```
+
+### 2.11 UUIDGenerator
+
+```
+public abstract class UUIDGenerator {
+
+    /**
+     * UUID 生成器
+     *
+     * 返回 UUIDType - UUID 的 type
+     */
+    public func getType(): UUIDType
+
+}
+```
+### 2.12 StringArgGenerator
+
+```
+public abstract class StringArgGenerator <: UUIDGenerator {
+
+    /**
+     * UUID 生成器
+     * 
+     * 参数 name - 符合 UUID 标准的名称
+     * 返回 UUIDType - UUID 的 type
+     */
+    public func generate(name: String): UUID
+
+    /**
+     * UUID 生成器
+     * 
+     * 参数 nameByte - 指定字节数组
+     * 返回 UUIDType - UUID 的 type
+     */
+    public func generate(nameByte: Array<UInt8>): UUID
+
+}
+```
+### 2.13 StringArgGenerator
+
+```
+public abstract class NoArgGenerator {
+    /**
+     * UUID 生成器
+     * 
+     * 返回 UUID
+     */
+    public func generate():UUID
+}
+
 ```
