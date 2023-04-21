@@ -1354,9 +1354,7 @@ public class UUIDComparator {
      *              结果 <0 表示 ui < u2
      *              结果 = 0 表示 ui = u2
      */
-    public static func compare(u1: UUID, u2:UUID): Int32 {
-        return staticCompare(u1, u2)
-    }
+    public static func compare(u1: UUID, u2:UUID): Int32
 
 }
 ```
@@ -1398,21 +1396,8 @@ public abstract class StringArgGenerator <: UUIDGenerator {
 
 }
 ```
-### 2.13 StringArgGenerator
 
-```
-public abstract class NoArgGenerator {
-    /**
-     * UUID 生成器
-     * 
-     * 返回 UUID
-     */
-    public func generate():UUID
-}
-
-```
-
-### 2.14 TimeBasedGenerator
+### 2.13 TimeBasedGenerator
 
 基于时间+默认地址生成唯一 UUID。
 
@@ -1450,7 +1435,7 @@ public class TimeBasedGenerator <: NoArgGenerator {
 }
 ```
 
-### 2.15 FileBasedTimestampSynchronizer
+### 2.14 FileBasedTimestampSynchronizer
 
 保存时读取间戳的文件工具类。
 
@@ -1497,7 +1482,7 @@ public class FileBasedTimestampSynchronizer {
 }
 ```
 
-### 2.16 LockedFile
+### 2.15 LockedFile
 
 保存读取时间戳的具体实现类
 
@@ -1533,7 +1518,7 @@ public class LockedFile {
 }
 ```
 
-### 2.17 UUIDTimer
+### 2.16 UUIDTimer
 
 时间戳工具类
 
