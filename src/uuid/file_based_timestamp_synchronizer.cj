@@ -4,7 +4,7 @@
 
 package uuid
 
-public class FileBasedTimestampSynchronizer <: TimestampSynchronizer {
+public class FileBasedTimestampSynchronizer {
 
     private let logger: SimpleLogger = SimpleLogger()
     
@@ -15,6 +15,8 @@ public class FileBasedTimestampSynchronizer <: TimestampSynchronizer {
     private static let DEFAULT_LOCK_FILE_NAME2: String = "uuid2.txt"
 
     private var mInterval:Int64 = DEFAULT_UPDATE_INTERVAL
+
+
 
     protected var mLocked1: LockedFile
 
@@ -53,7 +55,7 @@ public class FileBasedTimestampSynchronizer <: TimestampSynchronizer {
         mInterval = interval
     }
 
-    protected override func initialize():Int64 {
+    protected func initialize():Int64 {
         let ts1: Int64 = mLocked1.readStamp()
         let ts2: Int64 = mLocked2.readStamp()
         var result: Int64
@@ -76,7 +78,7 @@ public class FileBasedTimestampSynchronizer <: TimestampSynchronizer {
         return result
      }
 
-    protected override func deactivate() {
+    protected func deactivate() {
         doDeactivate(mLocked1, mLocked2);
     }
 
@@ -90,7 +92,7 @@ public class FileBasedTimestampSynchronizer <: TimestampSynchronizer {
         }
     }
 
-    public override func update(now:Int64):Int64 {
+    public func update(now:Int64):Int64 {
         let nextAllowed: Int64 = now + mInterval
         if (mFirstActive) {
             mLocked2.writeStamp(nextAllowed)

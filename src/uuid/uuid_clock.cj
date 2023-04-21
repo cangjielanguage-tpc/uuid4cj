@@ -7,7 +7,7 @@ package uuid
 public class UUIDClock{
 
     public func currentTimeMillis():Int64{
-        return Time.now().unixTimeStamp().nanoseconds() / 1000 /1000
+        return Time.now().unixTimeStamp().milliseconds()
     }
 
 }

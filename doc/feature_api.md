@@ -1337,6 +1337,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
     public func toString(): String
 }
 ```
+
 ### 2.10 UUIDComparator
 
 比较两个 UUID
@@ -1409,4 +1410,166 @@ public abstract class NoArgGenerator {
     public func generate():UUID
 }
 
+```
+
+### 2.14 TimeBasedGenerator
+
+基于时间+默认地址生成唯一 UUID。
+
+```cangjie
+public class TimeBasedGenerator <: NoArgGenerator {
+
+    /**
+     * 初始化
+     *
+     * 参数 ethAddr - Option<EthernetAddress> 默认物理地址
+     * 参数 timer - UUIDTimer 时间戳生成类
+     */
+    public init(ethAddr:Option<EthernetAddress>,timer: UUIDTimer)
+
+    /**
+     * 获取UUIDType
+     *
+     * 返回值 UUIDType
+     */
+    public override func getType(): UUIDType
+
+    /**
+     * 获取EthernetAddress
+     *
+     * 返回值 EthernetAddress
+     */
+    public func getEthernetAddress(): EthernetAddress
+    
+    /**
+     * 生成 UUID
+     *
+     * 返回值 UUID
+     */   
+    public func generate(): UUID
+}
+```
+
+### 2.15 FileBasedTimestampSynchronizer
+
+保存时读取间戳的文件工具类。
+
+```cangjie
+public class FileBasedTimestampSynchronizer {
+
+    /**
+     * 初始化
+     */
+    public init()
+
+    /**
+     * 初始化
+     *
+     * 参数 lockFile1 - File 时间戳保存文件一
+     * 参数 lockFile2 - File 时间戳保存文件二
+     */
+    public init(lockFile1: File, lockFile2: File)
+
+    /**
+     * 初始化
+     *
+     * 参数 lockFile1 - File 时间戳保存文件一
+     * 参数 lockFile2 - File 时间戳保存文件二
+     * 参数 interval - Int64 时间间隔
+     */
+    public init(lockFile1: File, lockFile2: File, interval: Int64)
+
+    /**
+     * 设置时间间隔
+     *
+     * 参数 interval - Int64 时间间隔
+     */
+    public func setUpdateInterval(interval: Int64)
+
+    /**
+     * 更新文件里的时间戳
+     *
+     * 参数 now - Int64 系统时间
+     * 返回值 更新后的时间戳
+     */
+    public func update(now:Int64): Int64
+    
+}
+```
+
+### 2.16 LockedFile
+
+保存读取时间戳的具体实现类
+
+```cangjie
+public class LockedFile {
+
+    /**
+     * 初始化
+     *
+     * 参数 f - File 操作的文件
+     */
+    public init(f: File)
+
+    /**
+     * 清空失效
+     */
+    public func deactivate()
+
+    /**
+     * 读取时间戳
+     *
+     * 返回值 读取到的时间戳
+     */
+    public func readStamp(): Int64
+
+    /**
+     * 写入时间戳
+     *
+     * 参数 stamp - Int64 写入的时间戳
+     */
+    public func writeStamp(stamp: Int64)
+    
+}
+```
+
+### 2.17 UUIDTimer
+
+时间戳工具类
+
+```cangjie
+public class UUIDTimer {
+
+    /**
+     * 初始化
+     *
+     * 参数 rnd - SecureRandom 随机数生成类
+     * 参数 sync - Option<FileBasedTimestampSynchronizer> 保存时读取时间戳的文件工具类
+     */
+    public init(rnd:SecureRandom,sync:Option<FileBasedTimestampSynchronizer>)
+
+    /**
+     * 初始化
+     *
+     * 参数 rnd - SecureRandom 随机数生成类
+     * 参数 sync - Option<FileBasedTimestampSynchronizer> 保存时读取时间戳的文件工具类
+     * 参数 clock - UUIDClock 时钟
+     */
+    public init(rnd:SecureRandom,sync:Option<FileBasedTimestampSynchronizer>,clock:UUIDClock)
+
+    /**
+     * 获取时钟序列
+     *
+     * 返回值 时钟序列
+     */
+    public func getClockSequence():Int32
+
+    /**
+     * 获取时间戳
+     *
+     * 返回值 时间戳
+     */
+    public func getTimestamp(): Int64
+
+}
 ```
