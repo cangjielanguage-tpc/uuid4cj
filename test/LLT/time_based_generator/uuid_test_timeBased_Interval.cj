@@ -23,7 +23,7 @@ main() {
 
     var oFile: Option<FileBasedTimestampSynchronizer> =  FileBasedTimestampSynchronizer(file1, file2)
     oFile.getOrThrow().setUpdateInterval(10 * 1000) // 10s update
-    let a: TimeBasedGenerator = Generators.timeBasedGenerator(oFile)
+    let a: TimeBasedGenerator = Generators.timeBasedGenerator(Option<EthernetAddress>.None, oFile)
 
     a.generate()
 
