@@ -10,9 +10,12 @@ from std import time.*
 main() {
 
     var timer = UUIDTimer(SecureRandom(), Option<FileBasedTimestampSynchronizer>.None)
-    let a: TimeBasedGenerator = Generators.timeBasedGenerator(timer)
 
-    let b: TimeBasedGenerator = Generators.timeBasedGenerator(Option<UUIDTimer>.None)
+    var ethernetAddress: Option<EthernetAddress> =  EthernetAddress("87:f5:93:06:d3:0c")
+    
+    let a: TimeBasedGenerator = Generators.timeBasedGenerator(ethernetAddress, timer)
+
+    let b: TimeBasedGenerator = Generators.timeBasedGenerator(Option<EthernetAddress>.None, Option<UUIDTimer>.None)
 
 
     let uuid: UUID = a.generate()

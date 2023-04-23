@@ -458,25 +458,35 @@ UUIDType: 7
 /**
  * 构造 UUID 生成器的工厂方法
  * 
- * 返回值 TimeBasedGenerator- 基于时间+默认地址生成器
+ * 返回值 TimeBasedGenerator- 基于默认时间+默认地址生成器
  */
 public static func timeBasedGenerator(): TimeBasedGenerator
 
 /**
  * 构造 UUID 生成器的工厂方法
  * 
- * 参数 sync- Option<FileBasedTimestampSynchronizer> 使用文件来存储时间戳
- * 返回值 TimeBasedGenerator- 基于时间+默认地址生成器
+ * 参数 ethernetAddress- Option<EthernetAddress> 地址类
+ * 返回值 TimeBasedGenerator- 基于默认时间+地址
  */
-public static func timeBasedGenerator(sync: Option<FileBasedTimestampSynchronizer>): TimeBasedGenerator
+public static func timeBasedGenerator(ethernetAddress: Option<EthernetAddress>): TimeBasedGenerator
 
 /**
  * 构造 UUID 生成器的工厂方法
  * 
+ * 参数 ethernetAddress- Option<EthernetAddress> 地址类
+ * 参数 sync- Option<FileBasedTimestampSynchronizer> 使用文件来存储时间戳
+ * 返回值 TimeBasedGenerator- 基于时间+地址生成器
+ */
+public static func timeBasedGenerator(ethernetAddress: Option<EthernetAddress>, sync: Option<FileBasedTimestampSynchronizer>): TimeBasedGenerator
+
+/**
+ * 构造 UUID 生成器的工厂方法
+ * 
+ * 参数 ethernetAddress- Option<EthernetAddress> 地址类
  * 参数 timer- Option<UUIDTimer> 时间戳管理类
  * 返回值 TimeBasedGenerator- 基于时间+默认地址生成器
  */ 
-public static func timeBasedGenerator(timer: Option<UUIDTimer>): TimeBasedGenerator
+public static func timeBasedGenerator(ethernetAddress: Option<EthernetAddress>, timer: Option<UUIDTimer>): TimeBasedGenerator
 ```
 
 #### 1.6.2 示例
@@ -501,7 +511,29 @@ UUIDType: 1
 生成的UUID: 01878d39-54c2-7db7-aa02-cb98e6732ee4
 ```
 
-##### 1.6.2.2 timeBasedGenerator(sync: Option<FileBasedTimestampSynchronizer>) 使用示例
+##### 1.6.2.2 timeBasedGenerator(ethernetAddress: Option<EthernetAddress>) 使用示例
+
+```cangjie
+from uuid import uuid.*
+
+main() {  
+    var ethernetAddress1: Option<EthernetAddress> =  EthernetAddress("87:f5:93:06:d3:0c")
+    let time: TimeBasedGenerator = Generators.timeBasedGenerator(ethernetAddress1)
+    let uuid: UUID = time.generate()
+
+    println("UUIDType: ${time.getType().raw()}")
+    println("生成的UUID: ${uuid.toString()}")
+    return 0
+}
+```
+执行结果如下：
+
+```
+UUIDType: 1
+生成的UUID: 01878d39-54c2-7db7-aa02-cb98e6732ee4
+```
+
+##### 1.6.2.3 timeBasedGenerator(ethernetAddress: Option<EthernetAddress>, sync: Option<FileBasedTimestampSynchronizer>) 使用示例
 
 ```cangjie
 from uuid import uuid.*
@@ -534,9 +566,11 @@ main() {
 
     var oFile: Option<FileBasedTimestampSynchronizer> =  FileBasedTimestampSynchronizer(file1, file2)
 
-    let a: TimeBasedGenerator = Generators.timeBasedGenerator(oFile)
+    var ethernetAddress1: Option<EthernetAddress> =  EthernetAddress("87:f5:93:06:d3:0c")
 
-    let b: TimeBasedGenerator = Generators.timeBasedGenerator(Option<FileBasedTimestampSynchronizer>.None)
+    let a: TimeBasedGenerator = Generators.timeBasedGenerator(ethernetAddress1, oFile)
+
+    let b: TimeBasedGenerator = Generators.timeBasedGenerator(ethernetAddress1, Option<FileBasedTimestampSynchronizer>.None)
 
     let uuid: UUID = a.generate()
 
@@ -563,7 +597,7 @@ UUIDType: 1
 生成的UUID2: 01878d39-58d2-7162-80e2-a635375f7674
 ```
 
-##### 1.6.2.3 timeBasedGenerator(timer: Option<UUIDTimer>) 使用示例
+##### 1.6.2.4 timeBasedGenerator(ethernetAddress: Option<EthernetAddress>, timer: Option<UUIDTimer>) 使用示例
 
 ```cangjie
 from uuid import uuid.*
@@ -572,11 +606,12 @@ from std import random.*
 from std import time.*
 
 main() {
+    var ethernetAddress1: Option<EthernetAddress> =  EthernetAddress("87:f5:93:06:d3:0c")
 
     var timer = UUIDTimer(SecureRandom(), Option<FileBasedTimestampSynchronizer>.None)
-    let a: TimeBasedGenerator = Generators.timeBasedGenerator(timer)
+    let a: TimeBasedGenerator = Generators.timeBasedGenerator(ethernetAddress1, timer)
 
-    let b: TimeBasedGenerator = Generators.timeBasedGenerator(Option<UUIDTimer>.None)
+    let b: TimeBasedGenerator = Generators.timeBasedGenerator(ethernetAddress1, Option<UUIDTimer>.None)
 
 
     let uuid: UUID = a.generate()
@@ -1555,6 +1590,23 @@ public class UUIDTimer {
      * 返回值 时间戳
      */
     public func getTimestamp(): Int64
+
+}
+```
+
+### 2.17 UUIDClock
+
+系统时间工具类
+
+```cangjie
+public class UUIDClock {
+
+    /**
+     * 获取当前系统时间
+     *
+     * 返回值 系统时间戳
+     */
+    public func currentTimeMillis(): Int64
 
 }
 ```

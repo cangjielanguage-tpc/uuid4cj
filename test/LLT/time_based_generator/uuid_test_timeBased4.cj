@@ -14,7 +14,7 @@ main() {
 
     var oFile: Option<FileBasedTimestampSynchronizer> =  FileBasedTimestampSynchronizer()
 
-    let a: TimeBasedGenerator = Generators.timeBasedGenerator(oFile)
+    let a: TimeBasedGenerator = Generators.timeBasedGenerator(Option<EthernetAddress>.None, oFile)
 
 
     let uuid: UUID = a.generate()

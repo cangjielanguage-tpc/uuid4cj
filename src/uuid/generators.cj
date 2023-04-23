@@ -102,9 +102,12 @@ public class Generators{
      * @return TimeBasedGenerator
      */
     public static func timeBasedGenerator():TimeBasedGenerator{
-        return  timeBasedGenerator(Option<UUIDTimer>.None);
+        return  timeBasedGenerator(Option<EthernetAddress>.None);
     }
 
+    public static func timeBasedGenerator(ethernetAddress: Option<EthernetAddress>):TimeBasedGenerator{
+        return timeBasedGenerator(ethernetAddress, Option<UUIDTimer>.None)
+    }
     /**
      * Factory method for constructing UUID generator that generates UUID using
      * variant 1 (time+location based).
@@ -115,7 +118,7 @@ public class Generators{
      * @param timer - Option<FileBasedTimestampSynchronizer>
      * @return TimeBasedGenerator
      */
-    public static func timeBasedGenerator(sync: Option<FileBasedTimestampSynchronizer>):TimeBasedGenerator{
+    public static func timeBasedGenerator(ethernetAddress: Option<EthernetAddress>, sync: Option<FileBasedTimestampSynchronizer>):TimeBasedGenerator{
         var timer: UUIDTimer
 
         try {
@@ -124,8 +127,10 @@ public class Generators{
             throw IllegalArgumentException("Failed to create UUIDTimer with specified synchronizer: " + e.toString())
         }
         
-        return  TimeBasedGenerator(Option<EthernetAddress>.None, timer);
+        return  timeBasedGenerator(ethernetAddress, timer);
     }
+
+    
 
     /**
      * Factory method for constructing UUID generator that generates UUID using
@@ -137,12 +142,12 @@ public class Generators{
      * @param timer - Option<UUIDTimer>
      * @return TimeBasedGenerator
      */
-    public static func timeBasedGenerator(timer: Option<UUIDTimer>):TimeBasedGenerator{
+    public static func timeBasedGenerator(ethernetAddress: Option<EthernetAddress>, timer: Option<UUIDTimer>):TimeBasedGenerator{
         let timerTT = match (timer) {
             case Some(v) => timer
             case None => sharedTimer()
         }
-        return  TimeBasedGenerator(Option<EthernetAddress>.None, timerTT.getOrThrow());
+        return  TimeBasedGenerator(ethernetAddress, timerTT.getOrThrow());
     }
 
     private static func sharedTimer(): Option<UUIDTimer> {

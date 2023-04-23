@@ -32,10 +32,11 @@ main() {
 
 
     var oFile: Option<FileBasedTimestampSynchronizer> =  FileBasedTimestampSynchronizer(file1, file2)
+    var ethernetAddress: Option<EthernetAddress> =  EthernetAddress("87:f5:93:06:d3:0c")
 
-    let a: TimeBasedGenerator = Generators.timeBasedGenerator(oFile)
+    let a: TimeBasedGenerator = Generators.timeBasedGenerator(ethernetAddress, oFile)
 
-    let b: TimeBasedGenerator = Generators.timeBasedGenerator(Option<FileBasedTimestampSynchronizer>.None)
+    let b: TimeBasedGenerator = Generators.timeBasedGenerator(Option<EthernetAddress>.None, Option<FileBasedTimestampSynchronizer>.None)
 
     let uuid: UUID = a.generate()
 
