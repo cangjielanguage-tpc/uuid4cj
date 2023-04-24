@@ -8,6 +8,11 @@ public abstract class UUIDGenerator{
 
     protected init(){}
 
+    /**
+     * get UUIDType
+     *
+     * @return UUIDType
+     */
     public func getType():UUIDType
 
 }

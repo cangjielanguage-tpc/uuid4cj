@@ -105,6 +105,16 @@ public class Generators{
         return  timeBasedGenerator(Option<EthernetAddress>.None);
     }
 
+    /**
+     * Factory method for constructing UUID generator that generates UUID using
+     * variant 1 (time+location based).
+     *
+     * using specified Ethernet address
+     * No additional external synchronization is used.
+     *
+     * @param ethernetAddress - Option<EthernetAddress>
+     * @return TimeBasedGenerator
+     */
     public static func timeBasedGenerator(ethernetAddress: Option<EthernetAddress>):TimeBasedGenerator{
         return timeBasedGenerator(ethernetAddress, Option<UUIDTimer>.None)
     }
@@ -115,6 +125,7 @@ public class Generators{
      * using specified Ethernet address
      * specified FileBasedTimestampSynchronizer instance
      *
+     * @param ethernetAddress - Option<EthernetAddress>
      * @param timer - Option<FileBasedTimestampSynchronizer>
      * @return TimeBasedGenerator
      */
@@ -130,8 +141,6 @@ public class Generators{
         return  timeBasedGenerator(ethernetAddress, timer);
     }
 
-    
-
     /**
      * Factory method for constructing UUID generator that generates UUID using
      * variant 1 (time+location based). 
@@ -139,6 +148,7 @@ public class Generators{
      * using specified Ethernet address
      * specified UUIDTimer instance
      *
+     * @param ethernetAddress - Option<EthernetAddress>
      * @param timer - Option<UUIDTimer>
      * @return TimeBasedGenerator
      */

@@ -6,6 +6,9 @@ package uuid
 
 public abstract class NoArgGenerator <: UUIDGenerator{
 
+    /**
+     * generate uuid
+     */
     public func generate():UUID
 
 }
