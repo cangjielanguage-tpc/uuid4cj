@@ -1,15 +1,34 @@
 /*
- * @Copyright (c) Huawei Technologies Co., Ltd. 2022-2022. All rights reserved.
+ * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2023. All rights reserved.
  */
 
 package uuid
 
+/**
+ * Implementation of UUID generator that uses time/location based generation
+ * method (variant 1).
+ *<p>
+ * As all JUG provided implementations, this generator is fully thread-safe.
+ * Additionally it can also be made externally synchronized with other
+ * instances (even ones running on other JVMs); to do this,
+ * use {@link com.fasterxml.uuid.ext.FileBasedTimestampSynchronizer}
+ * (or equivalent).
+ *
+ * since 38.2
+ */
 public class TimeBasedGenerator <: NoArgGenerator{
 
     protected var _ethernetAddress: Option<EthernetAddress>
     protected var _timer: UUIDTimer
     protected var _uuidL2:Int64
 
+    /**
+     * @param ethAddr Hardware address (802.1) to use for generating
+     *   spatially unique part of UUID. If system has more than one NIC
+     *
+     * @param ethAddr - Option<EthernetAddress>
+     * @param timer - UUIDTimer
+     */
     @overflowWrapping
     public init(ethAddr:Option<EthernetAddress>,timer: UUIDTimer){
         var uuidBytes: Array<UInt8> = Array<UInt8>(16,item:0)
@@ -30,14 +49,29 @@ public class TimeBasedGenerator <: NoArgGenerator{
         _timer = timer
     }
 
+    /**
+     * get UUIDType
+     *
+     * @return UUIDType
+     */
     public override func getType(): UUIDType{
         return UUIDType.TIME_BASED
     }
 
+    /**
+     * get EthernetAddress
+     *
+     * @return EthernetAddress
+     */
     public func getEthernetAddress():EthernetAddress{
         return _ethernetAddress.getOrThrow()
     }
 
+    /**
+     * generate uuid
+     *
+     * @return uuid
+     */
     public override func generate():UUID{
         let rawTimestamp:Int64 = _timer.getTimestamp()
         let clockHi:Int64 = Int64(rightShift(rawTimestamp,32))

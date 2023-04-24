@@ -7,7 +7,10 @@ package uuid
 from std import sync.*
 from std import collection.*
 
-
+/**
+ * EthernetAddress encapsulates the 6-byte MAC address defined in
+ * IEEE 802.1 standard.
+ */
 public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>{
 
     private static let serialVersionUID:Int64 = 1
@@ -21,7 +24,17 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
     private var _asString = Option<String>.None
 
     
-
+    /**
+     * String constructor; given a 'standard' ethernet MAC address string
+     * (like '00:C0:F0:3D:5B:7C'), constructs an EthernetAddress instance.
+     *
+     * Note that string is case-insensitive, and also that leading zeroes
+     * may be omitted. Thus '00:C0:F0:3D:5B:7C' and '0:c0:f0:3d:5b:7c' are
+     * equivalent, and a 'null' address could be passed as ':::::' as well
+     * as '00:00:00:00:00:00' (or any other intermediate combination).
+     *
+     * @param addrStr - String representation of the ethernet address
+     */
     public init(addrStr:String){
 
         let len = addrStr.size
@@ -92,7 +105,13 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         return UInt32(char)
     }
 
-
+    /**
+     * Binary constructor that constructs an instance given the 6 byte
+     *      * (48-bit) address. Useful if an address is saved in binary format
+     *      * (for saving space for example).
+     *
+     * @param addr - Array address
+     */
     public init(addr : Array<UInt8>){
         if(addr.size != 6){
             throw  NumberFormatException("Ethernet address has to consist of 6 bytes")
@@ -104,19 +123,48 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         _address = l
     }
 
+    /**
+     * Another binary constructor; constructs an instance from
+     *
+     * the given
+     * long argument; the lowest 6 bytes contain the address.
+     *
+     * @param addr - Int64 that contains the MAC address in 6 least significant
+     *    bytes.
+     */
     public init(addr:Int64){
         _address = addr
     }
 
-
+    /**
+     * Default cloning behaviour (bitwise copy) is just fine...
+     */
     public func clone():EthernetAddress{
         return EthernetAddress(_address)
     }
 
+    /**
+     * Constructs a new EthernetAddress given the byte array that contains
+     * binary representation of the address.
+     *
+     * Note that calling this method returns the same result as would
+     * using the matching constructor.
+     *
+     * @param addr - Array representation of the ethernet address
+     */
     public static func valueOf(addr:Array<UInt8>):EthernetAddress{
         return EthernetAddress(addr)
     }
 
+    /**
+     * Constructs a new EthernetAddress given the byte array that contains
+     * binary representation of the address.
+     *
+     * Note that calling this method returns the same result as would
+     * using the matching constructor.
+     *
+     * @param addr - Array Binary representation of the ethernet address
+     */
     public static func valueOf(addr:Array<Int32>):EthernetAddress{
         var bAddr:Array<UInt8> = Array<UInt8>(addr.size,item:0)
         for (i in 0..addr.size) {
@@ -125,20 +173,63 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         return EthernetAddress(bAddr)
     }
 
+    /**
+     * Constructs a new EthernetAddress given a string representation of
+     * the ethernet address.
+     *
+     * Note that calling this method returns the same result as would
+     * using the matching constructor.
+     *
+     * @param addrStr - String representation of the ethernet address
+     */
     public static func valueOf(addrStr:String){
         return EthernetAddress(addrStr)
     }
 
+    /**
+     * Constructs a new EthernetAddress given the long int value (64-bit)
+     * representation of the ethernet address (of which 48 LSB contain
+     * the definition)
+     *
+     * Note that calling this method returns the same result as would
+     * using the matching constructor.
+     *
+     * @param addr - Int64 int representation of the ethernet address
+     */
     public static func valueOf(addr:Int64){
         return EthernetAddress(addr)
     }
 
+    /**
+     * Factory method that can be used to construct a random multicast
+     * address; to be used in cases where there is no "real" ethernet
+     * address to use. Address to generate should be a multicast address
+     * to avoid accidental collision with real manufacturer-assigned
+     * MAC addresses.
+     *<p>
+     * Internally a {@link SecureRandom} instance is used for generating
+     * random number to base address on.
+     *
+     * @return EthernetAddress
+     */
     public static func constructMulticastAddress():EthernetAddress{
         return constructMulticastAddress(_randomNumberGenerator())
     }
 
     static let m1: MultiConditionMonitor = MultiConditionMonitor()
 
+    /**
+     * Factory method that can be used to construct a random multicast
+     * address; to be used in cases where there is no "real" ethernet
+     * address to use. Address to generate should be a multicast address
+     * to avoid accidental collision with real manufacturer-assigned
+     * MAC addresses.
+     *<p>
+     * Address is created using specified SecureRandom number generator.
+     *
+     * @param rnd - SecureRandom
+     * @return EthernetAddress
+     */
     public static func constructMulticastAddress(rnd:SecureRandom):EthernetAddress{
         var dummy:Array<UInt8> =  Array<UInt8>(6,item:0)
         synchronized(m1){
@@ -148,16 +239,34 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         return EthernetAddress(dummy)
     }
 
+    /**
+     * Returns 6 byte byte array that contains the binary representation
+     * of this ethernet address; byte 0 is the most significant byte
+     * (and so forth)
+     *
+     * @return 6 UInt8 array that contains the binary representation
+     */
     public func asByteArray():Array<UInt8>{
         var result:Array<UInt8> = Array<UInt8>(6,item:0)
         toByteArray(result)
         return result
     }
 
+    /**
+     * Synonym to 'asByteArray()'
+     *
+     * @return 6 UInt8 array that contains the binary representation
+     */
     public func toByteArray():Array<UInt8>{
         return asByteArray()
     }
 
+    /**
+     * Synonym to 'toByteArray'
+     *
+     * @param array - Array<UInt8>
+     * @return Unit
+     */
     public func toByteArray(array:Array<UInt8>):Unit{
         if (array.size < 6) {
             throw IllegalArgumentException("Too small array, need to have space for 6 bytes")
@@ -165,6 +274,12 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         toByteArray(array, 0)
     }
 
+    /**
+     * Synonym to 'toByteArray'
+     *
+     * @param array - Array<UInt8>
+     * @return Unit
+     */
     @overflowWrapping
     public func toByteArray(uuidBytesArray:Array<UInt8>,pos:Int64):Unit{
          if (pos < 0 || (pos + 6) > uuidBytesArray.size) {
@@ -186,18 +301,39 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         uuidBytesArray[temppos] = UInt8(i)
     }
 
+    /**
+     * get address
+     *
+     * @return Int64
+     */
     public func toLong():Int64{
         return _address
     }
 
+    /**
+     * MulticastAddress or not
+     *
+     * @return Bool
+     */
     public func isMulticastAddress():Bool{
         return ((Int32(_address >> 40)) & 0x01) != 0
     }
 
+    /**
+     * LocallyAdministeredAddress or not
+     *
+     * @return Bool
+     */
     public func isLocallyAdministeredAddress():Bool{
         return ((Int32(_address >> 40)) & 0x02) != 0
     }
 
+    /**
+     * equal or not
+     *
+     * @param anothor - EthernetAddress
+     * @return Bool
+     */
     public operator func ==(anothor: EthernetAddress): Bool{
          if(this._address == anothor._address){
             return true
@@ -206,6 +342,12 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         return false
     }
 
+    /**
+     * equal or not
+     *
+     * @param anothor - EthernetAddress
+     * @return Bool
+     */
     public operator func !=(anothor: EthernetAddress): Bool{
         if(this._address != anothor._address){
             return true
@@ -213,10 +355,20 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
         return false
     }
 
+    /**
+     * get hashcode
+     *
+     * @return Int64
+     */
     public func hashCode(): Int64{
         return Int64(_address) ^ Int64(rightShift(_address,32))
     }
 
+    /**
+     * toString
+     *
+     * @return String
+     */
     @overflowWrapping
     public func toString(): String{
         var str = _asString

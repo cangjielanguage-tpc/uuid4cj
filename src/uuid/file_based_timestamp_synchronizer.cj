@@ -4,6 +4,10 @@
 
 package uuid
 
+/*
+ * The class is file generators
+ * @since 0.37.2
+ */
 public class FileBasedTimestampSynchronizer {
 
     private let logger: SimpleLogger = SimpleLogger()
@@ -24,14 +28,36 @@ public class FileBasedTimestampSynchronizer {
 
     var mFirstActive: Bool = false
 
+    /**
+     * Constructor that uses default values for names of files to use
+     * (files will get created in the current working directory), as
+     * well as for the update frequency value (10 seconds).
+     */
     public init(){
         this(openFile(DEFAULT_LOCK_FILE_NAME1), openFile(DEFAULT_LOCK_FILE_NAME2))
     }
 
+    /**
+     * Constructor that uses default values for names of files to use
+     * (files will get created in the current working directory), as
+     * well as for the update frequency value (10 seconds).
+     *
+     * @param lockFile1 - File
+     * @param lockFile2 - File
+     */
     public init(lockFile1: File, lockFile2: File){
         this(lockFile1, lockFile2, DEFAULT_UPDATE_INTERVAL)
     }
 
+    /**
+     * Constructor that uses default values for names of files to use
+     * (files will get created in the current working directory), as
+     * well as for the update frequency value (10 seconds).
+     *
+     * @param lockFile1 - File
+     * @param lockFile2 - File
+     * @param interval - Int64
+     */
     public init(lockFile1: File, lockFile2: File, interval: Int64){
         mInterval = interval
         mLocked1 = LockedFile(lockFile1)
@@ -47,6 +73,11 @@ public class FileBasedTimestampSynchronizer {
         }
     }
 
+    /**
+     * set mInterval
+     *
+     * @param interval - Int64
+     */
     public func setUpdateInterval(interval: Int64) {
         if (interval < 1) {
             throw IllegalArgumentException("Illegal value (${interval}); has to be a positive integer value")
@@ -92,6 +123,12 @@ public class FileBasedTimestampSynchronizer {
         }
     }
 
+    /**
+     * update file
+     *
+     * @param now - Int64
+     * @return timeStamp
+     */
     public func update(now:Int64):Int64 {
         let nextAllowed: Int64 = now + mInterval
         if (mFirstActive) {

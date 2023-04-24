@@ -6,6 +6,10 @@ package uuid
 
 from std import log.*
 
+/*
+ * The class is timeStamp generators
+ * @since 0.37.2
+ */
 public class UUIDTimer {
 
     private let _logger: SimpleLogger = SimpleLogger()
@@ -36,10 +40,23 @@ public class UUIDTimer {
 
     private static let MAX_WAIT_COUNT:Int32 = 50
 
-    public init(rnd:SecureRandom,sync:Option<FileBasedTimestampSynchronizer>){
+    /**
+     * init UUIDTimer
+     *
+     * @param rnd = SecureRandom
+     * @param sync = Option<FileBasedTimestampSynchronizer>
+     */
+    public init(rnd: SecureRandom,sync: Option<FileBasedTimestampSynchronizer>){
         this(rnd, sync,UUIDClock())
     }
 
+    /**
+     * init UUIDTimer
+     *
+     * @param rnd = SecureRandom
+     * @param sync = Option<FileBasedTimestampSynchronizer>
+     * @param clock = UUIDClock
+     */
     public init(rnd:SecureRandom,sync:Option<FileBasedTimestampSynchronizer>,clock:UUIDClock){
         _random = rnd
         _syncer = sync
@@ -61,10 +78,20 @@ public class UUIDTimer {
         _clockCounter = (_clockSequence >> 16) & 0xFF
     }
 
+    /**
+     * get clockSequence
+     *
+     * @return Int32
+     */
     public func getClockSequence():Int32{
         return (_clockSequence & 0xFFFF)
     }
 
+    /**
+     * get timestamp
+     *
+     * @return Int64
+     */
     public func getTimestamp(): Int64{
         var systime: Int64 = _clock.currentTimeMillis()
         if(systime < _lastSystemTimestamp) {

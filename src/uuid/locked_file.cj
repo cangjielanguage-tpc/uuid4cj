@@ -7,6 +7,10 @@ package uuid
 from std import fs.*
 from std import io.SeekPosition
 
+/*
+ * The class is timeStamp generators
+ * @since 0.37.2
+ */
 public class LockedFile {
 
     private let logger: SimpleLogger = SimpleLogger()
@@ -23,15 +27,27 @@ public class LockedFile {
 
     static let HEX_DIGITS: String  = "0123456789abcdef"
 
+    /*
+     * init class
+     *
+     * @param f - File
+     */
     public init (f: File) {
         mFile = f
     }
 
-    
+    /*
+     * deactivate
+     */
     public func deactivate() {
        mFile = Option<File>.None.getOrThrow()
     }
 
+    /*
+     * read timeStamp
+     *
+     * @return timeStamp
+     */
     public func readStamp(): Int64{
         var size: Int64 = mFile.length
         if (size == 0) {
@@ -93,6 +109,11 @@ public class LockedFile {
         return result
     }
 
+    /*
+     * write timeStamp
+     *
+     * @param stamp - Int64 timeStamp
+     */
     public func writeStamp (stamp: Int64) {
         if (stamp <= mLastTimestamp) {
             if (stamp == mLastTimestamp) {
