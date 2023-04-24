@@ -1610,3 +1610,16 @@ public class UUIDClock {
 
 }
 ```
+### 2.18 NoArgGenerator
+
+```
+public abstract class NoArgGenerator {
+    /**
+     * UUID 生成器
+     * 
+     * 返回 UUID
+     */
+    public func generate():UUID
+}
+
+```
