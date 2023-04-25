@@ -97,6 +97,7 @@ public class MessageDigest {
 
     func reset(): Unit {
         this.state = 0
+        this.c = algorithm.getType()
     }
 
     func digestProcess(): Array<UInt8> {

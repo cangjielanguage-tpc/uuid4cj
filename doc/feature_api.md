@@ -871,6 +871,7 @@ public class UUIDUtil {
     /**
      * 用于构造具有适当类型的 UUID 实例的 Helper 方法
      * 
+     * 参数 types - UUIDType
      * 参数 l1 - 该 UUID 的 128 比特值的最高有效 64 比特
      * 参数 l2 - 该 UUID 的 128 比特值的最低有效 64 比特
      * 返回值 UUID
@@ -906,7 +907,7 @@ public class UUIDUtil {
     /**
      * 用于确定给定 UUID 是哪种类型的 UUID 的方法
      * 
-     * 参数 uuid - 要检查的 UUID
+     * 参数 uuid - UUID
      * 
      * 返回值 ？UUIDType - Option<UUIDType>             
      */
@@ -916,7 +917,7 @@ public class UUIDUtil {
     /**
      * 获取 UUID 的数组
      * 
-     * 参数 uuid - 要检查的 UUID
+     * 参数 uuid - UUID
      * 
      * 返回值 Array<Int8>
      */
@@ -924,18 +925,18 @@ public class UUIDUtil {
     public static func asByteArray(uuid: UUID): Array<Int8>
 
     /**
-     * 如果您已经有更长的缓冲区
+     * 设置缓冲区
      * 
-     * 参数 uuid - 要检查的 UUID
+     * 参数 uuid - UUID
      * 参数 buffer - 缓冲区
      * 返回值 Unit
      */
     public static func toByteArray(uuid: UUID, buffer: Array<Int8>): Unit
 
     /**
-     * 如果您已经有更长的缓冲区，请在位置 offset 处追加
+     * 设置缓冲区，偏移量为 offset
      * 
-     * 参数 uuid - 要检查的 UUID
+     * 参数 uuid - UUID
      * 参数 buffer - 缓冲区
      * 参数 offset - 追加的位置
      * 返回值 Unit
