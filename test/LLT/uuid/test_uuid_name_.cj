@@ -5,7 +5,7 @@ from uuid import uuid.*
 
 main() {    
     let name: Array<UInt8> = "helloworld".toUtf8Array()
-    let uuid = UUID.nameUUIDFromBytes(name)
+    let uuid = UUID.nameUUIDFromBytes(UInt8ToInt8(name))
     let least = uuid.getLeastSignificantBits()
     let most = uuid.getMostSignificantBits()
     if(uuid.toString() != "fc5e038d-38a5-3032-8854-41e7fe7010b0" ||
@@ -17,3 +17,11 @@ main() {
     return 0
 }
 
+@overflowWrapping
+func UInt8ToInt8(arr: Array<UInt8>): Array<Int8> {
+    var res: Array<Int8> = Array<Int8>(arr.size, item: 0)
+    for( i in 0..arr.size) {
+        res[i] = Int8(arr[i])
+    }
+    return res
+}

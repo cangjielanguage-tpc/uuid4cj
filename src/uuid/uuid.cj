@@ -15,7 +15,7 @@ public class UUID <: ToString {
     private let mostSigBits: Int64
     private let leastSigBits: Int64
 
-    private init(data: Array<UInt8>) {
+    private init(data: Array<Int8>) {
         var msb: Int64 = 0
         var lsb: Int64 = 0
         if(data.size != 16) {
@@ -71,7 +71,7 @@ public class UUID <: ToString {
         randomBytes[6]  |= 0x40  /* set to version 4     */
         randomBytes[8]  &= 0x3f  /* clear variant        */
         randomBytes[8]  |= 0x80  /* set to IETF variant  */
-        return UUID(randomBytes)
+        return UUID(UInt8ToInt8(randomBytes))
     }
 
     /**
@@ -81,13 +81,14 @@ public class UUID <: ToString {
      * @param name - A byte array to be used to construct a {@code UUID}
      * @return UUID - A {@code UUID} generated from the specified array
      */
-    public static func nameUUIDFromBytes(name: Array<UInt8>): UUID {
+    @overflowWrapping 
+    public static func nameUUIDFromBytes(name: Array<Int8>): UUID {
         var md: MessageDigest = MessageDigest(DigestType.MD5)
-        var md5Bytes: Array<UInt8> = md.digest(input: name)
-        md5Bytes[6]  &= 0x0f  /* clear version        */
-        md5Bytes[6]  |= 0x30  /* set to version 3     */
-        md5Bytes[8]  &= 0x3f  /* clear variant        */
-        md5Bytes[8]  |= 0x80  /* set to IETF variant  */
+        var md5Bytes: Array<Int8> = md.digest(input: name)
+        md5Bytes[Int64(6)]  &= Int8(0x0f)  /* clear version        */
+        md5Bytes[Int64(6)]  |= Int8(0x30)  /* set to version 3     */
+        md5Bytes[Int64(8)]  &= Int8(0x3f)  /* clear variant        */
+        md5Bytes[Int64(8)]  |= Int8(0x80)  /* set to IETF variant  */
         return UUID(md5Bytes)
     }
 
