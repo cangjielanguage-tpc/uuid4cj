@@ -22,6 +22,6 @@ public abstract class StringArgGenerator <: UUIDGenerator {
      * 
      * @since 3.1
      */
-    public func generate(nameByte: Array<UInt8>): UUID
+    public func generate(nameByte: Array<Int8>): UUID
 
 }

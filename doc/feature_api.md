@@ -6,9 +6,6 @@ UUID 全称：Universally Unique Identifier，即通用唯一识别码， 定义
 
 UUID 的标准格式：xxxxxxxx-xxxx-Axxx-Bxxx-xxxxxxxxxxxx ，形式为 8-4-4-4-12 的 32 个字符，如：550e8400-e29b-41d4-a716-446655440000。
 
-A 代表版本号，由于 UUID 的标准实现有 5 个版本，所以只会是 1,2,3,4,5
-B 只会是8,9,a,b 
-
 ## 1 java-uuid-generator 基于多种方式，生成的 uuid 唯一值
 
 前置条件：NA 
@@ -672,7 +669,7 @@ public class UUID <: ToString {
      * 参数 name - 用于构造 UUID 的字节数组
      * 返回值 UUID
      */
-    public static func nameUUIDFromBytes(name: Array<UInt8>): UUID
+    public static func nameUUIDFromBytes(name: Array<Int8>): UUID
 
     /**
      * 根据 UUID 的 toString 方法中描述的字符串标准创建 UUID
@@ -726,10 +723,11 @@ public class UUID <: ToString {
      * 版本号具有以下含义：
      * 
      * 1  Time-based UUID 基于时间戳生成
-     * 2  DCE security UUID DCE安全版本
      * 3  Name-based UUID 基于命名空间和MD5散列算法
      * 4  Randomly generated UUID 基于随机数生成的
      * 5  Name-based UUID 基于命名空间和SHA1散列算法
+     * 6  Time-based UUID 基于时间重新排序
+     * 7  Time-based UUID 基于时间的纪元
      *
      * 返回值 Int32 - 此 UUID 的版本号
      */
@@ -1015,11 +1013,11 @@ public class NameBasedGenerator <: StringArgGenerator {
     /**
      * 通过名称生成 UUID
      *
-     * 参数 nameBytes - Array<UInt8>
+     * 参数 nameBytes - Array<Int8>
      * 返回值 UUID
      */
     @overflowWrapping
-    public override func generate(nameBytes: Array<UInt8>): UUID
+    public override func generate(nameBytes: Array<Int8>): UUID
 }
 ```
 
@@ -1427,7 +1425,7 @@ public abstract class StringArgGenerator <: UUIDGenerator {
      * 参数 nameByte - 指定字节数组
      * 返回 UUIDType - UUID 的 type
      */
-    public func generate(nameByte: Array<UInt8>): UUID
+    public func generate(nameByte: Array<Int8>): UUID
 
 }
 ```

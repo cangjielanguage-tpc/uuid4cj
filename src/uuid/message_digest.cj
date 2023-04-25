@@ -85,13 +85,14 @@ public class MessageDigest {
      * Digest the information
      *
      * @param input - digest message
-     * @return Array<UInt8> - Results after digest
+     * @return Array<Int8> - Results after digest
      */
-    func digest(input!: Array<UInt8> = Array<UInt8>()): Array<UInt8> {
+    @overflowWrapping
+    func digest(input!: Array<Int8> = Array<Int8>()): Array<Int8> {
         if(this.state == 1) {
-            return digestProcess()
+            return UInt8ToInt8(digestProcess())
         }
-        return digestAll(input) 
+        return UInt8ToInt8(digestAll(input))
     }
 
     func reset(): Unit {
@@ -112,15 +113,16 @@ public class MessageDigest {
         return Array<UInt8>() 
     }
 
-    func digestAll(input: Array<UInt8>): Array<UInt8> {
+    @overflowWrapping
+    func digestAll(input: Array<Int8>): Array<UInt8> {
         match (this.algorithm) {
             case DigestType.MD5 => 
                 var md: Array<UInt8> = Array<UInt8>(MD5_DIGEST_LENGTH, item: 0)
-                md5(input, md)
+                md5(Int8ToUInt8(input), md)
                 return md
             case DigestType.SHA1 => 
                 var md: Array<UInt8> = Array<UInt8>(SHA_DIGEST_LENGTH, item: 0)
-                sha1(input, md)
+                sha1(Int8ToUInt8(input), md)
                 return md
         }
         return Array<UInt8>() 

@@ -7,7 +7,7 @@ main() {
     var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
     var s: String = "helloworld"
     var uuid1: UUID = Generators.nameBasedGenerator(namespace).generate(s)
-    var uuid2: UUID = Generators.nameBasedGenerator(namespace).generate(s.toUtf8Array())
+    var uuid2: UUID = Generators.nameBasedGenerator(namespace).generate(UInt8ToInt8(s.toUtf8Array()))
     let type1: Int64 = Generators.nameBasedGenerator(namespace).getType().raw()
     let type2: Int64 = Generators.nameBasedGenerator(namespace).getType().raw()
     let s1: String = uuid1.toString()
@@ -19,3 +19,11 @@ main() {
     return 0
 }
 
+@overflowWrapping
+func UInt8ToInt8(arr: Array<UInt8>): Array<Int8> {
+    var res: Array<Int8> = Array<Int8>(arr.size, item: 0)
+    for( i in 0..arr.size) {
+        res[i] = Int8(arr[i])
+    }
+    return res
+}
