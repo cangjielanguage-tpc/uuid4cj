@@ -1530,7 +1530,7 @@ public class LockedFile {
     public init(f: File)
 
     /**
-     * 清空失效
+     * 清空文件
      */
     public func deactivate()
 
