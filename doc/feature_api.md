@@ -1168,7 +1168,7 @@ public class TimeBasedReorderedGenerator <: NoArgGenerator {
 }
 ```
 
-### 2.8 TimeBasedReorderedGenerator
+### 2.8 TimeBasedEpochGenerator
 
 使用基于时间纪元生成 UUID。
 
