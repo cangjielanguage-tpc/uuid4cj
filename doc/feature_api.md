@@ -1527,7 +1527,8 @@ public class UUIDTimer {
      * 初始化
      *
      * 参数 rnd - SecureRandom 随机数生成类
-     * 参数 sync - Option<FileBasedTimestampSynchronizer> 保存时读取时间戳的文件工具类
+     * 参数 sync - Option<FileBasedTimestampSynchronizer> 保存时读取时间戳的文件工具类。传入Option<FileBasedTimestampSynchronizer>.None默认文件为uuid1.txt， 
+     * uuid2.txt
      */
     public init(rnd:SecureRandom,sync:Option<FileBasedTimestampSynchronizer>)
 
