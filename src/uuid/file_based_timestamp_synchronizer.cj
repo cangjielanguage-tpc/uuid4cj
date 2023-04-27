@@ -22,9 +22,9 @@ public class FileBasedTimestampSynchronizer {
 
 
 
-    protected var mLocked1: LockedFile
+    var mLocked1: LockedFile
 
-    protected var mLocked2: LockedFile
+    var mLocked2: LockedFile
 
     var mFirstActive: Bool = false
 
@@ -113,7 +113,7 @@ public class FileBasedTimestampSynchronizer {
         doDeactivate(mLocked1, mLocked2);
     }
 
-    protected func doDeactivate(lf1: ?LockedFile, lf2: ?LockedFile) {
+    private func doDeactivate(lf1: ?LockedFile, lf2: ?LockedFile) {
         if (let Some(i) = lf1) {
             lf1.getOrThrow().deactivate();
         }
