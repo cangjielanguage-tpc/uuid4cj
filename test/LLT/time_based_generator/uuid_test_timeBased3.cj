@@ -12,23 +12,12 @@ from std import format.Formatter
 main() {  
     let filePath1: String = "./ggg_3.txt"
 
-    var file1: File
+    var file1: File = openFile(filePath1)
 
-    if (File.exists(filePath1)) {
-        file1 = File(filePath1, OpenOption.Open(true, true))
-    } else {
-        file1 = File(filePath1, OpenOption.Create(true))
-    }
 
     let filePath2: String = "./zzz_3.txt"
 
-    var file2: File
-
-    if (File.exists(filePath2)) {
-        file2 = File(filePath2, OpenOption.Open(true, true))
-    } else {
-        file2 = File(filePath2, OpenOption.Create(true))
-    }
+    var file2: File = openFile(filePath2)
 
 
     var oFile: Option<FileBasedTimestampSynchronizer> =  FileBasedTimestampSynchronizer(file1, file2)
@@ -44,6 +33,18 @@ main() {
 
     file1.close()
     file2.close()
+
+    // readStamp
+
+    var file3: File = openFile(filePath1)
+
+    var file4: File = openFile(filePath2)
+    var oFileNew: Option<FileBasedTimestampSynchronizer> =  FileBasedTimestampSynchronizer(file3, file4)
+
+    let c: TimeBasedGenerator = Generators.timeBasedGenerator(Option<EthernetAddress>.None, oFileNew)
+    c.generate()
+
+    // -------
 
     if(uuid.version() != 1) {
         return -1
@@ -62,4 +63,15 @@ main() {
     }
     
     return 0
+}
+
+public func openFile (filePath: String): File {
+    var file: File
+
+    if (File.exists(filePath)) {
+        file = File(filePath, OpenOption.Open(true, true))
+    } else {
+        file = File(filePath, OpenOption.Create(true))
+    }
+    return file
 }

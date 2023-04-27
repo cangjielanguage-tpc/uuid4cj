@@ -1516,43 +1516,7 @@ public class FileBasedTimestampSynchronizer {
 }
 ```
 
-### 2.15 LockedFile
-
-保存读取时间戳的具体实现类
-
-```cangjie
-public class LockedFile {
-
-    /**
-     * 初始化
-     *
-     * 参数 f - File 操作的文件
-     */
-    public init(f: File)
-
-    /**
-     * 清空文件
-     */
-    public func deactivate()
-
-    /**
-     * 读取时间戳
-     *
-     * 返回值 读取到的时间戳
-     */
-    public func readStamp(): Int64
-
-    /**
-     * 写入时间戳
-     *
-     * 参数 stamp - Int64 写入的时间戳
-     */
-    public func writeStamp(stamp: Int64)
-    
-}
-```
-
-### 2.16 UUIDTimer
+### 2.15 UUIDTimer
 
 时间戳工具类
 
@@ -1593,7 +1557,7 @@ public class UUIDTimer {
 }
 ```
 
-### 2.17 UUIDClock
+### 2.16 UUIDClock
 
 系统时间工具类
 
@@ -1609,7 +1573,7 @@ public class UUIDClock {
 
 }
 ```
-### 2.18 NoArgGenerator
+### 2.17 NoArgGenerator
 
 ```
 public abstract class NoArgGenerator {

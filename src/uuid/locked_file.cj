@@ -11,7 +11,7 @@ from std import io.SeekPosition
  * The class is timeStamp generators
  * @since 0.37.2
  */
-public class LockedFile {
+class LockedFile {
 
     private let logger: SimpleLogger = SimpleLogger()
 
@@ -40,7 +40,7 @@ public class LockedFile {
      * deactivate
      */
     public func deactivate() {
-       mFile = Option<File>.None.getOrThrow()
+       throw NoneValueException("deactivate the file")
     }
 
     /*
