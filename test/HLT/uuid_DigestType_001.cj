@@ -1,0 +1,19 @@
+//3rd_party_lib:uuid4cj/build/uuid
+//3rd_party_lib:uuid4cj/ci_lib/cryptocj
+//3rd_party_lib:uuid4cj/ci_lib/charset
+
+from std import unittest.*
+from std import unittest.testmacro.*
+from uuid import uuid.*
+from std import random.*
+
+@Test
+public class uuid_DigestType_001{
+    @TestCase
+    public func uuid_DigestType_001():Unit{
+        println("DigestType.MD5: ${DigestType.MD5.toString()}")
+        println("DigestType.SHA1: ${DigestType.SHA1.toString()}")
+        @Assert(DigestType.MD5.toString(),"MD5")
+        @Assert(DigestType.SHA1.toString(),"SHA1")
+    }
+}
