@@ -1,0 +1,35 @@
+//3rd_party_lib:uuid4cj/build/uuid
+//3rd_party_lib:uuid4cj/ci_lib/cryptocj
+//3rd_party_lib:uuid4cj/ci_lib/charset
+
+from std import unittest.*
+from std import unittest.testmacro.*
+from uuid import uuid.*
+from std import random.*
+
+@Test
+public class uuid_UUIDComparator_001{
+    @TestCase
+    public func uuid_UUIDComparator_001():Unit{
+        println("---------------------------------uuid_UUIDComparator_001------------------------------")
+        let uuid = UUID(2,0)
+        let uuid2 = UUID(0,2)
+        let uuid3 = UUID(2,2)
+        let uuid4 = UUID(2,2)
+
+        println("uuid: ${uuid.toString()}")
+        println("uuid2: ${uuid2.toString()}")
+        println("uuid3: ${uuid3.toString()}")
+        println("uuid4: ${uuid4.toString()}")
+
+        println("UUIDComparator.compare(uuid,uuid): ${UUIDComparator.compare(uuid,uuid)}")
+        println("UUIDComparator.compare(uuid,uuid2): ${UUIDComparator.compare(uuid,uuid2)}")
+        println("UUIDComparator.compare(uuid,uuid3): ${UUIDComparator.compare(uuid,uuid3)}")
+        println("UUIDComparator.compare(uuid3,uuid4): ${UUIDComparator.compare(uuid3,uuid4)}")
+        
+        @Assert(UUIDComparator.compare(uuid,uuid),0)
+        @Assert(UUIDComparator.compare(uuid,uuid2)>0,true)
+        @Assert(UUIDComparator.compare(uuid,uuid3)<0,true)
+        @Assert(UUIDComparator.compare(uuid3,uuid4),0)
+    }
+}
