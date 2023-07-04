@@ -19,7 +19,8 @@ main() {
        testToByteArraySmall() != 0 ||
        testToByteArrayNullUuid() != 0 ||      
        testToByteArrayNonNullUuid() != 0 || 
-       testToByteArrayNullUuidExtra() != 0
+       testToByteArrayNullUuidExtra() != 0 ||
+       testToByteArrayNonNullUuidExtra() != 0
        ) {
         return -1
     }
@@ -82,49 +83,41 @@ func testToByteArrayNullUuidExtra(): Int32 {
     let test_uuid = UUIDUtil.nilUUID()
     let test_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH, item: Int8(UInt32('x')))
     UUIDUtil.toByteArray(test_uuid, test_array)
-    var i: Int64 = 0
     for(k in 0..UUID_BYTE_ARRAY_LENGTH) {
-        if(NULL_UUID_BYTE_ARRAY[i] != test_array[i]) {
+        if(NULL_UUID_BYTE_ARRAY[k] != test_array[k]) {
             return -1
         }
-        i++
     }
-    i = 0
     for(k in 0..EXTRA_DATA_LENGTH) {
-        if(Int8(UInt32('x')) != test_array[i + UUID_BYTE_ARRAY_LENGTH]) {
+        if(Int8(UInt32('x')) != test_array[k + UUID_BYTE_ARRAY_LENGTH]) {
             return -1
         }
-        i++
     }
 
     return 0
 }
 
 // test a good uuid case with extra data in the array
-@overflowWrapping
+@OverflowWrapping
 func testToByteArrayNonNullUuidExtra(): Int32 {
     let test_uuid = UUIDUtil.uuid(MIXED_CASE_VALID_UUID_STRING)
     let test_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH, item: Int8(UInt32('x')))
     UUIDUtil.toByteArray(test_uuid, test_array)
-    var i: Int64 = 0
     for(k in 0..UUID_BYTE_ARRAY_LENGTH) {
-        if(Int8(VALID_UUID_BYTE_ARRAY[i]) != test_array[i]) {
+        if(Int8(VALID_UUID_BYTE_ARRAY[k]) != test_array[k]) {
             return -1
         }
-        i++
     }
-    i = 0
     for(k in 0..EXTRA_DATA_LENGTH) {
-        if(Int8(UInt32('x')) != test_array[i + UUID_BYTE_ARRAY_LENGTH]) {
+        if(Int8(UInt32('x')) != test_array[k + UUID_BYTE_ARRAY_LENGTH]) {
             return -1
         }
-        i++
     }
 
     return 0
 }
 
-@overflowWrapping
+@OverflowWrapping
 func UInt8ToInt8(arr: Array<UInt8>): Array<Int8> {
     var res: Array<Int8> = Array<Int8>(arr.size, item: 0)
     for( i in 0..arr.size) {

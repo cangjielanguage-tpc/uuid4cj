@@ -5,7 +5,6 @@ from uuid import uuid.*
 
 main() {   
     var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
-    var s: String = "helloworld"
     var name2: NameBasedGenerator = Generators.nameBasedGenerator(namespace, MessageDigest(DigestType.SHA1))
     var name3: NameBasedGenerator = Generators.nameBasedGenerator(namespace, MessageDigest(DigestType.MD5))
     var name4: NameBasedGenerator = Generators.nameBasedGenerator(namespace)
@@ -24,7 +23,7 @@ main() {
     }
 
     try {
-        var uuid5: UUID = name5.getNamespace()
+        name5.getNamespace()
     }catch(e: Exception) {
         if(!e.toString().contains("NoneValueException")) {
             return -3

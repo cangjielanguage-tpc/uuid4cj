@@ -29,7 +29,7 @@ public class UUIDComparator {
      * Static helper method that can be used instead of instantiating comparator
      * (used by unit tests, can be used by code too)
      */
-    @overflowWrapping
+    @OverflowWrapping
     static func staticCompare(u1: UUID, u2: UUID): Int32 {
         // First: major sorting by types
         let types: Int32 = u1.version()
@@ -56,7 +56,7 @@ public class UUIDComparator {
         return diffs
     }
 
-    @overflowWrapping
+    @OverflowWrapping
     static func compareULongs(l1: Int64, l2: Int64): Int32 {
         var diffs: Int32 = compareUInts(Int32(l1 >> 32), Int32(l2 >> 32))
         if (diffs == 0) {

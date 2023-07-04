@@ -87,7 +87,7 @@ public class MessageDigest {
      * @param input - digest message
      * @return Array<Int8> - Results after digest
      */
-    @overflowWrapping
+    @OverflowWrapping
     func digest(input!: Array<Int8> = Array<Int8>()): Array<Int8> {
         if(this.state == 1) {
             return UInt8ToInt8(digestProcess())
@@ -114,7 +114,7 @@ public class MessageDigest {
         return Array<UInt8>() 
     }
 
-    @overflowWrapping
+    @OverflowWrapping
     func digestAll(input: Array<Int8>): Array<UInt8> {
         match (this.algorithm) {
             case DigestType.MD5 => 

@@ -4,7 +4,6 @@
 from uuid import uuid.*
 
 main() {    
-    var s: Array<UInt8> = [104, 101, 108, 108, 111, 119, 111, 114, 108, 100, 115, 100, 102, 115, 103, 115, 116, 103, 119, 103, 115, 103, 115, 103, 102, 115, 103, 101, 114]
     var uuid = UUIDUtil.constructUUID(UUIDType.TIME_BASED, -768862386091519507, -6742583835698893911).toString()
     var uuid2 = UUIDUtil.constructUUID(UUIDType.DCE, -768862386091519507, -6742583835698893911).toString()
     var uuid3 = UUIDUtil.constructUUID(UUIDType.NAME_BASED_MD5, -768862386091519507, -6742583835698893911).toString()

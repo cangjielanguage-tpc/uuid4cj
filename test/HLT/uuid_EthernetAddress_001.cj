@@ -50,7 +50,7 @@ public class uuid_EthernetAddress_001{
         println("---------------------------------uuid_EthernetAddress_init_006------------------------------")
         var eMessage = ""
         try{
-            var ethernetAddress = EthernetAddress("00:c0:f0:3D:5B0:7c")
+            EthernetAddress("00:c0:f0:3D:5B0:7c")
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -71,7 +71,7 @@ public class uuid_EthernetAddress_001{
         var array : Array<UInt8> = Array<UInt8>()
         var eMessage = ""
         try{
-            var ethernetAddress = EthernetAddress(array)
+            EthernetAddress(array)
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -84,7 +84,7 @@ public class uuid_EthernetAddress_001{
         var array : Array<UInt8> = [0x0, 0xc0, 0xf0, 0x3d, 0x5b, 0x7c, 0x7c]
         var eMessage = ""
         try{
-            var ethernetAddress = EthernetAddress(array)
+            EthernetAddress(array)
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -154,7 +154,7 @@ public class uuid_EthernetAddress_001{
         var array : Array<UInt8> = Array<UInt8>()
         var eMessage = ""
         try{
-            var ethernetAddress = EthernetAddress.valueOf(array)
+            EthernetAddress.valueOf(array)
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -167,7 +167,7 @@ public class uuid_EthernetAddress_001{
         var array : Array<UInt8> = [0x0, 0xc0, 0xf0, 0x3d, 0x5b, 0x7c, 0x7c]
         var eMessage = ""
         try{
-            var ethernetAddress = EthernetAddress.valueOf(array)
+            EthernetAddress.valueOf(array)
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -188,7 +188,7 @@ public class uuid_EthernetAddress_001{
         var array : Array<Int32> = Array<Int32>()
         var eMessage = ""
         try{
-            var ethernetAddress = EthernetAddress.valueOf(array)
+            EthernetAddress.valueOf(array)
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -201,7 +201,7 @@ public class uuid_EthernetAddress_001{
         var array : Array<Int32> = [0x0, 0xc0, 0xf0, 0x3d, 0x5b, 0x7c, 0x7c]
         var eMessage = ""
         try{
-            var ethernetAddress = EthernetAddress.valueOf(array)
+            EthernetAddress.valueOf(array)
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -215,7 +215,7 @@ public class uuid_EthernetAddress_001{
         var array : Array<Int32> = [0x100, 0xc0, 0xf0, 0x3d, 0x5b, 0x7c]
         var eMessage = ""
         try{
-            var ethernetAddress = EthernetAddress.valueOf(array)
+            EthernetAddress.valueOf(array)
         } catch (e: OverflowException){
             eMessage = "OverflowException"
         }
@@ -262,7 +262,7 @@ public class uuid_EthernetAddress_001{
         println("---------------------------------uuid_EthernetAddress_valueOf_006------------------------------")
         var eMessage = ""
         try{
-            var ethernetAddress = EthernetAddress.valueOf("00:c0:f0:3D:5B0:7c")
+            EthernetAddress.valueOf("00:c0:f0:3D:5B0:7c")
         } catch (e: Exception){
             eMessage = e.message
         }

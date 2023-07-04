@@ -33,7 +33,7 @@ public class TimeBasedReorderedGenerator <: NoArgGenerator{
      * @param ethAddr - Hardware address to use for generating
      * @param timer - Object used for synchronizing access to timestamps
      */
-    @overflowWrapping
+    @OverflowWrapping
     public init(ethAddr: ?EthernetAddress, timer: UUIDTimer) {
         let uuidBytes:Array<UInt8> = Array<UInt8>(16, item: 0)
         match(ethAddr) {
@@ -70,7 +70,7 @@ public class TimeBasedReorderedGenerator <: NoArgGenerator{
         return _ethernetAddress.getOrThrow()
     }
 
-    @overflowWrapping
+    @OverflowWrapping
     public func generate(): UUID {
         // Ok, get 60-bit timestamp (4 MSB are ignored)
         let rawTimestamp: Int64 = _timer.getTimestamp()

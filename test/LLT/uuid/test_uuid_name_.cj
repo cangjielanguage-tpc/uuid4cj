@@ -17,7 +17,7 @@ main() {
     return 0
 }
 
-@overflowWrapping
+@OverflowWrapping
 func UInt8ToInt8(arr: Array<UInt8>): Array<Int8> {
     var res: Array<Int8> = Array<Int8>(arr.size, item: 0)
     for( i in 0..arr.size) {

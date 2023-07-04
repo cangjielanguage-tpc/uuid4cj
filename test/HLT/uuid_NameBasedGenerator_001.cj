@@ -186,7 +186,7 @@ public class uuid_NameBasedGenerator_001{
         var name: NameBasedGenerator = NameBasedGenerator(Option<UUID>.None,Option<MessageDigest>.None,Option<UUIDType>.None)
         var eMessage = ""
         try {
-            let uuid: UUID = name.getNamespace()
+            name.getNamespace()
         } catch (e:NoneValueException) {
             println(e.message)
             eMessage = "NoneValueException"
@@ -199,7 +199,7 @@ public class uuid_NameBasedGenerator_001{
         var eMessage = ""
         var array:Array<Int8> = Array<Int8>(0,item:0)
         try {
-            let uuid: UUID = name.generate(array)
+            name.generate(array)
         } catch (e:Exception) {
             println(e.message)
             eMessage = e.message

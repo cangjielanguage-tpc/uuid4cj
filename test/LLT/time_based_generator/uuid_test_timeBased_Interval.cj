@@ -9,6 +9,7 @@ from std import time.*
 from std import fs.*
 from std import format.Formatter
 from std import io.SeekPosition
+from std import sync.sleep
 
 
 main() {  
@@ -22,11 +23,11 @@ main() {
 
     a.generate()
 
-    sleep(1*1000 * 1000 * 1000) //1s sleep
+    sleep((1*1000) * Duration.millisecond) //1s sleep
 
     a.generate()
 
-    sleep(10*1000 * 1000 * 1000) //10s sleep
+    sleep((10*1000) * Duration.millisecond) //10s sleep
 
     a.generate()
 

@@ -50,7 +50,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
                 throw NumberFormatException("Incomplete ethernet address (missing one or more digits")
             }
 
-            var c : Char = addrStr.charAt(i)
+            var c : Char = addrStr.get(i).getOrThrow()
             i++
             var value:Int64 = 0
             if(c == ':'){
@@ -67,7 +67,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
                 }
 
                 if(i < len){
-                    c = addrStr.charAt(i)
+                    c = addrStr.get(i).getOrThrow()
                     i++
                     if(c != ':'){
                          value = (value << 4)
@@ -88,8 +88,8 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
 
             if (c != ':') {
                 if (i < len) {
-                    if (addrStr.charAt(i) != ':') {
-                        throw NumberFormatException("Expected ':', got ('"+ addrStr.charAt(i).toString()+"')")
+                    if (addrStr.get(i).getOrThrow() != ':') {
+                        throw NumberFormatException("Expected ':', got ('"+ addrStr.get(i).getOrThrow().toString()+"')")
                     }
                     i++
                 }else if(j < 5){
@@ -280,7 +280,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
      * @param array - Array<UInt8>
      * @return Unit
      */
-    @overflowWrapping
+    @OverflowWrapping
     public func toByteArray(uuidBytesArray:Array<UInt8>,pos:Int64):Unit{
          if (pos < 0 || (pos + 6) > uuidBytesArray.size) {
             throw  IllegalArgumentException("Illegal offset (${pos}), need room for 6 bytes")
@@ -369,7 +369,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
      *
      * @return String
      */
-    @overflowWrapping
+    @OverflowWrapping
     public func toString(): String{
         var str = _asString
         if(let Some(i) = str){

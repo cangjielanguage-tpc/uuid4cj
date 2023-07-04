@@ -12,7 +12,7 @@ from std import math.*
  * @since 0.37.2
  */
 extend Random {
-    @overflowWrapping
+    @OverflowWrapping
     func nextBytes(length: Int32): Array<UInt8> {
         var bytes: Array<UInt8> = Array<UInt8>(Int64(length), item: 0)
         var i: Int64 = 0

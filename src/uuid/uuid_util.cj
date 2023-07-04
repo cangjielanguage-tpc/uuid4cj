@@ -6,7 +6,7 @@ package uuid
 
 /*
  * The class is UUIDUtil
- * @since 0.37.2
+ * @since 0.39.4
  */
 public class UUIDUtil {
     public static let BYTE_OFFSET_CLOCK_LO: Int32 = 0
@@ -61,14 +61,14 @@ public class UUIDUtil {
             }
             // Need to bypass hyphens:
             if( i == 8 || i == 13 || i == 18 || i == 23) {
-                if (id.charAt(i) != '-') {
+                if (id.get(i).getOrThrow() != '-') {
                         throw NumberFormatException("UUID has to be represented by the standard 36-char representation")
                     }
                 i++
             }
 
             var curr: Int32 = 0
-            var c: Char = id.charAt(i)
+            var c: Char = id.get(i).getOrThrow()
 
             if (c >= '0' && c <= '9') {
                 curr = Int32(UInt32(c) - UInt32('0'))
@@ -81,7 +81,7 @@ public class UUIDUtil {
             }
             curr = (curr << 4)
             i++
-            c = id.charAt(i)
+            c = id.get(i).getOrThrow()
 
             if (c >= '0' && c <= '9') {
                 curr |= Int32(UInt32(c) - UInt32('0'))
@@ -140,7 +140,7 @@ public class UUIDUtil {
      * @param uuidBytes - 16 bytes array
      * @return UUID
      */
-    @overflowWrapping
+    @OverflowWrapping
     public static func constructUUID(types: UUIDType, uuidBytes: Array<Int8>): UUID {
         // first, ensure type is ok
         var b: Int32 = Int32(uuidBytes[Int64(BYTE_OFFSET_TYPE)] & 0xF) // clear out high nibble
@@ -218,7 +218,7 @@ public class UUIDUtil {
      * @return UUIDType - UUIDType
      *                    NoneValueException  
      */
-    @overflowWrapping
+    @OverflowWrapping
     public static func typeOf(uuid: UUID): ?UUIDType {
         // Ok: so 4 MSB of byte at offset 6...
         let l: Int64 = uuid.getMostSignificantBits()
@@ -258,7 +258,7 @@ public class UUIDUtil {
      * 
      * @return Array<Int8>
      */
-    @overflowWrapping
+    @OverflowWrapping
     public static func asByteArray(uuid: UUID): Array<Int8> {
         let hi: Int64 = uuid.getMostSignificantBits()
         let lo: Int64 = uuid.getLeastSignificantBits()
@@ -289,7 +289,7 @@ public class UUIDUtil {
      * @param offset - position
      * @return Unit
      */
-    @overflowWrapping
+    @OverflowWrapping
     public static func toByteArray(uuid: UUID, buffer: Array<Int8>, offset: Int32): Unit {
         checkUUIDByteArray(buffer, offset)
         let hi: Int64 = uuid.getMostSignificantBits()
@@ -306,7 +306,7 @@ public class UUIDUtil {
         return hi | lo
     }
     
-    @overflowWrapping
+    @OverflowWrapping
     private static func appendInt(value: Int32, buffer: Array<Int8>, offset: Int32): Unit {
         var os: Int32 = offset
         buffer[Int64(os)] = Int8(value >> 24)

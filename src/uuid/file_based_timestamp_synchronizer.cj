@@ -100,7 +100,7 @@ public class FileBasedTimestampSynchronizer {
         if (result <= 0) {
             logger.warn("Could not determine safe timer starting point: assuming current system time is acceptable")
         } else {
-            let now: Int64 = Int64(Time.now().unixTimeStamp().milliseconds())
+            let now: Int64 = Int64(DateTime.now().toUnixTimeStamp().toMilliseconds())
             if ((now + mInterval) < result) {
                 logger.warn("Safe timestamp read is ${result - now} milliseconds in future, and is greater than the inteval (${mInterval})")
             }

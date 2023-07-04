@@ -124,19 +124,15 @@ func testToByteArrayNullUuidExtra(): Int32 {
     let test_uuid = UUIDUtil.nilUUID()
     let test_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH, item: Int8(UInt32('x')))
     UUIDUtil.toByteArray(test_uuid, test_array,0)
-    var i: Int64 = 0
     for(k in 0..UUID_BYTE_ARRAY_LENGTH) {
-        if(NULL_UUID_BYTE_ARRAY[i] != test_array[i]) {
+        if(NULL_UUID_BYTE_ARRAY[k] != test_array[k]) {
             return -1
         }
-        i++
     }
-    i = 0
     for(k in 0..EXTRA_DATA_LENGTH) {
-        if(Int8(UInt32('x')) != test_array[i + UUID_BYTE_ARRAY_LENGTH]) {
+        if(Int8(UInt32('x')) != test_array[k + UUID_BYTE_ARRAY_LENGTH]) {
             return -1
         }
-        i++
     }
 
     return 0
@@ -147,48 +143,41 @@ func testToByteArrayNullUuidExtra2(): Int32 {
     let test_uuid = UUIDUtil.nilUUID()
     let test_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH, item: Int8(UInt32('x')))
     UUIDUtil.toByteArray(test_uuid, test_array, Int32(EXTRA_DATA_LENGTH/2))
-    var i: Int64 = 0
+    
     // first check the data (in the middle of the array)
     for(k in 0..UUID_BYTE_ARRAY_LENGTH) {
-        if(NULL_UUID_BYTE_ARRAY[i] != test_array[i + EXTRA_DATA_LENGTH/2]) {
+        if(NULL_UUID_BYTE_ARRAY[k] != test_array[k + EXTRA_DATA_LENGTH/2]) {
             return -1
         }
-        i++
     }
     // and now check that the surrounding bytes were not changed
-    i = 0 
     for(k in 0..EXTRA_DATA_LENGTH/2) {
-        if(Int8(UInt32('x')) != test_array[i]) {
+        if(Int8(UInt32('x')) != test_array[k]) {
             return -2
         }
-        if(Int8(UInt32('x')) != test_array[i + UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH/2]) {
+        if(Int8(UInt32('x')) != test_array[k + UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH/2]) {
             return -3
         }
-        i++
     }
 
     return 0
 }
 
 // test a good uuid case with extra data in the array
-@overflowWrapping
+@OverflowWrapping
 func testToByteArrayNonNullUuidExtra(): Int32 {
     let test_uuid = UUIDUtil.uuid(MIXED_CASE_VALID_UUID_STRING)
     let test_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH, item: Int8(UInt32('x')))
     UUIDUtil.toByteArray(test_uuid, test_array, 0)
-    var i: Int64 = 0
     for(k in 0..UUID_BYTE_ARRAY_LENGTH) {
-        if(Int8(VALID_UUID_BYTE_ARRAY[i]) != test_array[i]) {
+        if(Int8(VALID_UUID_BYTE_ARRAY[k]) != test_array[k]) {
             return -1
         }
-        i++
     }
-    i = 0
     for(k in 0..EXTRA_DATA_LENGTH) {
-        if(Int8(UInt32('x')) != test_array[i + UUID_BYTE_ARRAY_LENGTH]) {
+        if(Int8(UInt32('x')) != test_array[k + UUID_BYTE_ARRAY_LENGTH]) {
             return -1
         }
-        i++
     }
 
     return 0
@@ -196,35 +185,31 @@ func testToByteArrayNonNullUuidExtra(): Int32 {
 
 // now test a good uuid case with extra data in the array
 // to make sure we aren't blowing the bounds of the buffer
-@overflowWrapping
+@OverflowWrapping
 func testToByteArrayNonNullUuidExtra2(): Int32 {
     let test_uuid = UUIDUtil.uuid(MIXED_CASE_VALID_UUID_STRING)
     let test_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH, item: Int8(UInt32('x')))
     UUIDUtil.toByteArray(test_uuid, test_array, Int32(EXTRA_DATA_LENGTH/2))
     // first check the data (in the middle of the array)
-    var i: Int64 = 0
     for(k in 0..UUID_BYTE_ARRAY_LENGTH) {
-        if(Int8(VALID_UUID_BYTE_ARRAY[i]) != test_array[i + EXTRA_DATA_LENGTH/2]) {
+        if(Int8(VALID_UUID_BYTE_ARRAY[k]) != test_array[k + EXTRA_DATA_LENGTH/2]) {
             return -1
         }
-        i++
     }
-    i = 0
     // and now check that the surrounding bytes were not changed
     for(k in 0..EXTRA_DATA_LENGTH/2) {
-        if(Int8(UInt32('x')) != test_array[i]) {
+        if(Int8(UInt32('x')) != test_array[k]) {
             return -1
         }
-        if(Int8(UInt32('x')) != test_array[i + UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH/2]) {
+        if(Int8(UInt32('x')) != test_array[k + UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH/2]) {
             return -1
         }
-        i++
     }
 
     return 0
 }
 
-@overflowWrapping
+@OverflowWrapping
 func UInt8ToInt8(arr: Array<UInt8>): Array<Int8> {
     var res: Array<Int8> = Array<Int8>(arr.size, item: 0)
     for( i in 0..arr.size) {

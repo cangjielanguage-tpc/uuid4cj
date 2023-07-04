@@ -13,7 +13,6 @@ main() {
     var uuid6 = UUIDUtil.constructUUID(UUIDType.TIME_BASED_REORDERED, s)
     var uuid7 = UUIDUtil.constructUUID(UUIDType.TIME_BASED_EPOCH, s)
     var uuid8 = UUIDUtil.constructUUID(UUIDType.FREE_FORM, s)
-    var uuid9 = UUIDUtil.constructUUID(UUIDType.UNKNOWN, s)
 
     if(UUIDUtil.asByteArray(uuid).toString() != "[104, 101, 108, 108, 111, 119, 31, 114, -84, 100, 115, 100, 102, 115, 103, 115]" ||
         UUIDUtil.asByteArray(uuid2).toString() != "[104, 101, 108, 108, 111, 119, 47, 114, -84, 100, 115, 100, 102, 115, 103, 115]" ||

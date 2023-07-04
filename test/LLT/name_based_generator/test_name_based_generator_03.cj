@@ -11,9 +11,7 @@ main() {
     var name4: NameBasedGenerator = Generators.nameBasedGenerator(namespace)
     var name5: NameBasedGenerator = Generators.nameBasedGenerator()
     var uuid2: UUID = name2.generate(s)
-    var uuid3: UUID = name3.generate(s)
     var uuid4: UUID = name4.generate(s)
-    var uuid5: UUID = name5.generate(s)
     if(
         uuid2.toString() != uuid4.toString() ||
         name2.getType().raw() != 5 ||

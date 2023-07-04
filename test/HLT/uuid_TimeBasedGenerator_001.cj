@@ -7,6 +7,8 @@ from std import unittest.testmacro.*
 from uuid import uuid.*
 from std import random.*
 from std import fs.*
+from std import time.*
+from std import sync.sleep
 from crypto import crypto.*
 
 @Test
@@ -17,7 +19,7 @@ public class uuid_TimeBasedGenerator_001{
         var fbts = FileBasedTimestampSynchronizer(file1,file2) 
         var timeBasedGenerator = TimeBasedGenerator(Option<EthernetAddress>.None,UUIDTimer(SecureRandom(),fbts))
         println("生成uuid:${timeBasedGenerator.generate()}")
-        sleep(10*1000*1000*1000)
+        sleep((10*1000) * Duration.millisecond)
         println("生成uuid:${timeBasedGenerator.generate()}")
         file1.close()
         file2.close()
@@ -44,7 +46,7 @@ public class uuid_TimeBasedGenerator_001{
         println("file2: ${String.fromUtf8(bytearry2).trimAsciiRight()}")
         @Assert(String.fromUtf8(bytearry).trimAsciiRight() != "",true)
         @Assert(String.fromUtf8(bytearry2).trimAsciiRight() == "",true)
-        sleep(1*1000*1000*1000)
+        sleep((1*1000) * Duration.millisecond)
 
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry3 = File.readFrom("uuid_TimeBasedGenerator_001.txt")
@@ -54,7 +56,7 @@ public class uuid_TimeBasedGenerator_001{
         @Assert(String.fromUtf8(bytearry).trimAsciiRight() == String.fromUtf8(bytearry3).trimAsciiRight(),true)
         @Assert(String.fromUtf8(bytearry2).trimAsciiRight() == "",true)
 
-        sleep(10*1000*1000*1000)
+        sleep((10*1000) * Duration.millisecond)
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry5 = File.readFrom("uuid_TimeBasedGenerator_001.txt")
         println("file1: ${String.fromUtf8(bytearry5).trimAsciiRight()}")
@@ -63,7 +65,7 @@ public class uuid_TimeBasedGenerator_001{
         @Assert(String.fromUtf8(bytearry3).trimAsciiRight() == String.fromUtf8(bytearry5).trimAsciiRight(),true)
         @Assert(String.fromUtf8(bytearry6).trimAsciiRight() != "",true)
 
-        sleep(1*1000*1000*1000)
+        sleep((1*1000)* Duration.millisecond)
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry7 = File.readFrom("uuid_TimeBasedGenerator_001.txt")
         println("file1: ${String.fromUtf8(bytearry7).trimAsciiRight()}")
@@ -72,7 +74,7 @@ public class uuid_TimeBasedGenerator_001{
         @Assert(String.fromUtf8(bytearry5).trimAsciiRight() == String.fromUtf8(bytearry7).trimAsciiRight(),true)
         @Assert(String.fromUtf8(bytearry8).trimAsciiRight() == String.fromUtf8(bytearry6).trimAsciiRight(),true)
 
-        sleep(10*1000*1000*1000)
+        sleep((10*1000)* Duration.millisecond)
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry9 = File.readFrom("uuid_TimeBasedGenerator_001.txt")
         println("file1: ${String.fromUtf8(bytearry9).trimAsciiRight()}")
@@ -81,7 +83,7 @@ public class uuid_TimeBasedGenerator_001{
         @Assert(String.fromUtf8(bytearry7).trimAsciiRight() != String.fromUtf8(bytearry9).trimAsciiRight(),true)
         @Assert(String.fromUtf8(bytearry8).trimAsciiRight() == String.fromUtf8(bytearry10).trimAsciiRight(),true)
 
-        sleep(10*1000*1000*1000)
+        sleep((10*1000)* Duration.millisecond)
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry11 = File.readFrom("uuid_TimeBasedGenerator_001.txt")
         println("file1: ${String.fromUtf8(bytearry11).trimAsciiRight()}")
@@ -112,7 +114,7 @@ public class uuid_TimeBasedGenerator_001{
         println("file2: ${String.fromUtf8(bytearry2).trimAsciiRight()}")
         @Assert(String.fromUtf8(bytearry).trimAsciiRight() != "",true)
         @Assert(String.fromUtf8(bytearry2).trimAsciiRight() == "",true)
-        sleep(1*1000*1000*1000)
+        sleep((1*1000)* Duration.millisecond)
 
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry3 = File.readFrom("uuid_TimeBasedGenerator_002.txt")
@@ -122,7 +124,7 @@ public class uuid_TimeBasedGenerator_001{
         @Assert(String.fromUtf8(bytearry).trimAsciiRight() == String.fromUtf8(bytearry3).trimAsciiRight(),true)
         @Assert(String.fromUtf8(bytearry2).trimAsciiRight() == "",true)
 
-        sleep(5*1000*1000*1000)
+        sleep((5*1000)* Duration.millisecond)
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry5 = File.readFrom("uuid_TimeBasedGenerator_002.txt")
         println("file1: ${String.fromUtf8(bytearry5).trimAsciiRight()}")
@@ -131,7 +133,7 @@ public class uuid_TimeBasedGenerator_001{
         @Assert(String.fromUtf8(bytearry3).trimAsciiRight() == String.fromUtf8(bytearry5).trimAsciiRight(),true)
         @Assert(String.fromUtf8(bytearry6).trimAsciiRight() != "",true)
 
-        sleep(1*1000*1000*1000)
+        sleep((1*1000)* Duration.millisecond)
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry7 = File.readFrom("uuid_TimeBasedGenerator_002.txt")
         println("file1: ${String.fromUtf8(bytearry7).trimAsciiRight()}")
@@ -140,7 +142,7 @@ public class uuid_TimeBasedGenerator_001{
         @Assert(String.fromUtf8(bytearry5).trimAsciiRight() == String.fromUtf8(bytearry7).trimAsciiRight(),true)
         @Assert(String.fromUtf8(bytearry8).trimAsciiRight() == String.fromUtf8(bytearry6).trimAsciiRight(),true)
 
-        sleep(5*1000*1000*1000)
+        sleep((5*1000)* Duration.millisecond)
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry9 = File.readFrom("uuid_TimeBasedGenerator_002.txt")
         println("file1: ${String.fromUtf8(bytearry9).trimAsciiRight()}")
@@ -149,7 +151,7 @@ public class uuid_TimeBasedGenerator_001{
         @Assert(String.fromUtf8(bytearry7).trimAsciiRight() != String.fromUtf8(bytearry9).trimAsciiRight(),true)
         @Assert(String.fromUtf8(bytearry8).trimAsciiRight() == String.fromUtf8(bytearry10).trimAsciiRight(),true)
 
-        sleep(5*1000*1000*1000)
+        sleep((5*1000)* Duration.millisecond)
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry11 = File.readFrom("uuid_TimeBasedGenerator_002.txt")
         println("file1: ${String.fromUtf8(bytearry11).trimAsciiRight()}")
@@ -181,7 +183,7 @@ public class uuid_TimeBasedGenerator_001{
         println("file2: ${String.fromUtf8(bytearry2).trimAsciiRight()}")
         @Assert(String.fromUtf8(bytearry).trimAsciiRight() != "",true)
         @Assert(String.fromUtf8(bytearry2).trimAsciiRight() == "",true)
-        sleep(1*1000*1000*1000)
+        sleep((1*1000)* Duration.millisecond)
 
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry3 = File.readFrom("uuid_TimeBasedGenerator_003.txt")
@@ -191,7 +193,7 @@ public class uuid_TimeBasedGenerator_001{
         @Assert(String.fromUtf8(bytearry).trimAsciiRight() == String.fromUtf8(bytearry3).trimAsciiRight(),true)
         @Assert(String.fromUtf8(bytearry2).trimAsciiRight() == "",true)
 
-        sleep(5*1000*1000*1000)
+        sleep((5*1000)* Duration.millisecond)
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry5 = File.readFrom("uuid_TimeBasedGenerator_003.txt")
         println("file1: ${String.fromUtf8(bytearry5).trimAsciiRight()}")
@@ -200,7 +202,7 @@ public class uuid_TimeBasedGenerator_001{
         @Assert(String.fromUtf8(bytearry3).trimAsciiRight() == String.fromUtf8(bytearry5).trimAsciiRight(),true)
         @Assert(String.fromUtf8(bytearry6).trimAsciiRight() != "",true)
 
-        sleep(1*1000*1000*1000)
+        sleep((1*1000)* Duration.millisecond)
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry7 = File.readFrom("uuid_TimeBasedGenerator_003.txt")
         println("file1: ${String.fromUtf8(bytearry7).trimAsciiRight()}")
@@ -209,7 +211,7 @@ public class uuid_TimeBasedGenerator_001{
         @Assert(String.fromUtf8(bytearry5).trimAsciiRight() == String.fromUtf8(bytearry7).trimAsciiRight(),true)
         @Assert(String.fromUtf8(bytearry8).trimAsciiRight() == String.fromUtf8(bytearry6).trimAsciiRight(),true)
 
-        sleep(5*1000*1000*1000)
+        sleep((5*1000)* Duration.millisecond)
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry9 = File.readFrom("uuid_TimeBasedGenerator_003.txt")
         println("file1: ${String.fromUtf8(bytearry9).trimAsciiRight()}")
@@ -218,7 +220,7 @@ public class uuid_TimeBasedGenerator_001{
         @Assert(String.fromUtf8(bytearry7).trimAsciiRight() != String.fromUtf8(bytearry9).trimAsciiRight(),true)
         @Assert(String.fromUtf8(bytearry8).trimAsciiRight() == String.fromUtf8(bytearry10).trimAsciiRight(),true)
 
-        sleep(5*1000*1000*1000)
+        sleep((5*1000)* Duration.millisecond)
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry11 = File.readFrom("uuid_TimeBasedGenerator_003.txt")
         println("file1: ${String.fromUtf8(bytearry11).trimAsciiRight()}")
@@ -244,7 +246,7 @@ public class uuid_TimeBasedGenerator_001{
         println("file2: ${String.fromUtf8(bytearry2_).trimAsciiRight()}")
         @Assert(String.fromUtf8(bytearry_).trimAsciiRight() != "",true)
         @Assert(String.fromUtf8(bytearry2_).trimAsciiRight() != "",true)
-        sleep(1*1000*1000*1000)
+        sleep((1*1000)* Duration.millisecond)
 
         println("生成uuid:${timeBasedGenerator.generate()}")
         var bytearry = File.readFrom("uuid_TimeBasedGenerator_001.txt")

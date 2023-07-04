@@ -162,7 +162,7 @@ public class UUIDTimer {
         var counter: Int32 = 0
         do {
             try {
-                sleep(delay * 1000 * 1000)
+                sleep(delay * Duration.millisecond)
             } catch (ie: InterruptedException ){
                 throw InterruptedException("Failed to sleep ");
             }
@@ -172,7 +172,7 @@ public class UUIDTimer {
             if (counter > MAX_WAIT_COUNT) {
                 break
             }
-        } while (Int64( Time.now().unixTimeStamp().milliseconds()) < waitUntil)
+        } while (Int64(DateTime.now().toUnixTimeStamp().toMilliseconds()) < waitUntil)
 
     }
 }

@@ -11,12 +11,12 @@ package uuid
 public class UUIDClock{
 
     /**
-     * Returns the current time in milliseconds.
+     * Returns the current time in toMilliseconds.
      *
      * @return Int64
      */
     public func currentTimeMillis():Int64{
-        return Time.now().unixTimeStamp().milliseconds()
+        return DateTime.now().toUnixTimeStamp().toMilliseconds()
     }
 
 }
