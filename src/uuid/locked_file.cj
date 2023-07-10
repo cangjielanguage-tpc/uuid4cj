@@ -82,7 +82,7 @@ class LockedFile {
 
         if ((!dataStr.startsWith("[0"))
             || (dataStr.size < 3)
-            || dataStr.charAt(2).toLowerCase() != 'x') {
+            || dataStr.get(2).getOrThrow().toLowerCase() != 'x') {
             err = "does not start with '[0x' prefix"
         } else {
             let ix: Int64 = dataStr.indexOf(']', 3).getOrThrow()
@@ -133,7 +133,7 @@ class LockedFile {
         for(i in 18..2 : -1) {
             var val: Int64 = stampTemp & 0x0f
             // Char -> uint8
-            mWriteArray[i] = UInt8(UInt32(HEX_DIGITS.charAt(val)))
+            mWriteArray[i] = UInt8(UInt32(HEX_DIGITS.get(val).getOrThrow()))
 
             stampTemp = (stampTemp >> 4)
         }

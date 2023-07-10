@@ -782,7 +782,7 @@ public class UUID <: ToString {
      *
      * 返回值 Int32 - 哈希值
      */
-    @overflowWrapping
+    @OverflowWrapping
     public func hashCode(): Int32
 
     /**
@@ -865,7 +865,7 @@ public class UUIDUtil {
      * 参数 uuidBytes - 16 字节序列的数组
      * 返回值 UUID
      */
-    @overflowWrapping
+    @OverflowWrapping
     public static func constructUUID(types: UUIDType, uuidBytes: Array<Int8>): UUID
     
     /**
@@ -911,7 +911,7 @@ public class UUIDUtil {
      * 
      * 返回值 ？UUIDType - Option<UUIDType>             
      */
-    @overflowWrapping
+    @OverflowWrapping
     public static func typeOf(uuid: UUID): ?UUIDType
 
     /**
@@ -921,7 +921,7 @@ public class UUIDUtil {
      * 
      * 返回值 Array<Int8>
      */
-    @overflowWrapping
+    @OverflowWrapping
     public static func asByteArray(uuid: UUID): Array<Int8>
 
     /**
@@ -941,7 +941,7 @@ public class UUIDUtil {
      * 参数 offset - 追加的位置
      * 返回值 Unit
      */
-    @overflowWrapping
+    @OverflowWrapping
     public static func toByteArray(uuid: UUID, buffer: Array<Int8>, offset: Int32): Unit
 }
 ```
@@ -1017,7 +1017,7 @@ public class NameBasedGenerator <: StringArgGenerator {
      * 参数 nameBytes - Array<Int8>
      * 返回值 UUID
      */
-    @overflowWrapping
+    @OverflowWrapping
     public override func generate(nameBytes: Array<Int8>): UUID
 }
 ```
@@ -1141,7 +1141,7 @@ public class TimeBasedReorderedGenerator <: NoArgGenerator {
      * 参数 ethAddr - 用于生成的硬件地址
      * 参数 timer - 用于同步访问时间戳的对象         
      */
-    @overflowWrapping
+    @OverflowWrapping
     public init(ethAddr: ?EthernetAddress, timer: UUIDTimer)
 
     /**
@@ -1163,7 +1163,7 @@ public class TimeBasedReorderedGenerator <: NoArgGenerator {
      *
      * 返回值 UUID
      */ 
-    @overflowWrapping   
+    @OverflowWrapping   
     public func generate(): UUID
 }
 ```
@@ -1317,7 +1317,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
      * 参数 pos - 位置
      * 返回值 - Unit
      */
-    @overflowWrapping
+    @OverflowWrapping
     public func toByteArray(uuidBytesArray: Array<UInt8>, pos: Int64): Unit
 
     /**
@@ -1367,7 +1367,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
      *
      * 返回值 - String
      */
-    @overflowWrapping
+    @OverflowWrapping
     public func toString(): String
 }
 ```

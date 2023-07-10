@@ -97,7 +97,7 @@ public class uuid_UUID_001{
 
         var eMessage = ""
         try{
-            let uuid3 = UUID.fromString("")
+            UUID.fromString("")
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -106,7 +106,7 @@ public class uuid_UUID_001{
 
         eMessage = ""
         try{
-            let uuid3 = UUID.fromString("G")
+            UUID.fromString("G")
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -115,7 +115,7 @@ public class uuid_UUID_001{
 
         eMessage = ""
         try{
-            let uuid3 = UUID.fromString("00000000-0000--0000-0000-000000000000")
+            UUID.fromString("00000000-0000--0000-0000-000000000000")
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -124,7 +124,7 @@ public class uuid_UUID_001{
 
         eMessage = ""
         try{
-            let uuid3 = UUID.fromString("00000000-00000000-0000-000000000000")
+            UUID.fromString("00000000-00000000-0000-000000000000")
         } catch (e: Exception){
             eMessage = e.message
         }

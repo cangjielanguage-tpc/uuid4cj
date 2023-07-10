@@ -47,7 +47,7 @@ public class uuid_UUIDUtil_001{
         println("---------------------------------uuid_UUIDUtil_uuid_String_002------------------------------")
         var eMessage = ""
         try{
-            let uuid3 = UUIDUtil.uuid("")
+            UUIDUtil.uuid("")
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -56,7 +56,7 @@ public class uuid_UUIDUtil_001{
 
         eMessage = ""
         try{
-            let uuid3 = UUIDUtil.uuid("G")
+            UUIDUtil.uuid("G")
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -65,7 +65,7 @@ public class uuid_UUIDUtil_001{
 
         eMessage = ""
         try{
-            let uuid3 = UUIDUtil.uuid("00000000-0000--0000-0000-000000000000")
+            UUIDUtil.uuid("00000000-0000--0000-0000-000000000000")
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -74,7 +74,7 @@ public class uuid_UUIDUtil_001{
 
         eMessage = ""
         try{
-            let uuid3 = UUIDUtil.uuid("00000000-00000000-0000-000000000000")
+            UUIDUtil.uuid("00000000-00000000-0000-000000000000")
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -101,7 +101,7 @@ public class uuid_UUIDUtil_001{
         var arry: Array<Int8> = Array<Int8>(0,item:0)
         var eMessage = ""
         try{
-            let uuid2: UUID = UUIDUtil.uuid(arry)
+            UUIDUtil.uuid(arry)
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -148,7 +148,7 @@ public class uuid_UUIDUtil_001{
         
         var eMessage = ""
         try{
-            let uuid2: UUID = UUIDUtil.uuid(arry,5)
+            UUIDUtil.uuid(arry,5)
         } catch (e: Exception){
             eMessage = e.message
         }
@@ -222,7 +222,7 @@ public class uuid_UUIDUtil_001{
         
         var eMessage = ""
         try{
-            let uuid: UUID = UUIDUtil.constructUUID(UUIDType.TIME_BASED_EPOCH,arry)
+            UUIDUtil.constructUUID(UUIDType.TIME_BASED_EPOCH,arry)
         } catch (e: IndexOutOfBoundsException){
             eMessage = "IndexOutOfBoundsException"
         }

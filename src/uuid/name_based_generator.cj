@@ -101,7 +101,7 @@ public class NameBasedGenerator <: StringArgGenerator {
      * @param name - string
      * @return UUID
      */  
-    @overflowWrapping  
+    @OverflowWrapping  
     public override func generate(name: String): UUID {
         return generate(UInt8ToInt8(_utf8.newEncoder().encode(name)))
     }
@@ -112,7 +112,7 @@ public class NameBasedGenerator <: StringArgGenerator {
      * @param nameBytes - Array<UInt8>
      * @return UUID
      */
-    @overflowWrapping
+    @OverflowWrapping
     public override func generate(nameBytes: Array<Int8>): UUID {
         var digest: Array<Int8> = Array<Int8>()
         _digester.getOrThrow().reset()

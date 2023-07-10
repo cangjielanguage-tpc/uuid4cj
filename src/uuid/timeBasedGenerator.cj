@@ -29,7 +29,7 @@ public class TimeBasedGenerator <: NoArgGenerator{
      * @param ethAddr - Option<EthernetAddress>
      * @param timer - UUIDTimer
      */
-    @overflowWrapping
+    @OverflowWrapping
     public init(ethAddr:Option<EthernetAddress>,timer: UUIDTimer){
         var uuidBytes: Array<UInt8> = Array<UInt8>(16,item:0)
         var ethAddrTemp = ethAddr

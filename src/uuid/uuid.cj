@@ -81,7 +81,7 @@ public class UUID <: ToString {
      * @param name - A byte array to be used to construct a {@code UUID}
      * @return UUID - A {@code UUID} generated from the specified array
      */
-    @overflowWrapping 
+    @OverflowWrapping 
     public static func nameUUIDFromBytes(name: Array<Int8>): UUID {
         var md: MessageDigest = MessageDigest(DigestType.MD5)
         var md5Bytes: Array<Int8> = md.digest(input: name)
@@ -277,7 +277,7 @@ public class UUID <: ToString {
      *
      * @return Int32 - A hash code value for this {@code UUID}
      */
-    @overflowWrapping
+    @OverflowWrapping
     public func hashCode(): Int32 {
         let hilo: Int64 = mostSigBits ^ leastSigBits
         return Int32((Int32(hilo >> 32)) ^ Int32(hilo))
