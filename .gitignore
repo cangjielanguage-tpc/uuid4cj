@@ -9,7 +9,10 @@
 *.gcda
 *.gcno
 /output
-/cryptocj
+/crypto4cj
 /test2
 /charset
 *.bc
+log/
+tmp/
+report/

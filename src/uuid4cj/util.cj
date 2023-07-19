@@ -8,7 +8,7 @@
  * This is a util
  */
 
-package uuid
+package uuid4cj
 
 /*
  * The class is Unsupported Operation exception

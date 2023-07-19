@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2023. All rights reserved.
  */
 
-package uuid
+package uuid4cj
 
 from std import time.*
 

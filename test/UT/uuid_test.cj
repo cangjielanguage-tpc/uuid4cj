@@ -1,4 +1,4 @@
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from std import unittest.testmacro.{Assert, Test, TestCase}
 
 @Test

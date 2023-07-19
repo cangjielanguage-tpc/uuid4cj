@@ -2,7 +2,7 @@
  * Copyright (c) Cangjie Library Team 2023-2023. All rights resvered.
  */
 
-package uuid
+package uuid4cj
 
 /**
  * Default UUID comparator is not very useful

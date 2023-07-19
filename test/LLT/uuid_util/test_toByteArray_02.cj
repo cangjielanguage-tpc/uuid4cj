@@ -1,7 +1,7 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 let UUID_BYTE_ARRAY_LENGTH: Int64 = 16
 let EXTRA_DATA_LENGTH: Int64 = 9

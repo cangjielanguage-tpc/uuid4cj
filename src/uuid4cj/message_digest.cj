@@ -2,14 +2,14 @@
  * Copyright (c) Cangjie Library Team 2023-2023. All rights resvered.
  */
 
-package uuid
+package uuid4cj
 
-from cryptocj import md5cj.*
-from cryptocj import sha1cj.*
-from cryptocj import sha224cj.*
-from cryptocj import sha256cj.*
-from cryptocj import sha384cj.*
-from cryptocj import sha512cj.*
+from crypto4cj import md5cj.*
+from crypto4cj import sha1cj.*
+from crypto4cj import sha224cj.*
+from crypto4cj import sha256cj.*
+from crypto4cj import sha384cj.*
+from crypto4cj import sha512cj.*
 
 /*
  * The class is digest type
