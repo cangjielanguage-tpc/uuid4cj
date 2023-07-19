@@ -1,5 +1,5 @@
 <div align="center">
-<h1>UUID</h1>
+<h1>uuid4cj</h1>
 </div>
 
 <p align="center">
@@ -128,7 +128,7 @@ UUID（通用唯一标识符），也称为GUID（全局唯一标识符）。UUI
 .
 ├── doc
 ├── src
-│   ├── uuid
+│   ├── uuid4cj
 └── test
 │   ├── HLT
 │   ├── LLT
@@ -162,7 +162,7 @@ cpm build
 #### 基于名称 MD5 生成 UUID 使用样例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {   
     var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
@@ -183,7 +183,7 @@ UUIDType: 3
 #### 基于名称 SHA1 生成 UUID 使用样例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {   
     var name: NameBasedGenerator = Generators.nameBasedGenerator()
@@ -201,7 +201,7 @@ UUIDType: 5
 ```
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {   
     var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
@@ -220,7 +220,7 @@ UUIDType: 5
 ```
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {   
     var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
@@ -240,7 +240,7 @@ UUIDType: 5
 #### 基于随机数 生成 UUID 使用样例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from crypto import crypto.SecureRandom
 from std import random.*
 
@@ -263,7 +263,7 @@ UUIDType: 4
 基于SecureRandom随机生成的UUID: 1c290f65-05c7-4426-a90f-6505c7f426e6
 ```
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from crypto import crypto.SecureRandom
 from std import random.*
 
@@ -287,7 +287,7 @@ UUIDType: 4
 基于Random随机生成的UUID: c259ecfd-bbf0-4e28-8ea2-03d10194b80a
 ```
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from crypto import crypto.SecureRandom
 from std import random.*
 
@@ -315,7 +315,7 @@ UUIDType: 4
 样例一
 
 ```
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {  
     var time: TimeBasedReorderedGenerator = Generators.timeBasedReorderedGenerator()
@@ -335,7 +335,7 @@ UUIDType: 6
 样例二
 
 ```
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {  
     var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
@@ -356,7 +356,7 @@ UUIDType: 6
 样例三
 
 ```
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {  
     var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
@@ -380,7 +380,7 @@ UUIDType: 6
 样例一
 
 ```
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {  
     var time: TimeBasedEpochGenerator = Generators.timeBasedEpochGenerator()
@@ -400,7 +400,7 @@ UUIDType: 7
 样例二
 
 ```
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from std import random.*
 
 main() {  
@@ -423,7 +423,7 @@ UUIDType: 7
 样例一
 
 ```
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {  
     let time: TimeBasedGenerator = Generators.timeBasedGenerator()
@@ -444,7 +444,7 @@ UUIDType: 1
 样例二
 
 ```
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from crypto import crypto.SecureRandom
 from std import random.*
 from std import time.*
@@ -506,7 +506,7 @@ UUIDType: 1
 样例三
 
 ```
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from crypto import crypto.SecureRandom
 from std import random.*
 from std import time.*

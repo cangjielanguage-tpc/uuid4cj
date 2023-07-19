@@ -1,7 +1,7 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {    
     let uuid = UUID.nilUUID()

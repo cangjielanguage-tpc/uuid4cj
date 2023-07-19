@@ -23,7 +23,7 @@ UUID 的标准格式：xxxxxxxx-xxxx-Axxx-Bxxx-xxxxxxxxxxxx ，形式为 8-4-4-4
 依赖：
 
 1. 仓颉标准库的 SecureRandom
-2. 三方库 cryptocj 的 MD5、SHA1
+2. 三方库 crypto4cj 的 MD5、SHA1
 3. 三方库 charset
 
 性能： NA
@@ -52,7 +52,7 @@ public static func nameBasedGenerator(namespace: UUID, digester: MessageDigest):
 #### 1.1.2 示例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {   
     var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
@@ -112,7 +112,7 @@ public static func nameBasedGenerator(namespace: UUID, digester: MessageDigest):
 ##### 1.2.2.1 Generators.nameBasedGenerator() 使用示例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {   
     var name: NameBasedGenerator = Generators.nameBasedGenerator()
@@ -132,7 +132,7 @@ UUIDType: 5
 ##### 1.2.2.2 Generators.nameBasedGenerator(namespace: UUID) 使用示例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {   
     var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
@@ -153,7 +153,7 @@ UUIDType: 5
 ##### 1.2.2.3 Generators.nameBasedGenerator(namespace: UUID, digester: MessageDigest) 使用示例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {   
     var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
@@ -209,7 +209,7 @@ public static func randomBasedGenerator(rnd: SecureRandom): RandomBasedGenerator
 #### 1.3.2 示例
 ##### 1.3.2.1 randomBasedGenerator() 使用示例
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from crypto import crypto.SecureRandom
 from std import random.*
 
@@ -236,7 +236,7 @@ UUIDType: 4
 ```
 ##### 1.3.2.2 randomBasedGenerator(rnd: Random) 使用示例
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from crypto import crypto.SecureRandom
 from std import random.*
 
@@ -261,7 +261,7 @@ UUIDType: 4
 ```
 ##### 1.3.2.3 randomBasedGenerator(rnd: SecureRandom) 使用示例
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from crypto import crypto.SecureRandom
 from std import random.*
 
@@ -320,7 +320,7 @@ public static func timeBasedReorderedGenerator(ethernetAddress: EthernetAddress,
 ##### 1.4.2.1 timeBasedReorderedGenerator() 使用示例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {  
     var time: TimeBasedReorderedGenerator = Generators.timeBasedReorderedGenerator()
@@ -340,7 +340,7 @@ UUIDType: 6
 ##### 1.4.2.2 timeBasedReorderedGenerator(ethernetAddress: EthernetAddress) 使用示例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {  
     var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
@@ -361,7 +361,7 @@ UUIDType: 6
 ##### 1.4.2.3 timeBasedReorderedGenerator(ethernetAddress: EthernetAddress, timer: UUIDTimer) 使用示例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {  
     var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
@@ -407,7 +407,7 @@ public static func timeBasedEpochGenerator(random: Random): TimeBasedEpochGenera
 ##### 1.5.2.1 timeBasedEpochGenerator() 使用示例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {  
     var time: TimeBasedEpochGenerator = Generators.timeBasedEpochGenerator()
@@ -427,7 +427,7 @@ UUIDType: 7
 ##### 1.5.2.2 timeBasedEpochGenerator(ethernetAddress: EthernetAddress) 使用示例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from std import random.*
 
 main() {  
@@ -490,7 +490,7 @@ public static func timeBasedGenerator(ethernetAddress: Option<EthernetAddress>, 
 ##### 1.6.2.1 timeBasedGenerator() 使用示例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {  
     let time: TimeBasedGenerator = Generators.timeBasedGenerator()
@@ -511,7 +511,7 @@ UUIDType: 1
 ##### 1.6.2.2 timeBasedGenerator(ethernetAddress: Option<EthernetAddress>) 使用示例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {  
     var ethernetAddress1: Option<EthernetAddress> =  EthernetAddress("87:f5:93:06:d3:0c")
@@ -533,7 +533,7 @@ UUIDType: 1
 ##### 1.6.2.3 timeBasedGenerator(ethernetAddress: Option<EthernetAddress>, sync: Option<FileBasedTimestampSynchronizer>) 使用示例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from crypto import crypto.SecureRandom
 from std import random.*
 from std import time.*
@@ -597,7 +597,7 @@ UUIDType: 1
 ##### 1.6.2.4 timeBasedGenerator(ethernetAddress: Option<EthernetAddress>, timer: Option<UUIDTimer>) 使用示例
 
 ```cangjie
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from crypto import crypto.SecureRandom
 from std import random.*
 from std import time.*

@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2022-2022. All rights reserved.
  */
 
-package uuid
+package uuid4cj
 
 public abstract class UUIDGenerator{
 

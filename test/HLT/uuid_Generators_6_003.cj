@@ -1,10 +1,10 @@
-//3rd_party_lib:uuid4cj/build/uuid
-//3rd_party_lib:uuid4cj/ci_lib/cryptocj
+//3rd_party_lib:uuid4cj/build/uuid4cj
+//3rd_party_lib:uuid4cj/ci_lib/crypto4cj
 //3rd_party_lib:uuid4cj/ci_lib/charset
 
 from std import unittest.*
 from std import unittest.testmacro.*
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 from crypto import crypto.*
 
 @Test

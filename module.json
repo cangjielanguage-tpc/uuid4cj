@@ -1,14 +1,14 @@
 {
 	"cjc_version": "0.39.4",
 	"organization": "huangjie84@huawei",
-	"name": "uuid",
+	"name": "uuid4cj",
 	"description": "This library is used to generate UUIDs.",
 	"version": "0.0.1",
 	"requires": {
-		"cryptocj": {
+		"crypto4cj": {
 			"organization": "cangjie",
 			"version": "0.0.6",
-			"path": "./cryptocj"
+			"path": "./crypto4cj"
 		},
 		"charset": {
 			"organization": "zft",

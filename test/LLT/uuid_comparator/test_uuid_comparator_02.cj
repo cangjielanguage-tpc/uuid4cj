@@ -1,7 +1,7 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid import uuid.*
+from uuid4cj import uuid4cj.*
 
 main() {    
     var u1: UUID = UUID.fromString("f55473bb-c3db-11ed-a26d-87b9a4e06ba9")

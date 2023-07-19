@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2023. All rights reserved.
  */
 
-package uuid
+package uuid4cj
 
 /**
  * Implementation of UUID generator that uses time/location based generation
