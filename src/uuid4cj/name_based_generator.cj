@@ -56,7 +56,7 @@ public class NameBasedGenerator <: StringArgGenerator {
         match (digester) {
             case None => 
                 _digester = MessageDigest(DigestType.SHA1)
-            case Some(v) =>
+            case Some(_) =>
                 _digester = digester
         }
         match (types) {
@@ -71,7 +71,7 @@ public class NameBasedGenerator <: StringArgGenerator {
                     _types = UUIDType.NAME_BASED_SHA1
                     logger.warn("Could not determine type of Digester from '%s' assuming 'SHA-1' type")
                 }
-            case Some(v) =>
+            case Some(_) =>
                 _types = types
         }
     }

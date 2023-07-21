@@ -111,7 +111,6 @@ public class MessageDigest {
                 sha1Final(md, (this.c as SHACTX).getOrThrow())
                 return md
         }
-        return Array<UInt8>() 
     }
 
     @OverflowWrapping
@@ -126,6 +125,5 @@ public class MessageDigest {
                 sha1(Int8ToUInt8(input), md)
                 return md
         }
-        return Array<UInt8>() 
     }
 }

@@ -16,11 +16,11 @@ extend Random {
     func nextBytes(length: Int32): Array<UInt8> {
         var bytes: Array<UInt8> = Array<UInt8>(Int64(length), item: 0)
         var i: Int64 = 0
-        for(k in 0..bytes.size) {
+        for(_ in 0..bytes.size) {
             var rnd: Int32 = nextInt32()
             var n: Int64 = min(Int64(length) - i, Int64(4))
             n--
-            for(j in 0..n) {
+            for(_ in 0..n) {
                 rnd >>= 8
                 i++
                 bytes[i] = UInt8(rnd)

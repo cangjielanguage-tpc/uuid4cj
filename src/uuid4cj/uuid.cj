@@ -22,12 +22,12 @@ public class UUID <: ToString {
             throw IllegalArgumentException("data must be 16 bytes in length")
         }
         var k: Int64 = 0
-        for(i in 0..8) {
+        for(_ in 0..8) {
             msb = (msb << 8) | (Int64(data[k]) & 0xff)
             k++
         }
         k = 8
-        for(i in 8..16) {
+        for(_ in 8..16) {
            lsb = (lsb << 8) | (Int64(data[k]) & 0xff)
            k++
         }            
@@ -323,6 +323,5 @@ public class UUID <: ToString {
         } else {
             return 0
         }
-        return 0
     }
 }

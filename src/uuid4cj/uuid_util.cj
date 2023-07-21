@@ -55,7 +55,7 @@ public class UUIDUtil {
         var hi: Int64 = 0
         var i: Int64 = 0
         var j: Int64 = 0
-        for (k in 0..36) {
+        for (_ in 0..36) {
             if( i >= 36 ) {
                 break
             }

@@ -154,7 +154,7 @@ public class Generators{
      */
     public static func timeBasedGenerator(ethernetAddress: Option<EthernetAddress>, timer: Option<UUIDTimer>):TimeBasedGenerator{
         let timerTT = match (timer) {
-            case Some(v) => timer
+            case Some(_) => timer
             case None => sharedTimer()
         }
         return  TimeBasedGenerator(ethernetAddress, timerTT.getOrThrow());
@@ -163,7 +163,7 @@ public class Generators{
     private static func sharedTimer(): Option<UUIDTimer> {
         try {
             _sharedTimer = match (_sharedTimer) {
-                case Some(v) => _sharedTimer
+                case Some(_) => _sharedTimer
                 case None => UUIDTimer(SecureRandom(), Option<FileBasedTimestampSynchronizer>.None);
             }
         } catch (e: IllegalArgumentException) {
