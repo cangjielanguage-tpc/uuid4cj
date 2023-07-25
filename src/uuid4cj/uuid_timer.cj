@@ -64,7 +64,7 @@ public class UUIDTimer {
         initCounters(rnd)
         _lastSystemTimestamp = 0
         _lastUsedTimestamp = 0
-        if(let Some(i) = sync){
+        if(let Some(_) = sync){
             let lastSaved:Int64 = sync.getOrThrow().initialize()
             if(lastSaved > _lastUsedTimestamp){
                 _lastUsedTimestamp = lastSaved
@@ -123,7 +123,7 @@ public class UUIDTimer {
         _lastUsedTimestamp = systime;
 
         let isSyncer: Bool = match (_syncer) {
-          case Some(v) => true
+          case Some(_) => true
           case None => false
         }
 

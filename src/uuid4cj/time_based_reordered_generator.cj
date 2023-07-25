@@ -39,7 +39,7 @@ public class TimeBasedReorderedGenerator <: NoArgGenerator{
         match(ethAddr) {
             case None =>
                 _ethernetAddress = EthernetAddress.constructMulticastAddress() 
-            case Some(v) =>
+            case Some(_) =>
                 _ethernetAddress = ethAddr
         }
         _ethernetAddress.getOrThrow().toByteArray(uuidBytes, 10)

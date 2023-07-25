@@ -18,15 +18,22 @@ main() {
 
     let uuid3: UUID = a.generate()
 
-    if ((uuid.getMostSignificantBits() == uuid2.getMostSignificantBits()) 
-        || (uuid.getMostSignificantBits() == uuid3.getMostSignificantBits())
-        || (uuid2.getMostSignificantBits() == uuid3.getMostSignificantBits()) ) {
+    let var1 = uuid.getMostSignificantBits() == uuid2.getMostSignificantBits()
+
+    let var2 = uuid.getMostSignificantBits() == uuid3.getMostSignificantBits()
+
+    let var3 = uuid2.getMostSignificantBits() == uuid3.getMostSignificantBits()
+    if (var1 || var2 || var3) {
         return -1
     }
 
-    if ((uuid.getLeastSignificantBits() != uuid2.getLeastSignificantBits())
-        || (uuid.getLeastSignificantBits() != uuid3.getLeastSignificantBits())
-        || (uuid2.getLeastSignificantBits() != uuid3.getLeastSignificantBits()) ) {
+    let var4 = uuid.getLeastSignificantBits() != uuid2.getLeastSignificantBits()
+
+    let var5 = uuid.getLeastSignificantBits() != uuid3.getLeastSignificantBits()
+
+    let var6 = uuid2.getLeastSignificantBits() != uuid3.getLeastSignificantBits()
+
+    if (var4 || var5 || var6) {
         return -2
     }
 

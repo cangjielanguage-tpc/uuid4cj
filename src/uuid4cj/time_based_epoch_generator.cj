@@ -54,7 +54,7 @@ public class TimeBasedEpochGenerator <: NoArgGenerator {
         let rawTimestamp: Int64 = UUIDClock().currentTimeMillis()
         var rnd: Array<UInt8> = Array<UInt8>(10, item: 0)
         match(_random) {
-            case Some(v) => 
+            case Some(_) => 
                 rnd = _random.getOrThrow().nextBytes(10)
             case None => 
                 rnd = _srandom.getOrThrow().nextBytes(10)

@@ -80,9 +80,7 @@ class LockedFile {
         var result: Int64 = -1
         var err: String = ""
 
-        if ((!dataStr.startsWith("[0"))
-            || (dataStr.size < 3)
-            || dataStr.get(2).getOrThrow().toLowerCase() != 'x') {
+        if ((!dataStr.startsWith("[0")) || (dataStr.size < 3) || (dataStr.get(2).getOrThrow().toLowerCase() != 'x')) {
             err = "does not start with '[0x' prefix"
         } else {
             let ix: Int64 = dataStr.indexOf(']', 3).getOrThrow()
