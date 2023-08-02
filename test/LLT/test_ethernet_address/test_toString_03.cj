@@ -2,7 +2,7 @@
 // EXEC: ./main
 
 from uuid4cj import uuid4cj.*
-
+from std import unicode.*
 
 main() {  
     var arr: Array<UInt8> = [0x87, 0xf5, 0x93, 0x06, 0xd3, 0x0c]  

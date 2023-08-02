@@ -6,6 +6,7 @@ from std import unittest.*
 from std import unittest.testmacro.*
 from uuid4cj import uuid4cj.*
 from std import math.*
+from std import format.*
 
 @Test
 public class uuid_UUIDUtil_001{

@@ -2,7 +2,7 @@
 // EXEC: ./main
 
 from uuid4cj import uuid4cj.*
-
+from std import unicode.*
 
 main() {    
     var ethernet_address: EthernetAddress =  EthernetAddress(0)

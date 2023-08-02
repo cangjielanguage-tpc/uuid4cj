@@ -2,6 +2,7 @@
 // EXEC: ./main
 
 from uuid4cj import uuid4cj.*
+from std import unicode.*
 
 // some valid strings for the various dropped digit cases
 let FIRST_GROUP_ALL_NUM_ETHERNET_ADDRESS_STRING: String =
