@@ -5,6 +5,8 @@
 package uuid4cj
 
 from std import fs.*
+from std import unicode.*
+from std import convert.*
 from std import io.SeekPosition
 
 /*
