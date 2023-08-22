@@ -7,12 +7,12 @@
 	"requires": {
 		"crypto4cj": {
 			"organization": "cangjie",
-			"version": "0.0.6",
+			"version": "0.0.7",
 			"path": "./crypto4cj"
 		},
 		"charset": {
-			"organization": "zft",
-			"version": "0.0.1",
+			"organization": "pllab",
+			"version": "0.0.2",
 			"path": "./charset"
 		}
 	},
