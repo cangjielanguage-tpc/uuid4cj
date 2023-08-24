@@ -29,7 +29,7 @@ public class uuid_Generators_5_001{
         var name: NameBasedGenerator = Generators.nameBasedGenerator()
         var exc = ""
         try {
-            let uuid: UUID = name.generate("")
+            name.generate("")
         } catch (e:Exception) {
             println(e.message)
             exc = e.message
