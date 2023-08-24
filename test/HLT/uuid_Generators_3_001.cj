@@ -76,7 +76,7 @@ public class uuid_Generators_3_001{
         var name: NameBasedGenerator = Generators.nameBasedGenerator(NameBasedGenerator.NAMESPACE_DNS, MessageDigest(DigestType.MD5))
         var exc = ""
         try {
-            let uuid: UUID = name.generate("")
+            name.generate("")
         } catch (e:Exception) {
             println(e.message)
             exc = e.message

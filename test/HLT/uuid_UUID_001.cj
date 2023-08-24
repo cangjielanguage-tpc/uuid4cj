@@ -77,7 +77,7 @@ public class uuid_UUID_001{
         var arry: Array<Int8> = Array<Int8>(0,item:0)
         var eMessage = ""
         try{
-            let uuid2: UUID = UUID.nameUUIDFromBytes(arry)
+            UUID.nameUUIDFromBytes(arry)
         } catch (e: Exception){
             eMessage = e.message
         }
