@@ -372,7 +372,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
     @OverflowWrapping
     public func toString(): String{
         var str = _asString
-        if(let Some(i) = str){
+        if(let Some(i) <- str){
             return i
         }
 
