@@ -153,9 +153,27 @@ UUID（通用唯一标识符），也称为GUID（全局唯一标识符）。UUI
 
 ### 编译
 
-```
-cpm build 
-```
+1. `uuid4cj` 依赖 `crypto4cj` 和 `charset`，请下载指定版本到 `uuid4cj` 的根目录进行编译，编译方式参考各自库的编译方式,地址
+
+    https://gitee.com/HW-PLLab/crypto4cj
+    https://gitee.com/HW-PLLab/charset
+
+
+    ```
+    cd uuid4cj
+    git clone https://gitee.com/HW-PLLab/crypto4cj.git
+    git clone https://gitee.com/HW-PLLab/charset.git
+    ```
+
+2. 编译 `uuid4cj`
+
+    ```
+    cd uuid4cj
+    cjpm build -V
+    ```
+
+
+    
 
 ### 功能示例
 
