@@ -85,7 +85,8 @@ public class TimeBasedReorderedGenerator <: NoArgGenerator{
         timeBottomL = rightShift((timeBottomL << 32), 32)
         // and reconstruct
         var l1:Int64 = timestampHigh | timeBottomL
-        return UUID(l1, _uuidL2)
+        let timeArray: Array<UInt8> = Int8ToUInt8(UUIDUtil.int64asByteArray(l1, _uuidL2))
+        return UUID(timeArray)
     }
 
 }

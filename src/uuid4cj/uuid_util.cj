@@ -16,7 +16,7 @@ public class UUIDUtil {
     public static let BYTE_OFFSET_CLOCK_SEQUENCE: Int32 = 8
     public static let BYTE_OFFSET_VARIATION: Int32 = 8
     private static let NIL_UUID: UUID = UUID.nilUUID()
-    private static let MAX_UUID: UUID = UUID(-1, -1)
+    private static let MAX_UUID: UUID = UUID(Array(16, item: 0xff))
     
     /**
      * one that is all zeroes.
@@ -100,7 +100,8 @@ public class UUIDUtil {
             j++
             i++
         }		
-        return UUID(hi, lo)
+        let byteArrays: Array<UInt8> = Int8ToUInt8(int64asByteArray(hi, lo))
+        return UUID(byteArrays)
     }
 
     /**
@@ -113,9 +114,9 @@ public class UUIDUtil {
      */
     public static func uuid(bytes: Array<Int8>): UUID {
         checkUUIDByteArray(bytes, 0)
-        let l1: Int64 = gatherLong(bytes, 0)
-        let l2: Int64 = gatherLong(bytes, 8)
-        return UUID(l1, l2)
+        // let l1: Int64 = gatherLong(bytes, 0)
+        // let l2: Int64 = gatherLong(bytes, 8)
+        return UUID(Int8ToUInt8(bytes.slice(0, 16)))
     }
 
     /**
@@ -130,7 +131,7 @@ public class UUIDUtil {
      */
     public static func uuid(bytes: Array<Int8>, offset: Int32): UUID {
         checkUUIDByteArray(bytes, offset)
-        return UUID(gatherLong(bytes, offset), gatherLong(bytes, offset + 8))
+        return UUID(Int8ToUInt8(bytes.slice(Int64(offset), 16)))
     }
 
     /**
@@ -169,7 +170,8 @@ public class UUIDUtil {
         // second, ensure variant is properly set too (8th byte most-sig byte of second long)
         ll2 = rightShift((ll2 << 2), 2) // remove 2 MSB
         ll2 |= (2 << 62) // set 2 MSB to '10'
-        return UUID(ll1, ll2)
+        let byteArrays: Array<UInt8> = Int8ToUInt8(int64asByteArray(ll1, ll2))
+        return UUID(byteArrays)
     }
     
     /**
@@ -221,12 +223,12 @@ public class UUIDUtil {
     @OverflowWrapping
     public static func typeOf(uuid: UUID): ?UUIDType {
         // Ok: so 4 MSB of byte at offset 6...
-        let l: Int64 = uuid.getMostSignificantBits()
+        let l: Int64 = getMostSignificantBits(uuid)
         let typeNibble: Int32 = (Int32(l) >> 12) & 0xF
         
         match (typeNibble) {
             case 0 =>
-                if (l == 0 && uuid.getLeastSignificantBits() == l) {
+                if (l == 0 && getLeastSignificantBits(uuid) == l) {
                     return UUIDType.UNKNOWN
                 }
             case 1 =>
@@ -260,14 +262,57 @@ public class UUIDUtil {
      */
     @OverflowWrapping
     public static func asByteArray(uuid: UUID): Array<Int8> {
-        let hi: Int64 = uuid.getMostSignificantBits()
-        let lo: Int64 = uuid.getLeastSignificantBits()
+        let hi: Int64 = getMostSignificantBits(uuid)
+        let lo: Int64 = getLeastSignificantBits(uuid)
         var result: Array<Int8> = Array<Int8>(16, item: 0)
         appendInt(Int32(hi >> 32), result, 0)
         appendInt(Int32(hi), result, 4)
         appendInt(Int32(lo >> 32), result, 8)
         appendInt(Int32(lo), result, 12)
         return result
+    }
+
+    /**
+     * Get the Array of UUID
+     * 
+     * @param uuid - UUID to check
+     * 
+     * @return Array<Int8>
+     */
+    @OverflowWrapping
+    public static func int64asByteArray(hi: Int64, lo: Int64): Array<Int8> {
+        var result: Array<Int8> = Array<Int8>(16, item: 0)
+        appendInt(Int32(hi >> 32), result, 0)
+        appendInt(Int32(hi), result, 4)
+        appendInt(Int32(lo >> 32), result, 8)
+        appendInt(Int32(lo), result, 12)
+        return result
+    }
+
+    /**
+     * Get the MostSignificantBits
+     * 
+     * @param uuid - UUID to check
+     * 
+     * @return Int64
+     */
+    @OverflowWrapping
+    public static func getMostSignificantBits(uuid: UUID): Int64 { // 等同于 gatherLong(bytes, 0)
+        // return gatherLong(UInt8ToInt8(uuid.getBytes()), 0)
+        return Int64(UInt64.parse("0x" + toHexString(uuid.getBytes().slice(0, 8))))
+    }
+
+    /**
+     * Get the LeastSignificantBits
+     * 
+     * @param uuid - UUID to check
+     * 
+     * @return Int64
+     */
+    @OverflowWrapping
+    public static func getLeastSignificantBits(uuid: UUID): Int64 { // 等同于 gatherLong(bytes, 8)
+        // return gatherLong(UInt8ToInt8(uuid.getBytes()), 8)
+        return Int64(UInt64.parse("0x" + toHexString(uuid.getBytes().slice(8, 8))))
     }
 
     /**
@@ -292,8 +337,8 @@ public class UUIDUtil {
     @OverflowWrapping
     public static func toByteArray(uuid: UUID, buffer: Array<Int8>, offset: Int32): Unit {
         checkUUIDByteArray(buffer, offset)
-        let hi: Int64 = uuid.getMostSignificantBits()
-        let lo: Int64 = uuid.getLeastSignificantBits()
+        let hi: Int64 = getMostSignificantBits(uuid)
+        let lo: Int64 = getLeastSignificantBits(uuid)
         appendInt(Int32(hi >> 32), buffer, offset)
         appendInt(Int32(hi), buffer, offset + 4)
         appendInt(Int32(lo >> 32), buffer, offset + 8)

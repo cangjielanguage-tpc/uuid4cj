@@ -42,15 +42,15 @@ public class UUIDComparator {
             diffs = compareULongs(u1.timestamp(), u2.timestamp())
             if (diffs == 0) {
                 // or if that won't work, by other bits lexically
-                diffs = compareULongs(u1.getLeastSignificantBits(), u2.getLeastSignificantBits())
+                diffs = compareULongs(UUIDUtil.getLeastSignificantBits(u1), UUIDUtil.getLeastSignificantBits(u2))
             }
         } else {
             // note: java.util.UUIDs compares with sign extension, IMO that's wrong, so:
-            diffs = compareULongs(u1.getMostSignificantBits(),
-                    u2.getMostSignificantBits())
+            diffs = compareULongs(UUIDUtil.getMostSignificantBits(u1),
+                    UUIDUtil.getMostSignificantBits(u2))
             if (diffs == 0) {
-                diffs = compareULongs(u1.getLeastSignificantBits(),
-                        u2.getLeastSignificantBits())
+                diffs = compareULongs(UUIDUtil.getLeastSignificantBits(u1),
+                        UUIDUtil.getLeastSignificantBits(u2))
             }
         }
         return diffs

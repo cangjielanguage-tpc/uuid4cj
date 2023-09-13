@@ -84,7 +84,9 @@ public class TimeBasedGenerator <: NoArgGenerator{
         var midhiL:Int64 = Int64(midhi);
         midhiL = rightShift((midhiL << 32), 32)
         var l1: Int64 = (Int64(clockLo) << 32) | midhiL
-        return UUID(l1, _uuidL2)
+
+        let timeArray: Array<UInt8> = Int8ToUInt8(UUIDUtil.int64asByteArray(l1, _uuidL2))
+        return UUID(timeArray)
     }
 
 }

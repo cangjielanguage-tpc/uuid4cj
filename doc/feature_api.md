@@ -644,10 +644,9 @@ public class UUID <: ToString {
     /**
      * 使用指定的数据构造一个 UUID
      *
-     * 参数  mostSigBits- 最高有效64位
-     * 参数  leastSigBits - 最低有效64位
+     * 参数  data- 16个byte
      */
-    public init(mostSigBits: Int64, leastSigBits: Int64)
+    public init(data: Array<Byte>)
 
     /**
      * 00000000-0000-0000-0000-000000000000
@@ -704,18 +703,11 @@ public class UUID <: ToString {
     public func toString(): String
 
     /**
-     * 返回此 UUID 的 128 位值中最低有效的 64 位
+     * 返回此 UUID 的 size为16的byte数组
      *
-     * 返回值 Int64 - 最低有效的 64 位
+     * 返回值 Array<Byte> - size为16的byte数组
      */
-    public func getLeastSignificantBits(): Int64
-
-    /**
-     * 返回此 UUID 的 128 位值的最高有效 64 位
-     *
-     * 返回值 Int64 - 最高有效 64 位
-     */
-    public func getMostSignificantBits(): Int64
+    public func getBytes(): Array<Byte>
 
     /**
      * 与此 UUID 关联的版本号，版本号描述了这个 UUID 是如何生成的。
@@ -783,7 +775,7 @@ public class UUID <: ToString {
      * 返回值 Int32 - 哈希值
      */
     @OverflowWrapping
-    public func hashCode(): Int32
+    public func hashCode(): Int64
 
     /**
      * 将此对象与指定的对象进行比较。当且仅当 UUID 具有相同的变体，
@@ -795,18 +787,6 @@ public class UUID <: ToString {
      */
     public func equals(obj: UUID): Bool
 
-    /**
-     * 将此 UUID 与指定的 UUID 进行比较。
-     *
-     * 如果 UUID 不同的最高有效字段对于第一个 UUID 更大，则两个 UUID 中的第一个大于第二个。
-     *
-     * 参数  val - 比较的 UUID
-     *
-     * 返回值 Int32 - -1: 小于 val
-     *                0: 等于 val
-     *                1: 大于 val
-     */
-    public func compareTo(val: UUID): Int32
 }
 ```
 
@@ -923,6 +903,37 @@ public class UUIDUtil {
      */
     @OverflowWrapping
     public static func asByteArray(uuid: UUID): Array<Int8>
+
+     /**
+     * 获取 UUID 的数组
+     * 
+     * 参数 hi - Int64
+     * 参数 lo - Int64
+     * 
+     * 返回值 Array<Int8>
+     */
+    @OverflowWrapping
+    public static func int64asByteArray(hi: Int64, lo: Int64): Array<Int8>
+
+    /**
+     * 获取 UUID 数组的高位Int64
+     * 
+     * 参数 uuid - UUID
+     * 
+     * 返回值 Int64
+     */
+    @OverflowWrapping
+    public static func getMostSignificantBits(uuid：UUID): Int64
+
+    /**
+     * 获取 UUID 数组的低位Int64
+     * 
+     * 参数 uuid - UUID
+     * 
+     * 返回值 Int64
+     */
+    @OverflowWrapping
+    public static func getLeastSignificantBits(uuid：UUID): Int64
 
     /**
      * 设置缓冲区
