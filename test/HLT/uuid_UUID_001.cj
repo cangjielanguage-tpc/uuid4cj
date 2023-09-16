@@ -14,33 +14,31 @@ public class uuid_UUID_001{
         println("---------------------------------uuid_UUID_Most_Least_init------------------------------")
         var name: NameBasedGenerator = Generators.nameBasedGenerator()
         let uuid: UUID = name.generate("hello world")
-        var l1 = uuid.getMostSignificantBits()
-        var l2 = uuid.getLeastSignificantBits()
-        let uuid2: UUID = UUID(l1,l2)
+        var bytes = uuid.getBytes()
+        let uuid2: UUID = UUID(bytes)
         println("uuid: ${uuid.toString()}")
-        println("Most: ${l1.toString()}")
-        println("Least: ${l2.toString()}")
         println("uuid2: ${uuid2.toString()}")
         @Assert(uuid2.toString(),uuid.toString())
         @Assert(uuid2.toString(),"2aae6c35-c94f-5fb4-95db-e95f408b9ce9")
-        @Assert(l1,3075514573807116212)
-        @Assert(l2,-7648262946844599063)
+
     }
     @TestCase
     public func uuid_UUID_init():Unit{
         println("---------------------------------uuid_UUID_init------------------------------")
-        let uuid: UUID = UUID(-1,-1)
+        let uuid: UUID = UUID(Array(16, item: 0xff))
         println("uuid: ${uuid.toString()}")
         @Assert(uuid.toString(),"ffffffff-ffff-ffff-ffff-ffffffffffff")
 
-        let uuid2: UUID = UUID(0,0)
+        let uuid2: UUID = UUID.nilUUID()
         println("uuid2: ${uuid2.toString()}")
         @Assert(uuid2.toString(),"00000000-0000-0000-0000-000000000000")
 
-        let uuid3: UUID = UUID(123,456)
+        let bytes: Array<UInt8> = [0, 0, 0, 0, 0, 0, 0, 123, 0, 0, 0, 0, 0, 0, 1, 200]
+        let uuid3: UUID = UUID(bytes)
         println("uuid3: ${uuid3.toString()}")
         @Assert(uuid3.toString(),"00000000-0000-007b-0000-0000000001c8")
     }
+
     @TestCase
     public func uuid_UUID_nilUUID():Unit{
         println("---------------------------------uuid_UUID_nilUUID------------------------------")
@@ -207,13 +205,13 @@ public class uuid_UUID_001{
     public func uuid_UUID_hashCode():Unit{
         println("---------------------------------uuid_UUID_hashCode------------------------------")
         println(UUID.fromString("8d570099-e33e-11ed-ae76-8d371a181fe2").hashCode())
-        @Assert(UUID.fromString("8d570099-e33e-11ed-ae76-8d371a181fe2").hashCode(),-637041759)
+        @Assert(UUID.fromString("8d570099-e33e-11ed-ae76-8d371a181fe2").hashCode(),146320336)
 
         println(UUID.fromString("00000000-0000-0000-0000-000000000000").hashCode())
-        @Assert(UUID.fromString("00000000-0000-0000-0000-000000000000").hashCode(),0)
+        @Assert(UUID.fromString("00000000-0000-0000-0000-000000000000").hashCode(),1431261433)
 
         println(UUID.fromString("b19189f9-4548-3aab-b923-47aefbcdd0a7").hashCode())
-        @Assert(UUID.fromString("b19189f9-4548-3aab-b923-47aefbcdd0a7").hashCode(),-1237900197)
+        @Assert(UUID.fromString("b19189f9-4548-3aab-b923-47aefbcdd0a7").hashCode(),166306558)
     }
     @TestCase
     public func uuid_UUID_equals_001():Unit{
@@ -236,9 +234,9 @@ public class uuid_UUID_001{
     @TestCase
     public func uuid_UUID_equals_002():Unit{
         println("---------------------------------uuid_UUID_equals_002------------------------------")
-        let uuid = UUID(1,0)
-        let uuid2 = UUID(0,1)
-        let uuid3 = UUID(1,1)
+        let uuid = UUID(Int8ToUInt8(UUIDUtil.int64asByteArray(1, 0)))// UUID(1,0)
+        let uuid2 = UUID(Int8ToUInt8(UUIDUtil.int64asByteArray(0,1)))
+        let uuid3 = UUID(Int8ToUInt8(UUIDUtil.int64asByteArray(1,1)))
 
         println("uuid: ${uuid.toString()}")
         println("uuid2: ${uuid2.toString()}")
@@ -248,27 +246,13 @@ public class uuid_UUID_001{
         @Assert(uuid.equals(uuid3),false) 
 
     }
-    @TestCase
-    public func uuid_UUID_compareTo():Unit{
-        println("---------------------------------uuid_UUID_compareTo------------------------------")
-        let uuid = UUID(2,0)
-        let uuid2 = UUID(0,2)
-        let uuid3 = UUID(2,2)
-        let uuid4 = UUID(2,2)
+}
 
-        println("uuid: ${uuid.toString()}")
-        println("uuid2: ${uuid2.toString()}")
-        println("uuid3: ${uuid3.toString()}")
-        println("uuid4: ${uuid4.toString()}")
-
-        println("uuid.compareTo(uuid): ${uuid.compareTo(uuid)}")
-        println("uuid.compareTo(uuid2): ${uuid.compareTo(uuid2)}")
-        println("uuid.compareTo(uuid3): ${uuid.compareTo(uuid3)}")
-        println("uuid3.compareTo(uuid4): ${uuid3.compareTo(uuid4)}")
-        
-        @Assert(uuid.compareTo(uuid),0)
-        @Assert(uuid.compareTo(uuid2),1)
-        @Assert(uuid.compareTo(uuid3),-1)
-        @Assert(uuid3.compareTo(uuid4),0)
+@OverflowWrapping
+func Int8ToUInt8(arr: Array<Int8>): Array<UInt8> {
+    var res: Array<UInt8> = Array<UInt8>(arr.size, item: 0)
+    for( i in 0..arr.size) {
+        res[i] = UInt8(arr[i])
     }
+    return res
 }

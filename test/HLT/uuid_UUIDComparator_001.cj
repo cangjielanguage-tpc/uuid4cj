@@ -12,10 +12,10 @@ public class uuid_UUIDComparator_001{
     @TestCase
     public func uuid_UUIDComparator_001():Unit{
         println("---------------------------------uuid_UUIDComparator_001------------------------------")
-        let uuid = UUID(2,0)
-        let uuid2 = UUID(0,2)
-        let uuid3 = UUID(2,2)
-        let uuid4 = UUID(2,2)
+        let uuid = UUID(Int8ToUInt8(UUIDUtil.int64asByteArray(2,0)))
+        let uuid2 = UUID(Int8ToUInt8(UUIDUtil.int64asByteArray(0,2)))
+        let uuid3 = UUID(Int8ToUInt8(UUIDUtil.int64asByteArray(2,2)))
+        let uuid4 = UUID(Int8ToUInt8(UUIDUtil.int64asByteArray(2,2)))
 
         println("uuid: ${uuid.toString()}")
         println("uuid2: ${uuid2.toString()}")
@@ -32,4 +32,12 @@ public class uuid_UUIDComparator_001{
         @Assert(UUIDComparator.compare(uuid,uuid3)<0,true)
         @Assert(UUIDComparator.compare(uuid3,uuid4),0)
     }
+}
+@OverflowWrapping
+func Int8ToUInt8(arr: Array<Int8>): Array<UInt8> {
+    var res: Array<UInt8> = Array<UInt8>(arr.size, item: 0)
+    for( i in 0..arr.size) {
+        res[i] = UInt8(arr[i])
+    }
+    return res
 }

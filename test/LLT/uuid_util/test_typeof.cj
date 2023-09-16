@@ -15,7 +15,7 @@ main() {
     var uuid7 = UUIDUtil.constructUUID(UUIDType.TIME_BASED_EPOCH, s)
     var uuid8 = UUIDUtil.constructUUID(UUIDType.FREE_FORM, s)
     var uuid9 = UUIDUtil.constructUUID(UUIDType.UNKNOWN, s)
-    var uuid10 = UUID(0,0)
+    var uuid10 = UUID.nilUUID()
 
     if(
         UUIDUtil.typeOf(uuid).getOrThrow().raw() != 1 ||

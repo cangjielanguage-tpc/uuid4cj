@@ -415,7 +415,7 @@ public class uuid_UUIDUtil_001{
     @TestCase
     public func uuid_UUIDUtil_toByteArray_001():Unit{
         println("---------------------------------uuid_UUIDUtil_toByteArray_001------------------------------")
-        var uuid = UUID(0,0)
+        var uuid = UUID.nilUUID()
         var array: Array<Int8> = Array<Int8>(16,item:0)
         UUIDUtil.toByteArray(uuid,array)
         println("array: ${array}")
@@ -429,7 +429,7 @@ public class uuid_UUIDUtil_001{
     @TestCase
     public func uuid_UUIDUtil_toByteArray_002():Unit{
         println("---------------------------------uuid_UUIDUtil_toByteArray_002------------------------------")
-        var uuid = UUID(0,0)
+        var uuid = UUID.nilUUID()
         var array: Array<Int8> = Array<Int8>(0,item:0)
         
         var eMessage = ""
@@ -454,7 +454,7 @@ public class uuid_UUIDUtil_001{
     @TestCase
     public func uuid_UUIDUtil_toByteArray_003():Unit{
         println("---------------------------------uuid_UUIDUtil_toByteArray_003------------------------------")
-        var uuid = UUID(0,0)
+        var uuid = UUID.nilUUID()
         var array: Array<Int8> = Array<Int8>(17,item:0)
         UUIDUtil.toByteArray(uuid,array,1)
         println("array: ${array}")
@@ -466,7 +466,7 @@ public class uuid_UUIDUtil_001{
         @Assert(array.toString(),"[0, -79, -111, -119, -7, 69, 72, 58, -85, -71, 35, 71, -82, -5, -51, -48, -89]")
 
         var array2: Array<Int8> = Array<Int8>(17,item:0)
-        UUIDUtil.toByteArray(UUID(0,0),array2,0)
+        UUIDUtil.toByteArray(UUID.nilUUID(),array2,0)
         println("array: ${array2}")
         @Assert(array2.toString(),"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]")
 
@@ -478,7 +478,7 @@ public class uuid_UUIDUtil_001{
     @TestCase
     public func uuid_UUIDUtil_toByteArray_004():Unit{
         println("---------------------------------uuid_UUIDUtil_toByteArray_004------------------------------")
-        var uuid = UUID(0,0)
+        var uuid = UUID.nilUUID()
         var array: Array<Int8> = Array<Int8>(0,item:0)
         
         var eMessage = ""

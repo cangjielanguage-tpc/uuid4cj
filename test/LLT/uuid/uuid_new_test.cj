@@ -22,6 +22,8 @@ main() {
     uuidTest.test10()
     uuidTest.test11()
     uuidTest.test12()
+    uuidTest.test13()
+    uuidTest.test14()
 }
 
 
@@ -30,22 +32,25 @@ public class UUIDTest {
 
     @TestCase
     public func test1(): Unit {
-        let uuid = UUIDs.nilUUID()
+        let uuid = UUID.nilUUID()
+        let uuid2 = UUID(Array(16, item: 0xff))
+
         @Assert(uuid.toString(), "00000000-0000-0000-0000-000000000000")
+        @Assert(uuid2.toString(), "ffffffff-ffff-ffff-ffff-ffffffffffff")
     }
 
     @TestCase
     public func test2(): Unit {
-        let uuid = UUIDs.fromString("f55473bb-c3db-11ed-a26d-87b9a4e06ba9")
+        let uuid = UUID.fromString("f55473bb-c3db-11ed-a26d-87b9a4e06ba9")
         @Assert(uuid.clockSequence(), 8813)
         
     }
 
     @TestCase
     public func test3(): Unit {
-        let uuid = UUIDs.fromString("f55473bb-c3db-11ed-a26d-87b9a4e06ba9")
-        let uuid2 = UUIDs.fromString("f55473bb-c3db-11ed-a26d-87b9a4e06ba9")
-        let uuid3 = UUIDs.fromString("35a83239-c3dc-11ed-ba36-bd215a723aba")
+        let uuid = UUID.fromString("f55473bb-c3db-11ed-a26d-87b9a4e06ba9")
+        let uuid2 = UUID.fromString("f55473bb-c3db-11ed-a26d-87b9a4e06ba9")
+        let uuid3 = UUID.fromString("35a83239-c3dc-11ed-ba36-bd215a723aba")
 
         @Assert(uuid.equals(uuid2), true)
         @Assert(uuid.equals(uuid3), false)
@@ -55,7 +60,7 @@ public class UUIDTest {
     @TestCase
     public func test4(): Unit {
         try {
-            UUIDs.fromString("b053e9b3-c1f2-444b-9299")
+            UUID.fromString("b053e9b3-c1f2-444b-9299")
         }catch(e: IllegalArgumentException) {
             @Assert(e.toString(), "IllegalArgumentException: Invalid UUID string: b053e9b3-c1f2-444b-9299")
         }
@@ -63,13 +68,13 @@ public class UUIDTest {
 
     @TestCase
     public func test5(): Unit {
-        let uuid = UUIDs.fromString("b053e9b3-c1f2-444b-9299-df2c236b23c1")
+        let uuid = UUID.fromString("b053e9b3-c1f2-444b-9299-df2c236b23c1")
         @Assert(uuid.toString(), "b053e9b3-c1f2-444b-9299-df2c236b23c1")
     }
 
     @TestCase
     public func test6(): Unit {
-        let uuid = UUIDs.fromString("f55473bb-c3db-11ed-a26d-87b9a4e06ba9")
+        let uuid = UUID.fromString("f55473bb-c3db-11ed-a26d-87b9a4e06ba9")
         @Assert(uuid.node(), 149231404870569)
     }
 
@@ -95,7 +100,7 @@ public class UUIDTest {
     public func test10(): Unit {
         let name = "398f00f4-208b-11ee-bac3-7f13f714b88c"
 
-        let uuid = UUIDs.fromString(name)
+        let uuid = UUID.fromString(name)
         @Assert(uuid.variant(), 2)
         @Assert(uuid.timestamp(), 139084420833280244)
         @Assert(uuid.clockSequence(), 15043)
@@ -106,10 +111,10 @@ public class UUIDTest {
     public func test11(): Unit {
         let name = "398f00f4-208b-11ee-bac3-7f13f714b88c"
 
-        let uuid = UUIDs.fromString(name)
+        let uuid = UUID.fromString(name)
         @Assert(uuid.toString(), "398f00f4-208b-11ee-bac3-7f13f714b88c")
-        @Assert(uuid.hashCode(), 1423169157)
         @Assert(uuid.node(), 139723726436492)
+        @Assert(uuid.hashCode(), 1485608566)
 
     }
 
@@ -121,4 +126,25 @@ public class UUIDTest {
         @Assert(uuid.version(), 3)
         @Assert(uuid.variant(), 2)
     }
+
+    @TestCase
+    public func test13(): Unit {
+        var arr: Array<UInt8> = [57, 43, 0, 44, 32, 39, 17, 38, 86, 95, 27, 19, 47, 20, 84, 40, 66]
+        try {
+            UUID(arr)
+        } catch(e: IllegalArgumentException) {
+            @Assert(e.toString(), "IllegalArgumentException: data must be 16 bytes in length")
+        }
+    }
+
+    @TestCase
+    public func test14(): Unit {
+        try {
+            UUID.fromString("f55473bb-c3db-11ed-a26d-87b9a4e06ba966")
+        } catch(e: IllegalArgumentException) {
+            @Assert(e.toString(), "IllegalArgumentException: Invalid UUID string: f55473bb-c3db-11ed-a26d-87b9a4e06ba966")
+        }
+        
+    }
+
 }

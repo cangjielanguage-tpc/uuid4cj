@@ -12,41 +12,18 @@ from crypto import crypto.SecureRandom
  * @since 0.37.2
  */
 public class UUID <: ToString {
-    private let mostSigBits: Int64
-    private let leastSigBits: Int64
 
-    private init(data: Array<Int8>) {
-        var msb: Int64 = 0
-        var lsb: Int64 = 0
+    private let bytes: Array<Byte> = Array(16, item: 0)
+
+    public init(data: Array<Byte>) {
         if(data.size != 16) {
             throw IllegalArgumentException("data must be 16 bytes in length")
         }
-        var k: Int64 = 0
-        for(_ in 0..8) {
-            msb = (msb << 8) | (Int64(data[k]) & 0xff)
-            k++
-        }
-        k = 8
-        for(_ in 8..16) {
-           lsb = (lsb << 8) | (Int64(data[k]) & 0xff)
-           k++
-        }            
-        this.mostSigBits = msb
-        this.leastSigBits = lsb
+        data.copyTo(bytes, 0, 0, bytes.size)
     }
 
-    /**
-     * Constructs a new {@code UUID} using the specified data.  {@code
-     * mostSigBits} is used for the most significant 64 bits of the {@code
-     * UUID} and {@code leastSigBits} becomes the least significant 64 bits of
-     * the {@code UUID}.
-     *
-     * @param  mostSigBits- The most significant bits of the {@code UUID}
-     * @param  leastSigBits - The least significant bits of the {@code UUID}
-     */
-    public init(mostSigBits: Int64, leastSigBits: Int64) {
-        this.mostSigBits = mostSigBits
-        this.leastSigBits = leastSigBits
+    private init() {
+        UUID(this.bytes)
     }
 
     /**
@@ -55,7 +32,7 @@ public class UUID <: ToString {
      * @return  A generated {@code UUID}
      */
     public static func nilUUID(): UUID {
-        UUID(0, 0)
+        UUID()
     }
 
     /**
@@ -71,7 +48,7 @@ public class UUID <: ToString {
         randomBytes[6]  |= 0x40  /* set to version 4     */
         randomBytes[8]  &= 0x3f  /* clear variant        */
         randomBytes[8]  |= 0x80  /* set to IETF variant  */
-        return UUID(UInt8ToInt8(randomBytes))
+        return UUID(randomBytes)
     }
 
     /**
@@ -85,11 +62,11 @@ public class UUID <: ToString {
     public static func nameUUIDFromBytes(name: Array<Int8>): UUID {
         var md: MessageDigest = MessageDigest(DigestType.MD5)
         var md5Bytes: Array<Int8> = md.digest(input: name)
-        md5Bytes[Int64(6)]  &= Int8(0x0f)  /* clear version        */
-        md5Bytes[Int64(6)]  |= Int8(0x30)  /* set to version 3     */
-        md5Bytes[Int64(8)]  &= Int8(0x3f)  /* clear variant        */
-        md5Bytes[Int64(8)]  |= Int8(0x80)  /* set to IETF variant  */
-        return UUID(md5Bytes)
+        md5Bytes[6]  &= Int8(0x0f)  /* clear version        */
+        md5Bytes[6]  |= Int8(0x30)  /* set to version 3     */
+        md5Bytes[8]  &= Int8(0x3f)  /* clear variant        */
+        md5Bytes[8]  |= Int8(0x80)  /* set to IETF variant  */
+        return UUID(Int8ToUInt8(md5Bytes))
     }
 
     /**
@@ -104,20 +81,17 @@ public class UUID <: ToString {
         if (components.size != 5) {
             throw IllegalArgumentException("Invalid UUID string: " + name)
         }
-        var k: Int64 = 0
-        for( i in 0..5) {
-            components[i] = "0x" + components[i]
-            k++
+        let hexStr = String.join(components)
+        if (hexStr.size != 32) {
+           throw IllegalArgumentException("Invalid UUID string: " + name)
         }
-        var mostSigBits: Int64 = Int64.parse(components[0])
-        mostSigBits <<= 16
-        mostSigBits |= Int64.parse(components[1])
-        mostSigBits <<= 16
-        mostSigBits |= Int64.parse(components[2])
-        var leastSigBits: Int64 = Int64.parse(components[3])
-        leastSigBits <<= 48
-        leastSigBits |= Int64.parse(components[4])
-        return UUID(mostSigBits, leastSigBits)
+        let data = match(fromHexString(hexStr)) { // TODO 切换0.40.2时使用std.hex.fromHexString
+            case Some(value) => value
+            case None => throw IllegalArgumentException("Invalid UUID string: " + name)
+        }
+        let uuid = UUID(data)
+        return uuid
+
     }
 
     /**
@@ -144,34 +118,21 @@ public class UUID <: ToString {
      * @return A string representation of this {@code UUID}
      */
     public func toString(): String {
-        return (digits(mostSigBits >> 32, 8) + "-" +
-                digits(mostSigBits >> 16, 4) + "-" +
-                digits(mostSigBits, 4) + "-" +
-                digits(leastSigBits >> 48, 4) + "-" +
-                digits(leastSigBits, 12))
-    }
+        return (toHexString(this.bytes.slice(0, 4)) + "-" +
+                toHexString(this.bytes.slice(4, 2)) + "-" +
+                toHexString(this.bytes.slice(6, 2)) + "-" +
+                toHexString(this.bytes.slice(8, 2)) + "-" +
+                toHexString(this.bytes.slice(10, 6)))
 
-    private static func digits(val: Int64, digits: Int32): String {
-        var hi: Int64 = 1 << (digits * 4)
-        return (hi | (val & (hi - 1))).format("02x").substring(1)
     }
 
     /**
-     * Returns the least significant 64 bits of this UUID's 128 bit value.
+     * Returns the 16 bytes value.
      *
-     * @return Int64 - The least significant 64 bits of this UUID's 128 bit value
+     * @return Array<Byte> - the 16 bytes value.
      */
-    public func getLeastSignificantBits(): Int64 {
-        return this.leastSigBits
-    }
-
-    /**
-     * Returns the most significant 64 bits of this UUID's 128 bit value.
-     *
-     * @return Int64 - The most significant 64 bits of this UUID's 128 bit value
-     */
-    public func getMostSignificantBits(): Int64 {
-        return this.mostSigBits
+    public func getBytes(): Array<Byte> {
+        return this.bytes
     }
 
     /**
@@ -188,7 +149,7 @@ public class UUID <: ToString {
      * @return Int32 - The version number of this {@code UUID}
      */
     public func version(): Int32 {
-        return Int32((mostSigBits >> 12) & 0x0f)
+        return Int32(bytes[6] >> 4 & 0x0f)
     }
 
     /**
@@ -206,7 +167,7 @@ public class UUID <: ToString {
      * @return  The variant number of this {@code UUID}
      */
     public func variant(): Int32 {
-        return Int32(rightShift(leastSigBits, (64 - rightShift(leastSigBits, 62))) & (leastSigBits >> 63))
+        return Int32(bytes[8] >> 6 & 0x0f)
     }
 
     /**
@@ -227,8 +188,12 @@ public class UUID <: ToString {
         if (version() != 1) {
             throw UnsupportedOperationException("Not a time-based UUID")
         }
-
-        return (mostSigBits & 0x0FFF) << 48 | ((mostSigBits >> 16) & 0x0FFFF) << 32 | rightShift(mostSigBits, 32)
+        let timestampBytes = Array<Byte>(8, item: 0)
+        this.bytes.copyTo(timestampBytes, 6, 0, 2)
+        this.bytes.copyTo(timestampBytes, 4, 2, 2)
+        this.bytes.copyTo(timestampBytes, 0, 4, 4)
+        timestampBytes[0] &= 0x0f
+        Int64.parse("0x" + toHexString(timestampBytes))
     }  
 
     /**
@@ -248,7 +213,11 @@ public class UUID <: ToString {
         if (version() != 1) {
             throw UnsupportedOperationException ("Not a time-based UUID")
         }
-        return Int32(rightShift((leastSigBits & 0x3FFF000000000000), 48))
+
+        let clockSequenceBytes = Array<Byte>(2, item: 0)
+        this.bytes.copyTo(clockSequenceBytes, 8, 0, 2)
+        clockSequenceBytes[0] &= 0x3f
+        return Int32.parse("0x" + toHexString(clockSequenceBytes))
     }  
 
     /**
@@ -269,7 +238,7 @@ public class UUID <: ToString {
             throw UnsupportedOperationException("Not a time-based UUID")
         }
 
-        return leastSigBits & 0x0000FFFFFFFFFFFF
+        return Int64.parse("0x" + toHexString(this.bytes.slice(10, 6)))
     }
 
     /**
@@ -278,9 +247,8 @@ public class UUID <: ToString {
      * @return Int32 - A hash code value for this {@code UUID}
      */
     @OverflowWrapping
-    public func hashCode(): Int32 {
-        let hilo: Int64 = mostSigBits ^ leastSigBits
-        return Int32((Int32(hilo >> 32)) ^ Int32(hilo))
+    public func hashCode(): Int64 {
+        return toString().hashCode()
     }
 
     /**
@@ -295,33 +263,35 @@ public class UUID <: ToString {
      *          otherwise
      */
     public func equals(obj: UUID): Bool {
-        return (mostSigBits == obj.getMostSignificantBits() &&
-                leastSigBits == obj.getLeastSignificantBits())
-    }
-
-    /**
-     * Compares this UUID with the specified UUID.
-     *
-     * The first of two UUIDs is greater than the second if the most
-     * significant field in which the UUIDs differ is greater for the first
-     * UUID.
-     *
-     * @param  val - {@code UUID} to which this {@code UUID} is to be compared
-     *
-     * @return  -1, 0 or 1 as this {@code UUID} is less than, equal to, or
-     *          greater than {@code val}
-     */
-    public func compareTo(val: UUID): Int32 {
-        if(this.mostSigBits < val.getMostSignificantBits()) {
-            return -1     
-        } else if(this.mostSigBits > val.getMostSignificantBits()) {
-            return 1
-        } else if(this.leastSigBits < val.getLeastSignificantBits()) {
-            return -1
-        } else if(this.leastSigBits > val.getLeastSignificantBits()) {
-            return 1
-        } else {
-            return 0
+        var isEquals = true
+        let objArray: Array<UInt8> = obj.getBytes()
+        for( i in 0..objArray.size) {
+            if (bytes[i] != objArray[i]) {
+                isEquals = false
+                break
+            }
         }
+        return isEquals
     }
+}
+
+// TODO 切换0.40.2版本及以上时用std.hex.fromHexString和std.hex.toHexString替换
+func fromHexString(data: String): Option<Array<UInt8>> {
+    let array: Array<UInt8> = Array(data.size / 2, item: 0)
+    try {
+        for (i in 0..array.size) {
+            array[i] = UInt8.parse("0x" + data.slice(i * 2, 2))
+        }
+        return array
+    } catch (e: Exception) {
+        return None
+    }
+}
+
+func toHexString(data: Array<UInt8>): String {
+    let sb = StringBuilder()
+    for (byte in data) {
+        sb.append(byte.format("02x"))
+    }
+    return sb.toString()
 }

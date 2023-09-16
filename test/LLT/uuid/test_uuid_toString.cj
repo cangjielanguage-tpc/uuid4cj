@@ -9,8 +9,7 @@ main() {
     println(uuid.variant())
     println(uuid.node())
     println(uuid.hashCode())
-    println(uuid.getLeastSignificantBits())
-    println(uuid.getMostSignificantBits())
+    println(uuid.getBytes())
     println(uuid.timestamp())
     println(uuid.clockSequence())
     if(uuid.toString() != "f55473bb-c3db-11ed-a26d-87b9a4e06ba9") {
