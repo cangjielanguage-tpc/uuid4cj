@@ -213,14 +213,9 @@ public class uuid_EthernetAddress_001{
         println("---------------------------------uuid_EthernetAddress_valueOf_017------------------------------")
 
         var array : Array<Int32> = [0x100, 0xc0, 0xf0, 0x3d, 0x5b, 0x7c]
-        var eMessage = ""
-        try{
-            EthernetAddress.valueOf(array)
-        } catch (e: OverflowException){
-            eMessage = "OverflowException"
-        }
-        println("eMessage: ${eMessage}")
-        @Assert(eMessage,"OverflowException") 
+        var ethernetAddress = EthernetAddress.valueOf(array)
+        println("ethernetAddress: ${ethernetAddress.toString()}")
+        @Assert(ethernetAddress.toString(),"00:c0:f0:3d:5b:7c")
     }
     @TestCase
     public func uuid_EthernetAddress_valueOf_001():Unit{

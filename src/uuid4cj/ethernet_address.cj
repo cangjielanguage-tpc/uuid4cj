@@ -165,6 +165,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
      *
      * @param addr - Array Binary representation of the ethernet address
      */
+    @OverflowWrapping 
     public static func valueOf(addr:Array<Int32>):EthernetAddress{
         var bAddr:Array<UInt8> = Array<UInt8>(addr.size,item:0)
         for (i in 0..addr.size) {
