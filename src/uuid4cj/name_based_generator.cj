@@ -118,7 +118,7 @@ public class NameBasedGenerator <: StringArgGenerator {
         _digester.getOrThrow().reset()
         match (_namespace) {
             case Some(v) =>
-                _digester.getOrThrow().update(Int8ToUInt8(UUIDUtil.asByteArray(v)))
+                _digester.getOrThrow().update(UUIDUtil.asByteArray(v))
                 _digester.getOrThrow().update(Int8ToUInt8(nameBytes))
                 digest = _digester.getOrThrow().digest()
             case None => 

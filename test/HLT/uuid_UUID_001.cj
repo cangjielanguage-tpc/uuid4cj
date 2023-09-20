@@ -60,7 +60,7 @@ public class uuid_UUID_001{
         println("---------------------------------uuid_UUID_Array_001------------------------------")
         var name: NameBasedGenerator = Generators.nameBasedGenerator()
         let uuid: UUID = name.generate("hello world")
-        var arry: Array<Int8> = UUIDUtil.asByteArray(uuid)
+        var arry: Array<Int8> = UInt8ToInt8(UUIDUtil.asByteArray(uuid))
         let uuid2: UUID = UUID.nameUUIDFromBytes(arry)
         println("uuid: ${uuid.toString()}")
         println("arry: ${arry}")
@@ -253,6 +253,15 @@ func Int8ToUInt8(arr: Array<Int8>): Array<UInt8> {
     var res: Array<UInt8> = Array<UInt8>(arr.size, item: 0)
     for( i in 0..arr.size) {
         res[i] = UInt8(arr[i])
+    }
+    return res
+}
+
+@OverflowWrapping
+func UInt8ToInt8(arr: Array<UInt8>): Array<Int8> {
+    var res: Array<Int8> = Array<Int8>(arr.size, item: 0)
+    for( i in 0..arr.size) {
+        res[i] = Int8(arr[i])
     }
     return res
 }

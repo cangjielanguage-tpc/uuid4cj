@@ -87,7 +87,7 @@ public class uuid_UUIDUtil_001{
         println("---------------------------------uuid_UUIDUtil_uuid_Array_001------------------------------")
         var name: NameBasedGenerator = Generators.nameBasedGenerator()
         let uuid: UUID = name.generate("hello world")
-        var arry: Array<Int8> = UUIDUtil.asByteArray(uuid)
+        var arry: Array<Int8> = UInt8ToInt8(UUIDUtil.asByteArray(uuid))
         let uuid2: UUID = UUIDUtil.uuid(arry)
         println("uuid: ${uuid.toString()}")
         println("arry: ${arry}")
@@ -118,7 +118,7 @@ public class uuid_UUIDUtil_001{
         println("arry: ${arry}")
         println("arry.size: ${arry.size}")
         var j:Int64 = 4
-        for (i in UUIDUtil.asByteArray(uuid)) {
+        for (i in UInt8ToInt8(UUIDUtil.asByteArray(uuid))) {
             arry[j] = i
             j++
         }
@@ -140,7 +140,7 @@ public class uuid_UUIDUtil_001{
         println("arry: ${arry}")
         println("arry.size: ${arry.size}")
         var j:Int64 = 4
-        for (i in UUIDUtil.asByteArray(uuid)) {
+        for (i in UInt8ToInt8(UUIDUtil.asByteArray(uuid))) {
             arry[j] = i
             j++
         }
@@ -511,4 +511,13 @@ public class uuid_UUIDUtil_001{
 
 
     }
+}
+
+@OverflowWrapping
+func UInt8ToInt8(arr: Array<UInt8>): Array<Int8> {
+    var res: Array<Int8> = Array<Int8>(arr.size, item: 0)
+    for( i in 0..arr.size) {
+        res[i] = Int8(arr[i])
+    }
+    return res
 }

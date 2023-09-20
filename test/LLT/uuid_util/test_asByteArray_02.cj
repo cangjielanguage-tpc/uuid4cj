@@ -6,7 +6,7 @@ from uuid4cj import uuid4cj.*
 let UUID_BYTE_ARRAY_LENGTH: Int64 = 16
 let EXTRA_DATA_LENGTH: Int64 = 9
 let MIXED_CASE_VALID_UUID_STRING: String = "4d687664-3A1e-4F30-aCc1-87F59306d30C"
-let NULL_UUID_BYTE_ARRAY: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH, item: 0)
+let NULL_UUID_BYTE_ARRAY: Array<UInt8> = Array<UInt8>(UUID_BYTE_ARRAY_LENGTH, item: 0)
 let VALID_UUID_BYTE_ARRAY: Array<UInt8> = [
         0x4d, 0x68, 0x76, 0x64,
         0x3a, 0x1e, 0x4f, 0x30,
@@ -40,19 +40,8 @@ func testToByteArrayNullUuid(): Int32 {
 func testToByteArrayNonNullUuid(): Int32 {
     let test_uuid = UUIDUtil.uuid(MIXED_CASE_VALID_UUID_STRING)
     if(UUIDUtil.asByteArray(test_uuid).size != UUID_BYTE_ARRAY_LENGTH ||
-    UUIDUtil.asByteArray(test_uuid) != UInt8ToInt8(VALID_UUID_BYTE_ARRAY)) {
+    UUIDUtil.asByteArray(test_uuid) != VALID_UUID_BYTE_ARRAY) {
         return -1
     }
     return 0
 }
-
-
-@OverflowWrapping
-func UInt8ToInt8(arr: Array<UInt8>): Array<Int8> {
-    var res: Array<Int8> = Array<Int8>(arr.size, item: 0)
-    for( i in 0..arr.size) {
-        res[i] = Int8(arr[i])
-    }
-    return res
-}
-
