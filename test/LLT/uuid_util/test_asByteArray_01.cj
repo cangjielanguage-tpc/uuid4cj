@@ -14,14 +14,14 @@ main() {
     var uuid7 = UUIDUtil.constructUUID(UUIDType.TIME_BASED_EPOCH, s)
     var uuid8 = UUIDUtil.constructUUID(UUIDType.FREE_FORM, s)
 
-    if(UUIDUtil.asByteArray(uuid).toString() != "[104, 101, 108, 108, 111, 119, 31, 114, -84, 100, 115, 100, 102, 115, 103, 115]" ||
-        UUIDUtil.asByteArray(uuid2).toString() != "[104, 101, 108, 108, 111, 119, 47, 114, -84, 100, 115, 100, 102, 115, 103, 115]" ||
-        UUIDUtil.asByteArray(uuid3).toString() != "[104, 101, 108, 108, 111, 119, 63, 114, -84, 100, 115, 100, 102, 115, 103, 115]" ||
-        UUIDUtil.asByteArray(uuid4).toString() != "[104, 101, 108, 108, 111, 119, 79, 114, -84, 100, 115, 100, 102, 115, 103, 115]" ||
-        UUIDUtil.asByteArray(uuid5).toString() != "[104, 101, 108, 108, 111, 119, 95, 114, -84, 100, 115, 100, 102, 115, 103, 115]" ||
-        UUIDUtil.asByteArray(uuid6).toString() != "[104, 101, 108, 108, 111, 119, 111, 114, -84, 100, 115, 100, 102, 115, 103, 115]" ||
-        UUIDUtil.asByteArray(uuid7).toString() != "[104, 101, 108, 108, 111, 119, 127, 114, -84, 100, 115, 100, 102, 115, 103, 115]" ||
-        UUIDUtil.asByteArray(uuid8).toString() != "[104, 101, 108, 108, 111, 119, -113, 114, -84, 100, 115, 100, 102, 115, 103, 115]" 
+    if(UUIDUtil.asByteArray(uuid).toString() != "[104, 101, 108, 108, 111, 119, 31, 114, 172, 100, 115, 100, 102, 115, 103, 115]" ||
+        UUIDUtil.asByteArray(uuid2).toString() != "[104, 101, 108, 108, 111, 119, 47, 114, 172, 100, 115, 100, 102, 115, 103, 115]" ||
+        UUIDUtil.asByteArray(uuid3).toString() != "[104, 101, 108, 108, 111, 119, 63, 114, 172, 100, 115, 100, 102, 115, 103, 115]" ||
+        UUIDUtil.asByteArray(uuid4).toString() != "[104, 101, 108, 108, 111, 119, 79, 114, 172, 100, 115, 100, 102, 115, 103, 115]" ||
+        UUIDUtil.asByteArray(uuid5).toString() != "[104, 101, 108, 108, 111, 119, 95, 114, 172, 100, 115, 100, 102, 115, 103, 115]" ||
+        UUIDUtil.asByteArray(uuid6).toString() != "[104, 101, 108, 108, 111, 119, 111, 114, 172, 100, 115, 100, 102, 115, 103, 115]" ||
+        UUIDUtil.asByteArray(uuid7).toString() != "[104, 101, 108, 108, 111, 119, 127, 114, 172, 100, 115, 100, 102, 115, 103, 115]" ||
+        UUIDUtil.asByteArray(uuid8).toString() != "[104, 101, 108, 108, 111, 119, 143, 114, 172, 100, 115, 100, 102, 115, 103, 115]" 
     ) {
         return -1
     }

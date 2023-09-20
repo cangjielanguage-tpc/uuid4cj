@@ -261,15 +261,8 @@ public class UUIDUtil {
      * @return Array<Int8>
      */
     @OverflowWrapping
-    public static func asByteArray(uuid: UUID): Array<Int8> {
-        let hi: Int64 = getMostSignificantBits(uuid)
-        let lo: Int64 = getLeastSignificantBits(uuid)
-        var result: Array<Int8> = Array<Int8>(16, item: 0)
-        appendInt(Int32(hi >> 32), result, 0)
-        appendInt(Int32(hi), result, 4)
-        appendInt(Int32(lo >> 32), result, 8)
-        appendInt(Int32(lo), result, 12)
-        return result
+    public static func asByteArray(uuid: UUID): Array<UInt8> {
+        return uuid.getBytes()
     }
 
     /**
