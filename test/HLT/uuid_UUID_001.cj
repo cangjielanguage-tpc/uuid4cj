@@ -246,6 +246,29 @@ public class uuid_UUID_001{
         @Assert(uuid.equals(uuid3),false) 
 
     }
+    @TestCase
+    public func uuid_UUID_compareTo():Unit{
+        println("---------------------------------uuid_UUID_compareTo------------------------------")
+        let uuid = UUID(Int8ToUInt8(UUIDUtil.int64asByteArray(2, 0)))
+        let uuid2 = UUID(Int8ToUInt8(UUIDUtil.int64asByteArray(0, 2)))
+        let uuid3 = UUID(Int8ToUInt8(UUIDUtil.int64asByteArray(2, 2)))
+        let uuid4 = UUID(Int8ToUInt8(UUIDUtil.int64asByteArray(2, 2)))
+
+        println("uuid: ${uuid.toString()}")
+        println("uuid2: ${uuid2.toString()}")
+        println("uuid3: ${uuid3.toString()}")
+        println("uuid4: ${uuid4.toString()}")
+
+        println("uuid.compareTo(uuid): ${uuid.compareTo(uuid)}")
+        println("uuid.compareTo(uuid2): ${uuid.compareTo(uuid2)}")
+        println("uuid.compareTo(uuid3): ${uuid.compareTo(uuid3)}")
+        println("uuid3.compareTo(uuid4): ${uuid3.compareTo(uuid4)}")
+        
+        @Assert(uuid.compareTo(uuid),0)
+        @Assert(uuid.compareTo(uuid2),1)
+        @Assert(uuid.compareTo(uuid3),-1)
+        @Assert(uuid3.compareTo(uuid4),0)
+    }
 }
 
 @OverflowWrapping

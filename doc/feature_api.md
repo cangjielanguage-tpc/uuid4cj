@@ -787,6 +787,19 @@ public class UUID <: ToString {
      */
     public func equals(obj: UUID): Bool
 
+    /**
+     * 将此 UUID 与指定的 UUID 进行比较。
+     *
+     * UUID 分成三个UInt64的值 从第一个开始比较大小 大于为 1 小于为 -1 等于为 0
+     *
+     * 参数  val - 比较的 UUID
+     *
+     * 返回值 Int32 - -1: 小于 val
+     *                0: 等于 val
+     *                1: 大于 val
+     */
+    public func compareTo(val: UUID): Int32
+
 }
 ```
 

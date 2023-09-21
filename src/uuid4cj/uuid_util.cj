@@ -6,7 +6,7 @@ package uuid4cj
 
 /*
  * The class is UUIDUtil
- * @since 0.39.4
+ * @since 0.39.7
  */
 public class UUIDUtil {
     public static let BYTE_OFFSET_CLOCK_LO: Int32 = 0
@@ -114,8 +114,6 @@ public class UUIDUtil {
      */
     public static func uuid(bytes: Array<Int8>): UUID {
         checkUUIDByteArray(bytes, 0)
-        // let l1: Int64 = gatherLong(bytes, 0)
-        // let l2: Int64 = gatherLong(bytes, 8)
         return UUID(Int8ToUInt8(bytes.slice(0, 16)))
     }
 
@@ -290,9 +288,8 @@ public class UUIDUtil {
      * @return Int64
      */
     @OverflowWrapping
-    public static func getMostSignificantBits(uuid: UUID): Int64 { // 等同于 gatherLong(bytes, 0)
-        // return gatherLong(UInt8ToInt8(uuid.getBytes()), 0)
-        return Int64(UInt64.parse("0x" + toHexString(uuid.getBytes().slice(0, 8))))
+    public static func getMostSignificantBits(uuid: UUID): Int64 {
+        return gatherLong(UInt8ToInt8(uuid.getBytes()), 0)
     }
 
     /**
@@ -303,9 +300,8 @@ public class UUIDUtil {
      * @return Int64
      */
     @OverflowWrapping
-    public static func getLeastSignificantBits(uuid: UUID): Int64 { // 等同于 gatherLong(bytes, 8)
-        // return gatherLong(UInt8ToInt8(uuid.getBytes()), 8)
-        return Int64(UInt64.parse("0x" + toHexString(uuid.getBytes().slice(8, 8))))
+    public static func getLeastSignificantBits(uuid: UUID): Int64 {
+        return gatherLong(UInt8ToInt8(uuid.getBytes()), 8)
     }
 
     /**
