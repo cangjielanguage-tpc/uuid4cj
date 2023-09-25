@@ -273,6 +273,45 @@ public class UUID <: ToString {
         }
         return isEquals
     }
+
+    /**
+     * Compares this UUID with the specified UUID.
+     *
+     * The first of two UUIDs is greater than the second if the most
+     * significant field in which the UUIDs differ is greater for the first
+     * UUID.
+     *
+     * @param  val - {@code UUID} to which this {@code UUID} is to be compared
+     *
+     * @return  -1, 0 or 1 as this {@code UUID} is less than, equal to, or
+     *          greater than {@code val}
+     */
+    public func compareTo(val: UUID): Int32 {
+
+        let bytesFirstValue: UInt64 = UInt64.parse("0x" + toHexString(this.bytes.slice(0, 5)))
+        let bytesMidValue: UInt64 = UInt64.parse("0x" + toHexString(this.bytes.slice(5, 5)))
+        let bytesEndValue: UInt64 = UInt64.parse("0x" + toHexString(this.bytes.slice(10, 6)))
+
+        let uuidFirstValue: UInt64 = UInt64.parse("0x" + toHexString(val.getBytes().slice(0, 5)))
+        let uuidMidValue: UInt64 = UInt64.parse("0x" + toHexString(val.getBytes().slice(5, 5)))
+        let uuidEndValue: UInt64 = UInt64.parse("0x" + toHexString(val.getBytes().slice(10, 6)))
+
+        if(bytesFirstValue < uuidFirstValue) {
+            return -1     
+        } else if(bytesFirstValue > uuidFirstValue) {
+            return 1
+        } else if(bytesMidValue < uuidMidValue) {
+            return -1
+        } else if(bytesMidValue > uuidMidValue) {
+            return 1
+        } else if(bytesEndValue < uuidEndValue) {
+            return -1
+        } else if(bytesEndValue > uuidEndValue) {
+            return 1
+        } else {
+            return 0
+        }
+    }
 }
 
 // TODO 切换0.40.2版本及以上时用std.hex.fromHexString和std.hex.toHexString替换
