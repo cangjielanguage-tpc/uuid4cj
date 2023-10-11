@@ -16,15 +16,9 @@ package uuid4cj
  * use the other generateRandomBasedUUID passing a previously initialized
  * SecureRandom instance.
  *
- * @since 37.2
+ * @since 39.8
  */
 public class RandomBasedGenerator <: NoArgGenerator{
-
-    /**
-     * Default shared random number generator, used if no random number generator
-     * is explicitly specified for instance
-     */
-    protected let _sharedRandom: Random = Random()
 
     /**
      * SecureRandom number generator that this generator uses.
@@ -35,6 +29,8 @@ public class RandomBasedGenerator <: NoArgGenerator{
      * Random number generator that this generator uses.
      */
     protected let _random: Random
+
+    protected let lock: Monitor = LazyRandom.getMonitor()
 
     /**
      * Looks like {@link SecureRandom} implementation is more efficient
@@ -49,9 +45,9 @@ public class RandomBasedGenerator <: NoArgGenerator{
      *   use a good random number generator; for example, SecureRandom.
      */
     public init(rnd: Random) {
-        _secureRandom = false;
+        _secureRandom = false
         _random = rnd
-        _sRandom = LazyRandom.sharedSecureRandom();
+        _sRandom = LazyRandom.sharedSecureRandom()
     }
 
     /**
@@ -60,9 +56,9 @@ public class RandomBasedGenerator <: NoArgGenerator{
      *   use a good random number generator; for example, SecureRandom.
      */
     public init(rnd: SecureRandom) {
-        _secureRandom = true;
+        _secureRandom = true
         _sRandom = rnd
-        _random = Random()
+        _random = LazyRandom.sharedNewRandom()
     }
 
     /**
@@ -86,8 +82,8 @@ public class RandomBasedGenerator <: NoArgGenerator{
             r1 = _toLong(buffer, 0);
             r2 = _toLong(buffer, 1);
         } else {
-            r1 =  _random.nextInt64()
-            r2 =  _random.nextInt64()
+            r1 = safeRandom()
+            r2 = safeRandom()
         }
         return UUIDUtil.constructUUID(UUIDType.RANDOM_BASED, r1, r2);
     }
@@ -106,6 +102,12 @@ public class RandomBasedGenerator <: NoArgGenerator{
             (Int64((buffer[offset+1]) & 0xFF) << 16) +
             (Int64((buffer[offset+2]) & 0xFF) << 8) +
             (Int64(buffer[offset+3]) & 0xFF)
+    }
+
+    private func safeRandom(): Int64 {
+        synchronized(lock) {
+            return _random.nextInt64()
+        }
     }
 
 }
