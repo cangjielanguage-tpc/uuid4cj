@@ -134,8 +134,8 @@ public class Generators{
 
         try {
             timer = UUIDTimer(SecureRandom(), sync)
-        } catch (e: Exception) {
-            throw IllegalArgumentException("Failed to create UUIDTimer with specified synchronizer: " + e.toString())
+        } catch (e: FSException | IllegalArgumentException) {
+            throw InterruptedException("Failed to create UUIDTimer with specified synchronizer: " + e.toString())
         }
         
         return  timeBasedGenerator(ethernetAddress, timer);
@@ -167,7 +167,7 @@ public class Generators{
                 case None => UUIDTimer(SecureRandom(), Option<FileBasedTimestampSynchronizer>.None);
             }
         } catch (e: IllegalArgumentException) {
-            throw IllegalArgumentException("Failed to create UUIDTimer with specified synchronizer: " + e.toString())
+            throw InterruptedException("Failed to create UUIDTimer with specified synchronizer: " + e.toString())
         }
 
         return _sharedTimer;

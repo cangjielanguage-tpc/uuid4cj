@@ -64,7 +64,7 @@ class LockedFile {
         var uArray: Array<UInt8> = Array<UInt8>(mFile.length, item: 0)
         try {
             mFile.read(uArray)
-        } catch (ie: Exception) {
+        } catch (ie: FSException | IllegalArgumentException) {
             logger.error("file Failed to read ${mFile.length} bytes")
             return READ_ERROR
         }

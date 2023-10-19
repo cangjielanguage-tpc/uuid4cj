@@ -322,7 +322,7 @@ func fromHexString(data: String): Option<Array<UInt8>> {
             array[i] = UInt8.parse("0x" + data.slice(i * 2, 2))
         }
         return array
-    } catch (e: Exception) {
+    } catch (e: IllegalArgumentException) {
         return None
     }
 }
