@@ -375,6 +375,7 @@ UUIDType: 6
 
 ```
 from uuid4cj import uuid4cj.*
+from crypto import crypto.SecureRandom
 
 main() {  
     var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
