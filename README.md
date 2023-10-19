@@ -471,31 +471,22 @@ from std import fs.*
 from std import format.Formatter
 
 main() {  
-    let filePath1: Path = Path("./ggg.txt")
+    let filePath1: String = "./ggg_readTest.txt"
 
-    var file1: File
+    var file1: File = openFile(filePath1)
 
-    if (File.exists(filePath1)) {
-        file1 = File(filePath1, OpenOption.Open(true, true))
-    } else {
-        file1 = File(filePath1, OpenOption.Create(true))
-    }
 
-    let filePath2: Path = Path("./zzz.txt")
+    let filePath2: String = "./zzz_readTest.txt"
 
-    var file2: File
+    var file2: File = openFile(filePath2)
 
-    if (File.exists(filePath2)) {
-        file2 = File(filePath2, OpenOption.Open(true, true))
-    } else {
-        file2 = File(filePath2, OpenOption.Create(true))
-    }
 
     var oFile: Option<FileBasedTimestampSynchronizer> =  FileBasedTimestampSynchronizer(file1, file2)
+    var ethernetAddress: Option<EthernetAddress> =  EthernetAddress("87:f5:93:06:d3:0c")
 
-    let a: TimeBasedGenerator = Generators.timeBasedGenerator(oFile)
+    let a: TimeBasedGenerator = Generators.timeBasedGenerator(ethernetAddress, oFile)
 
-    let b: TimeBasedGenerator = Generators.timeBasedGenerator(Option<FileBasedTimestampSynchronizer>.None)
+    let b: TimeBasedGenerator = Generators.timeBasedGenerator(Option<EthernetAddress>.None, Option<FileBasedTimestampSynchronizer>.None)
 
     let uuid: UUID = a.generate()
 
@@ -510,6 +501,16 @@ main() {
     file1.close()
     file2.close()
     return 0
+}
+public func openFile (filePath: String): File {
+    var file: File
+
+    if (File.exists(filePath)) {
+        file = File(filePath, OpenOption.Open(true, true))
+    } else {
+        file = File(filePath, OpenOption.Create(true))
+    }
+    return file
 }
 ```
 执行结果如下：
@@ -533,9 +534,9 @@ from std import time.*
 main() {
 
     var timer = UUIDTimer(SecureRandom(), Option<FileBasedTimestampSynchronizer>.None)
-    let a: TimeBasedGenerator = Generators.timeBasedGenerator(timer)
+    let a: TimeBasedGenerator = Generators.timeBasedGenerator(Option<EthernetAddress>.None, timer)
 
-    let b: TimeBasedGenerator = Generators.timeBasedGenerator(Option<UUIDTimer>.None)
+    let b: TimeBasedGenerator = Generators.timeBasedGenerator(Option<EthernetAddress>.None, Option<UUIDTimer>.None)
 
 
     let uuid: UUID = a.generate()
