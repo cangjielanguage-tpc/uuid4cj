@@ -130,8 +130,10 @@ UUID（通用唯一标识符），也称为GUID（全局唯一标识符）。UUI
 ├── src
 │   ├── uuid4cj
 └── test
+│   ├── FUZZ
 │   ├── HLT
 │   ├── LLT
+│   ├── Reliability
 │   └── UT
 ├── CHANGELOG.md
 ├── gitee_gate.cfg
@@ -143,7 +145,7 @@ UUID（通用唯一标识符），也称为GUID（全局唯一标识符）。UUI
 
 - `doc` 存放库的设计文档、使用文档、LLT 用例覆盖报告
 - `src` 是库源码目录
-- `test` 存放 HLT 测试用例、LLT 自测用例和 UT 单元测试用例
+- `test` 存放 FUZZ 测试用例、HLT 测试用例、LLT 自测用例、Reliability 测试用例和 UT 单元测试用例
 
 ### 接口说明
 
