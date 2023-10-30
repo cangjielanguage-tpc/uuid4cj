@@ -129,9 +129,9 @@ public class UUIDTimer {
 
         if ( isSyncer && systime >= _firstUnsafeTimestamp) {
             try {
-                _firstUnsafeTimestamp = _syncer.getOrThrow().update(systime);
-            } catch (ioe: Exception) {
-                throw Exception("Failed to synchronize timestamp");
+                _firstUnsafeTimestamp = _syncer.getOrThrow().update(systime)
+            } catch (ioe: FSException | IllegalArgumentException) {
+                throw InterruptedException("Failed to synchronize timestamp")
             }
         }
 

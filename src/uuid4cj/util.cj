@@ -15,11 +15,19 @@ package uuid4cj
  * @since 0.37.2
  */
 public class UnsupportedOperationException <: Exception {
+    private var messages: String = ""
     init() {
         super()
     }
     init(messages: String) {
         super(messages)
+        this.messages = messages
+    }
+    public func getMessage(): String {
+        return messages
+    }
+    public override func toString(): String {
+        return "UnsupportedOperationException: ${messages}"
     }
 }
 
@@ -28,11 +36,19 @@ public class UnsupportedOperationException <: Exception {
  * @since 0.37.2
  */
 public class InterruptedException <: Exception {
+    private var messages: String = ""
     init() {
         super()
     }
     init(messages: String) {
         super(messages)
+        this.messages = messages
+    }
+    public func getMessage(): String {
+        return messages
+    }
+    public override func toString(): String {
+        return "InterruptedException: ${messages}"
     }
 }
 
@@ -41,11 +57,19 @@ public class InterruptedException <: Exception {
  * @since 0.37.2
  */
 public class NumberFormatException <: Exception {
+    private var messages: String = ""
     init() {
         super()
     }
     init(messages: String) {
         super(messages)
+        this.messages = messages
+    }
+    public func getMessage(): String {
+        return messages
+    }
+    public override func toString(): String {
+        return "NumberFormatException: ${messages}"
     }
 }
 
