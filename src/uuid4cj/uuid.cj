@@ -6,6 +6,8 @@ package uuid4cj
 
 from std import format.Formatter
 from crypto import crypto.SecureRandom
+from encoding import hex.toHexString
+from encoding import hex.fromHexString
 
 /*
  * The class is uuid base class
@@ -85,7 +87,7 @@ public class UUID <: ToString {
         if (hexStr.size != 32) {
            throw IllegalArgumentException("Invalid UUID string: " + name)
         }
-        let data = match(fromHexString(hexStr)) { // TODO 切换0.40.2时使用std.hex.fromHexString
+        let data = match(fromHexString(hexStr)) {
             case Some(value) => value
             case None => throw IllegalArgumentException("Invalid UUID string: " + name)
         }
@@ -312,25 +314,4 @@ public class UUID <: ToString {
             return 0
         }
     }
-}
-
-// TODO 切换0.40.2版本及以上时用std.hex.fromHexString和std.hex.toHexString替换
-func fromHexString(data: String): Option<Array<UInt8>> {
-    let array: Array<UInt8> = Array(data.size / 2, item: 0)
-    try {
-        for (i in 0..array.size) {
-            array[i] = UInt8.parse("0x" + data.slice(i * 2, 2))
-        }
-        return array
-    } catch (e: IllegalArgumentException) {
-        return None
-    }
-}
-
-func toHexString(data: Array<UInt8>): String {
-    let sb = StringBuilder()
-    for (byte in data) {
-        sb.append(byte.format("02x"))
-    }
-    return sb.toString()
 }
