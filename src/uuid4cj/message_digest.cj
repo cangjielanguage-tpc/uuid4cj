@@ -72,12 +72,11 @@ public class MessageDigest {
         if(input.size == 0) {
             throw IllegalArgumentException("The input cannot be empty!")
         }
-        var str: String = unsafe { String.fromUtf8Unchecked(input) }  
         match (this.algorithm) {
             case DigestType.MD5 =>
-                md5Update((this.c as MD5CTX).getOrThrow(), str)
+                md5Update((this.c as MD5CTX).getOrThrow(), input)
             case DigestType.SHA1 =>
-                sha1Update((this.c as SHACTX).getOrThrow(), str) 
+                sha1Update((this.c as SHACTX).getOrThrow(), input) 
         }
     }
 

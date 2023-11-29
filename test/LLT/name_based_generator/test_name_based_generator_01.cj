@@ -6,7 +6,7 @@ from uuid4cj import uuid4cj.*
 main() {    
     var s: String = "helloworld"
     var uuid1: UUID = Generators.nameBasedGenerator().generate(s)
-    var uuid2: UUID = Generators.nameBasedGenerator().generate(UInt8ToInt8(s.toUtf8Array()))
+    var uuid2: UUID = Generators.nameBasedGenerator().generate(UInt8ToInt8(s.toArray()))
     let type1: Int64 = Generators.nameBasedGenerator().getType().raw()
     let type2: Int64 = Generators.nameBasedGenerator().getType().raw()
     let s1: String = uuid1.toString()

@@ -4,7 +4,7 @@
 from uuid4cj import uuid4cj.*
 
 main() {    
-    let name: Array<UInt8> = "helloworld".toUtf8Array()
+    let name: Array<UInt8> = "helloworld".toArray()
     let uuid = UUID.nameUUIDFromBytes(UInt8ToInt8(name))
     if(uuid.toString() != "fc5e038d-38a5-3032-8854-41e7fe7010b0" ) {
         return -1

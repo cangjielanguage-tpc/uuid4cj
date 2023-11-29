@@ -26,7 +26,7 @@ public class uuid_Standard_002 {
         @Assert(uuid.version(),3)
         @Assert(uuid.variant(),2)
         @Assert(name.getType().raw(),3)
-        @Assert(uuid.toString(),"b19189f9-4548-3aab-b923-47aefbcdd0a7")
+        @Assert(uuid.toString(),"11f3c98e-ee6f-32d6-93cc-8ea97b77b2a0")
         @Assert(uuid.toString(),uuid2.toString())
     }
 }

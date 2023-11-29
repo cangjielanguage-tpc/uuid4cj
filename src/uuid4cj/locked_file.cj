@@ -82,14 +82,14 @@ class LockedFile {
         var result: Int64 = -1
         var err: String = ""
 
-        if ((!dataStr.startsWith("[0")) || (dataStr.size < 3) || (dataStr.get(2).getOrThrow().toLowerCase() != 'x')) {
+        if ((!dataStr.startsWith("[0")) || (dataStr.size < 3) || (dataStr.toRuneArray()[2].toLowerCase() != 'x')) {
             err = "does not start with '[0x' prefix"
         } else {
-            let ix: Int64 = dataStr.indexOf(']', 3).getOrThrow()
+            let ix: Int64 = dataStr.indexOf("]", 3).getOrThrow()
             if (ix <= 0) {
                 err = "does not end with ']' marker"
             } else {
-                var hex: String = dataStr.substring(3, Int64(ix - 3))
+                var hex: String = dataStr[3..ix]
                 if (hex.size > 16) {
                     err = "length of the (hex) timestamp too long; expected 16"
                 } else {
@@ -133,7 +133,7 @@ class LockedFile {
         for(i in 18..2 : -1) {
             var val: Int64 = stampTemp & 0x0f
             // Char -> uint8
-            mWriteArray[i] = UInt8(UInt32(HEX_DIGITS.get(val).getOrThrow()))
+            mWriteArray[i] = UInt8(UInt32(HEX_DIGITS.toRuneArray()[val]))
 
             stampTemp = (stampTemp >> 4)
         }

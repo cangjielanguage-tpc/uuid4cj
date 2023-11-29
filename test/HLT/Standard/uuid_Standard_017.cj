@@ -17,7 +17,7 @@ public class uuid_Standard_017{
         println("基于SHA1摘要生成的UUID: ${uuid.toString()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),5)
-        @Assert(uuid.toString(),"cbd88ca2-d47a-5ecc-bf09-73d2beeb84c7")
+        @Assert(uuid.toString(),"823a2f73-a936-56c3-b8b4-03641bd74f35")
         @Assert(uuid.toString(),uuid2.toString())
     }
     @TestCase
@@ -29,7 +29,7 @@ public class uuid_Standard_017{
         println("基于SHA1摘要生成的UUID: ${uuid.toString()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),5)
-        @Assert(uuid.toString(),"430af79a-55ad-5570-b7af-420c1c95823b")
+        @Assert(uuid.toString(),"7b3d66ac-cb60-5154-8edf-0bcfd0c418b3")
         @Assert(uuid.toString(),uuid2.toString())
     }
     @TestCase
@@ -41,7 +41,7 @@ public class uuid_Standard_017{
         println("基于SHA1摘要生成的UUID: ${uuid.toString()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),5)
-        @Assert(uuid.toString(),"ee99fac8-36df-59d0-b293-e2e98fc8e908")
+        @Assert(uuid.toString(),"25024589-1a7c-5625-bdb2-81143473d4d3")
         @Assert(uuid.toString(),uuid2.toString())
     }
     @TestCase
@@ -53,7 +53,7 @@ public class uuid_Standard_017{
         println("基于SHA1摘要生成的UUID: ${uuid.toString()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),5)
-        @Assert(uuid.toString(),"26f3da01-5999-5447-b074-6d443151b195")
+        @Assert(uuid.toString(),"dbd9b896-6d7c-5852-895c-ecc5735cf874")
         @Assert(uuid.toString(),uuid2.toString())
     }
    
