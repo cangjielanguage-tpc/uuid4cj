@@ -7,7 +7,7 @@ from std import unicode.*
 main() {  
     var arr: Array<UInt8> = [0x87, 0xf5, 0x93, 0x06, 0xd3, 0x0c]  
     var ethernet_address: EthernetAddress =  EthernetAddress(arr)
-    if("87:f5:93:06:D3:0c".equals(ethernet_address.toString())) {
+    if("87:f5:93:06:D3:0c" == ethernet_address.toString()) {
         return -1
     }
     if(ethernet_address.toString() != "87:f5:93:06:D3:0c".toLower()) {

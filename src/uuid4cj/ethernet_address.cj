@@ -15,7 +15,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
 
     private static let serialVersionUID:Int64 = 1
 
-    private static let HEX_CHARS:Array<Char> = "0123456789abcdefABCDEF".toCharArray()
+    private static let HEX_CHARS:Array<Char> = "0123456789abcdefABCDEF".toRuneArray()
 
     protected static var _rnd = Option<SecureRandom>.None
 
@@ -50,7 +50,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
                 throw NumberFormatException("Incomplete ethernet address (missing one or more digits")
             }
 
-            var c : Char = addrStr.get(i).getOrThrow()
+            var c : Char = addrStr.toRuneArray()[i]
             i++
             var value:Int64 = 0
             if(c == ':'){
@@ -67,7 +67,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
                 }
 
                 if(i < len){
-                    c = addrStr.get(i).getOrThrow()
+                    c = addrStr.toRuneArray()[i]
                     i++
                     if(c != ':'){
                          value = (value << 4)
@@ -88,8 +88,8 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
 
             if (c != ':') {
                 if (i < len) {
-                    if (addrStr.get(i).getOrThrow() != ':') {
-                        throw NumberFormatException("Expected ':', got ('"+ addrStr.get(i).getOrThrow().toString()+"')")
+                    if (addrStr.toRuneArray()[i] != ':') {
+                        throw NumberFormatException("Expected ':', got ('"+ addrStr.toRuneArray()[i].toString()+"')")
                     }
                     i++
                 }else if(j < 5){

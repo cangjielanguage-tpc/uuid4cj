@@ -7,7 +7,7 @@ main() {
     var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
     var s: String = "helloworld"
     var uuid1: UUID = Generators.nameBasedGenerator(namespace).generate(s)
-    var uuid2: UUID = Generators.nameBasedGenerator(namespace).generate(UInt8ToInt8(s.toUtf8Array()))
+    var uuid2: UUID = Generators.nameBasedGenerator(namespace).generate(UInt8ToInt8(s.toArray()))
     let s1: String = uuid1.toString()
     let s2: String = uuid2.toString()
     if(s1 != s2) {

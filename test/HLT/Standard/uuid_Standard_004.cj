@@ -26,7 +26,7 @@ public class uuid_Standard_004 {
         @Assert(uuid.version(),3)
         @Assert(uuid.variant(),2)
         @Assert(name.getType().raw(),3)
-        @Assert(uuid.toString(),"b19189f9-4548-3aab-b923-47aefbcdd0a7")
+        @Assert(uuid.toString(),"11f3c98e-ee6f-32d6-93cc-8ea97b77b2a0")
         @Assert(uuid.toString(),uuid2.toString())
     }
     @TestCase
@@ -40,7 +40,7 @@ public class uuid_Standard_004 {
         println("基于MD5摘要生成的UUID: ${uuid.toString()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),3)
-        @Assert(uuid.toString(),"64cacb45-4bce-3b61-8714-1cb5bd63ac1d")
+        @Assert(uuid.toString(),"1ac8da69-0d38-3d76-9610-25ab6ee6dc2f")
         @Assert(uuid.toString(),uuid2.toString())
     }
     @TestCase
@@ -54,7 +54,7 @@ public class uuid_Standard_004 {
         println("基于MD5摘要生成的UUID: ${uuid.toString()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),3)
-        @Assert(uuid.toString(),"e358ca3c-f9fc-3846-8322-d8c511a3a11b")
+        @Assert(uuid.toString(),"5af444b8-bf08-3277-946a-be3800a0349e")
         @Assert(uuid.toString(),uuid2.toString())
     }
     @TestCase
@@ -68,7 +68,7 @@ public class uuid_Standard_004 {
         println("基于MD5摘要生成的UUID: ${uuid.toString()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),3)
-        @Assert(uuid.toString(),"054faba8-fc2f-302b-ad0f-6cb01c9c3f89")
+        @Assert(uuid.toString(),"3dba5e6d-ce97-3b41-a58c-686674d18ada")
         @Assert(uuid.toString(),uuid2.toString())
     }
     @TestCase

@@ -11,7 +11,7 @@ from std import random.*
 public class uuid_Standard_019{
     @TestCase
     public func uuid_Standard_019():Unit{
-        let random1 =  random.Random(1)
+        let random1 = Random(1)
         var randuuid: RandomBasedGenerator = Generators.randomBasedGenerator(random1)
         let uuid: UUID = randuuid.generate()
         let uuid2: UUID = randuuid.generate()

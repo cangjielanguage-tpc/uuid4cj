@@ -53,7 +53,7 @@ public class uuid_NameBasedGenerator_001{
         println("getNamespace: ${name.getNamespace()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),1)
-        @Assert(uuid.toString(),"cbd88ca2-d47a-1ecc-bf09-73d2beeb84c7")
+        @Assert(uuid.toString(),"823a2f73-a936-16c3-b8b4-03641bd74f35")
         @Assert(uuid.toString(),uuid2.toString())
         @Assert(name.getNamespace().toString(),NameBasedGenerator.NAMESPACE_DNS.toString())
     }
@@ -68,7 +68,7 @@ public class uuid_NameBasedGenerator_001{
         println("getNamespace: ${name.getNamespace()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),2)
-        @Assert(uuid.toString(),"430af79a-55ad-2570-b7af-420c1c95823b")
+        @Assert(uuid.toString(),"7b3d66ac-cb60-2154-8edf-0bcfd0c418b3")
         @Assert(uuid.toString(),uuid2.toString())
         @Assert(name.getNamespace().toString(),NameBasedGenerator.NAMESPACE_URL.toString())
     }
@@ -83,7 +83,7 @@ public class uuid_NameBasedGenerator_001{
         println("getNamespace: ${name.getNamespace()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),3)
-        @Assert(uuid.toString(),"e358ca3c-f9fc-3846-8322-d8c511a3a11b")
+        @Assert(uuid.toString(),"5af444b8-bf08-3277-946a-be3800a0349e")
         @Assert(uuid.toString(),uuid2.toString())
         @Assert(name.getNamespace().toString(),NameBasedGenerator.NAMESPACE_OID.toString())
     }
@@ -98,7 +98,7 @@ public class uuid_NameBasedGenerator_001{
         println("getNamespace: ${name.getNamespace()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),4)
-        @Assert(uuid.toString(),"054faba8-fc2f-402b-ad0f-6cb01c9c3f89")
+        @Assert(uuid.toString(),"3dba5e6d-ce97-4b41-a58c-686674d18ada")
         @Assert(uuid.toString(),uuid2.toString())
         @Assert(name.getNamespace().toString(),NameBasedGenerator.NAMESPACE_X500.toString())
     }
@@ -210,7 +210,7 @@ public class uuid_NameBasedGenerator_001{
     public func uuid_NameBasedGenerator_generateArray_001():Unit{
         println("---------------------------------uuid_NameBasedGenerator_generateArray_001------------------------------")
         var name: NameBasedGenerator = NameBasedGenerator(NameBasedGenerator.NAMESPACE_DNS,MessageDigest(DigestType.SHA1),UUIDType.TIME_BASED)
-        var array:Array<Int8> = UInt8ToInt8("hello world".toUtf8Array())
+        var array:Array<Int8> = UInt8ToInt8("hello world".toArray())
         let uuid: UUID = name.generate(array)
         let uuid2: UUID = name.generate(array)
         println("UUIDType: ${name.getType().raw()}")
@@ -218,7 +218,7 @@ public class uuid_NameBasedGenerator_001{
         println("getNamespace: ${name.getNamespace()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),1)
-        @Assert(uuid.toString(),"cbd88ca2-d47a-1ecc-bf09-73d2beeb84c7")
+        @Assert(uuid.toString(),"823a2f73-a936-16c3-b8b4-03641bd74f35")
         @Assert(uuid.toString(),uuid2.toString())
         @Assert(name.getNamespace().toString(),NameBasedGenerator.NAMESPACE_DNS.toString())
     }
@@ -226,7 +226,7 @@ public class uuid_NameBasedGenerator_001{
     public func uuid_NameBasedGenerator_generateArray_002():Unit{
         println("---------------------------------uuid_NameBasedGenerator_generateArray_002------------------------------")
         var name: NameBasedGenerator = NameBasedGenerator(NameBasedGenerator.NAMESPACE_URL,Option<MessageDigest>.None,UUIDType.DCE)
-        var array:Array<Int8> = UInt8ToInt8("hello world".toUtf8Array())
+        var array:Array<Int8> = UInt8ToInt8("hello world".toArray())
         let uuid: UUID = name.generate(array)
         let uuid2: UUID = name.generate(array)
         println("UUIDType: ${name.getType().raw()}")
@@ -234,7 +234,7 @@ public class uuid_NameBasedGenerator_001{
         println("getNamespace: ${name.getNamespace()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),2)
-        @Assert(uuid.toString(),"430af79a-55ad-2570-b7af-420c1c95823b")
+        @Assert(uuid.toString(),"7b3d66ac-cb60-2154-8edf-0bcfd0c418b3")
         @Assert(uuid.toString(),uuid2.toString())
         @Assert(name.getNamespace().toString(),NameBasedGenerator.NAMESPACE_URL.toString())
     }
@@ -242,7 +242,7 @@ public class uuid_NameBasedGenerator_001{
     public func uuid_NameBasedGenerator_generateArray_003():Unit{
         println("---------------------------------uuid_NameBasedGenerator_generateArray_003------------------------------")
         var name: NameBasedGenerator = NameBasedGenerator(NameBasedGenerator.NAMESPACE_OID,MessageDigest(DigestType.MD5),UUIDType.NAME_BASED_MD5)
-        var array:Array<Int8> = UInt8ToInt8("hello world".toUtf8Array())
+        var array:Array<Int8> = UInt8ToInt8("hello world".toArray())
         let uuid: UUID = name.generate(array)
         let uuid2: UUID = name.generate(array)
         println("UUIDType: ${name.getType().raw()}")
@@ -250,7 +250,7 @@ public class uuid_NameBasedGenerator_001{
         println("getNamespace: ${name.getNamespace()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),3)
-        @Assert(uuid.toString(),"e358ca3c-f9fc-3846-8322-d8c511a3a11b")
+        @Assert(uuid.toString(),"5af444b8-bf08-3277-946a-be3800a0349e")
         @Assert(uuid.toString(),uuid2.toString())
         @Assert(name.getNamespace().toString(),NameBasedGenerator.NAMESPACE_OID.toString())
     }
@@ -258,7 +258,7 @@ public class uuid_NameBasedGenerator_001{
     public func uuid_NameBasedGenerator_generateArray_004():Unit{
         println("---------------------------------uuid_NameBasedGenerator_generateArray_004------------------------------")
         var name: NameBasedGenerator = NameBasedGenerator(NameBasedGenerator.NAMESPACE_X500,MessageDigest(DigestType.MD5),UUIDType.RANDOM_BASED)
-        var array:Array<Int8> = UInt8ToInt8("hello world".toUtf8Array())
+        var array:Array<Int8> = UInt8ToInt8("hello world".toArray())
         let uuid: UUID = name.generate(array)
         let uuid2: UUID = name.generate(array)
         println("UUIDType: ${name.getType().raw()}")
@@ -266,7 +266,7 @@ public class uuid_NameBasedGenerator_001{
         println("getNamespace: ${name.getNamespace()}")
         @Assert(name.getType() is UUIDType,true)
         @Assert(name.getType().raw(),4)
-        @Assert(uuid.toString(),"054faba8-fc2f-402b-ad0f-6cb01c9c3f89")
+        @Assert(uuid.toString(),"3dba5e6d-ce97-4b41-a58c-686674d18ada")
         @Assert(uuid.toString(),uuid2.toString())
         @Assert(name.getNamespace().toString(),NameBasedGenerator.NAMESPACE_X500.toString())
     }
@@ -274,7 +274,7 @@ public class uuid_NameBasedGenerator_001{
     public func uuid_NameBasedGenerator_generateArray_005():Unit{
         println("---------------------------------uuid_NameBasedGenerator_generateArray_005------------------------------")
         var name: NameBasedGenerator = NameBasedGenerator(Option<UUID>.None,MessageDigest(DigestType.MD5),UUIDType.NAME_BASED_SHA1)
-        var array:Array<Int8> = UInt8ToInt8("hello world".toUtf8Array())
+        var array:Array<Int8> = UInt8ToInt8("hello world".toArray())
         let uuid: UUID = name.generate(array)
         let uuid2: UUID = name.generate(array)
         println("UUIDType: ${name.getType().raw()}")

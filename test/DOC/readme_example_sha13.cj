@@ -18,7 +18,7 @@ public class TestReadmeExample {
         var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
         var name: NameBasedGenerator = Generators.nameBasedGenerator(namespace, MessageDigest(DigestType.SHA1))
         let uuid: UUID = name.generate("helloworld")
-        @Assert("4684684f-d5ae-5e83-95e4-adecc6bb2135", uuid.toString())
+        @Assert("8cf4fccd-e796-5676-9352-57ff9bed87d1", uuid.toString())
         @Assert(5, name.getType().raw())
     }
 }

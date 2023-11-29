@@ -11,7 +11,7 @@ from std import random.*
 public class uuid_Standard_008{
     @TestCase
     public func uuid_Standard_008():Unit{
-        var time: TimeBasedEpochGenerator = Generators.timeBasedEpochGenerator(random.Random(1))
+        var time: TimeBasedEpochGenerator = Generators.timeBasedEpochGenerator(Random(1))
         let uuid: UUID = time.generate()
         let uuid2: UUID = time.generate()
         println("UUIDType: ${time.getType().raw()}")

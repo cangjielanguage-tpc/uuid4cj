@@ -61,14 +61,14 @@ public class UUIDUtil {
             }
             // Need to bypass hyphens:
             if( i == 8 || i == 13 || i == 18 || i == 23) {
-                if (id.get(i).getOrThrow() != '-') {
+                if (id.toRuneArray()[i] != '-') {
                         throw NumberFormatException("UUID has to be represented by the standard 36-char representation")
                     }
                 i++
             }
 
             var curr: Int32 = 0
-            var c: Char = id.get(i).getOrThrow()
+            var c: Char = id.toRuneArray()[i]
 
             if (c >= '0' && c <= '9') {
                 curr = Int32(UInt32(c) - UInt32('0'))
@@ -81,7 +81,7 @@ public class UUIDUtil {
             }
             curr = (curr << 4)
             i++
-            c = id.get(i).getOrThrow()
+            c = id.toRuneArray()[i]
 
             if (c >= '0' && c <= '9') {
                 curr |= Int32(UInt32(c) - UInt32('0'))

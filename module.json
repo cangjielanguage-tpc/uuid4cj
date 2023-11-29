@@ -1,5 +1,5 @@
 {
-	"cjc_version": "0.39.8",
+	"cjc_version": "0.45.2",
 	"organization": "huangjie84@huawei",
 	"name": "uuid4cj",
 	"description": "This library is used to generate UUIDs.",
