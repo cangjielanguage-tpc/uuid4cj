@@ -17,6 +17,5 @@ log/
 tmp/
 report/
 cjpm.lock
-cjpm.toml
 target/
 test_temp/

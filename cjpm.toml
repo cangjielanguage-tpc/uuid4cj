@@ -1,0 +1,16 @@
+[dependencies]
+  charset = {branch = "develop", git = "https://gitee.com/HW-PLLab/charset.git", version = "0.0.2"}
+  crypto4cj = {branch = "develop", git = "https://gitee.com/HW-PLLab/crypto4cj.git", version = "0.0.7"}
+
+[package]
+  cjc-version = "0.49.2"
+  compile-option = "-O2"
+  description = ""
+  link-option = ""
+  name = "uuid4cj"
+  output-type = "dynamic"
+  src-dir = "src"
+  target-dir = ""
+  version = "0.0.1"
+  package-configuration = {}
+  scripts = {}
