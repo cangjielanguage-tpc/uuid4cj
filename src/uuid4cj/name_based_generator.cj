@@ -17,7 +17,7 @@ from charset import charset.encoding.*
  * @since 37.2
  */
 public class NameBasedGenerator <: StringArgGenerator {
-    public static let  _utf8 = newUTF8Charset()
+    public static let  _utf8 = UTF8Charset.instance
     private let logger: SimpleLogger = SimpleLogger()
     /**
      * Namespace used when name is a DNS name.
