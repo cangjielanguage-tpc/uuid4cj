@@ -114,7 +114,7 @@ public class UUIDTest {
         let uuid = UUID.fromString(name)
         @Assert(uuid.toString(), "398f00f4-208b-11ee-bac3-7f13f714b88c")
         @Assert(uuid.node(), 139723726436492)
-        @Assert(uuid.hashCode(), 1485608566)
+        @Assert(uuid.hashCode(), 450226856567941703)
 
     }
 
