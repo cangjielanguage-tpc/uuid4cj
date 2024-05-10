@@ -205,13 +205,13 @@ public class uuid_UUID_001{
     public func uuid_UUID_hashCode():Unit{
         println("---------------------------------uuid_UUID_hashCode------------------------------")
         println(UUID.fromString("8d570099-e33e-11ed-ae76-8d371a181fe2").hashCode())
-        @Assert(UUID.fromString("8d570099-e33e-11ed-ae76-8d371a181fe2").hashCode(),146320336)
+        @Assert(UUID.fromString("8d570099-e33e-11ed-ae76-8d371a181fe2").hashCode(),6006174210588282058)
 
         println(UUID.fromString("00000000-0000-0000-0000-000000000000").hashCode())
-        @Assert(UUID.fromString("00000000-0000-0000-0000-000000000000").hashCode(),1431261433)
+        @Assert(UUID.fromString("00000000-0000-0000-0000-000000000000").hashCode(),1383799676518214173)
 
         println(UUID.fromString("b19189f9-4548-3aab-b923-47aefbcdd0a7").hashCode())
-        @Assert(UUID.fromString("b19189f9-4548-3aab-b923-47aefbcdd0a7").hashCode(),166306558)
+        @Assert(UUID.fromString("b19189f9-4548-3aab-b923-47aefbcdd0a7").hashCode(),-4271242665235116607)
     }
     @TestCase
     public func uuid_UUID_equals_001():Unit{
