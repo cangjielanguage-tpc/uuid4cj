@@ -1,3 +1,7 @@
+/*
+ * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2024. All rights reserved.
+ */
+
 /**
  * Intermediate base class for UUID generators that take one String argument for individual
  * calls. This includes name-based generators, but not random and time-based generators.

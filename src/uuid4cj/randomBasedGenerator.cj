@@ -1,7 +1,6 @@
 /*
- * Copyright (c) Cangjie Library Team 2023-2023. All rights resvered.
+ * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2024. All rights reserved.
  */
-
 package uuid4cj
 
 /**

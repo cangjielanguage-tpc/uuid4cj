@@ -564,6 +564,16 @@ UUIDType: 1
 生成的UUID2: 01878d39-58d2-7162-80e2-a635375f7676
 ```
 
-## <img alt="" src="./doc/assets/readme-icon-contribute.png" style="display: inline-block;" width=3%/>参与贡献
+## 约束与限制
 
-欢迎给我们提交 PR，欢迎给我们提交 issue，欢迎参与任何形式的贡献。
+在下述版本验证通过：
+
+    Cangjie Version: 0.51.4
+
+## 开源协议
+
+Apache License 2.0
+
+## 参与贡献
+
+欢迎给我们提交PR，欢迎给我们提交Issue，欢迎参与任何形式的贡献。
