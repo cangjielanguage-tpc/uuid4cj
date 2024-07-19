@@ -1,14 +1,14 @@
 //3rd_party_lib:uuid4cj/build/uuid4cj
 //3rd_party_lib:uuid4cj/ci_lib/crypto4cj
-//3rd_party_lib:uuid4cj/ci_lib/charset
+//3rd_party_lib:uuid4cj/ci_lib/charset4cj
 
-from std import unittest.*
-from std import unittest.testmacro.*
-from uuid4cj import uuid4cj.*
-from std import random.*
-from std import fs.*
-from std import math.*
-from crypto import crypto.*
+import std.unittest.*
+import std.unittest.testmacro.*
+import uuid4cj.uuid4cj.*
+import std.random.*
+import std.fs.*
+import std.math.*
+import crypto.crypto.*
 
 @Test
 public class uuid_UUIDTimer_001{

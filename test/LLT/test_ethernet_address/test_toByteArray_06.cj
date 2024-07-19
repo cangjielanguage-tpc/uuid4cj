@@ -1,7 +1,7 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
+import uuid4cj.uuid4cj.*
 
 let EXTRA_DATA_LENGTH: Int32 = 9
 main() {    
@@ -15,14 +15,14 @@ main() {
 
 func testToByteArray1(): Int32 {
     var ethernet_address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0c")
-    var test_array: Array<UInt8> = Array<UInt8>(Int64(6+9), item: UInt8(UInt32('x')))
+    var test_array: Array<UInt8> = Array<UInt8>(Int64(6+9), item: UInt8(UInt32(r'x')))
     ethernet_address.toByteArray(test_array)
     var arr: Array<UInt8> = [0x87, 0xf5, 0x93, 0x06, 0xd3, 0x0c]
     if(assertEthernetAddressArraysAreEqual(arr, 0, test_array, 0) != 0) {
         return -1
     }
     for(i in 0..9) {
-        if(test_array[i+6] != UInt8(UInt32('x'))) {
+        if(test_array[i+6] != UInt8(UInt32(r'x'))) {
             return -1
         }
         return 0

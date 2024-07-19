@@ -1,11 +1,11 @@
 //3rd_party_lib:uuid4cj/build/uuid4cj
 //3rd_party_lib:uuid4cj/ci_lib/crypto4cj
-//3rd_party_lib:uuid4cj/ci_lib/charset
+//3rd_party_lib:uuid4cj/ci_lib/charset4cj
 
-from uuid4cj import uuid4cj.*
-from std import random.*
-from fuzz import fuzz.*
-from std import fs.*
+import uuid4cj.uuid4cj.*
+import std.random.*
+import fuzz.fuzz.*
+import std.fs.*
 
 var returnFlag: Int32 = 0
 var file1 = File("uuid_TimeBasedGenerator_002.txt", OpenOption.CreateOrTruncate(true))

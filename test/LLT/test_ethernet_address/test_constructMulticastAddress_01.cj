@@ -1,8 +1,8 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
-from crypto import crypto.*
+import uuid4cj.uuid4cj.*
+import crypto.crypto.*
 
 
 main() {   

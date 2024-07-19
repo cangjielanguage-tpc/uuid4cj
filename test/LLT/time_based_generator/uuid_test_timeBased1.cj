@@ -2,9 +2,9 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
-from crypto import crypto.SecureRandom
-from std import random.*
+import uuid4cj.uuid4cj.*
+import crypto.crypto.SecureRandom
+import std.random.*
 
 main() {  
     var ethernetAddress1: Option<EthernetAddress> =  EthernetAddress("87:f5:93:06:d3:0c")

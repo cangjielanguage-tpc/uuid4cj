@@ -2,10 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2024. All rights reserved.
  */
 
-package uuid4cj
-
-from std import random.*
-from std import math.*
+package uuid4cj.uuid4cj
 
 /*
  * The class is extend Random

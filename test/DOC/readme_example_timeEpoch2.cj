@@ -1,10 +1,10 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
-from std import unittest.*
-from std import unittest.testmacro.*
-from std import random.*
+import uuid4cj.uuid4cj.*
+import std.unittest.*
+import std.unittest.testmacro.*
+import std.random.*
 
 main() {   
     let testReadmeExample = TestReadmeExample()

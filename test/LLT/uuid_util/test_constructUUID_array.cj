@@ -1,7 +1,7 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
+import uuid4cj.uuid4cj.*
 
 main() {    
     var uuid = UUIDUtil.constructUUID(UUIDType.TIME_BASED, -768862386091519507, -6742583835698893911).toString()

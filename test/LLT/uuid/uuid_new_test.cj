@@ -1,12 +1,12 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
-from std import format.Formatter
-from crypto import crypto.SecureRandom
-from std import collection.*
-from std import unittest.*
-from std import unittest.testmacro.*
+import uuid4cj.uuid4cj.*
+import std.format.Formatter
+import crypto.crypto.SecureRandom
+import std.collection.*
+import std.unittest.*
+import std.unittest.testmacro.*
 
 main() {    
     let uuidTest = UUIDTest()

@@ -1,7 +1,7 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
+import uuid4cj.uuid4cj.*
 
 let NULL_UUID_STRING: String = "00000000-0000-0000-0000-000000000000"
 let UPPER_CASE_VALID_UUID_STRING: String = "4D687664-3A1E-4F30-ACC1-87F59306D30C"

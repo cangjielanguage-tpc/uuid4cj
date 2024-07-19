@@ -1,8 +1,8 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
-from std import unicode.*
+import uuid4cj.uuid4cj.*
+import std.unicode.*
 
 // some valid strings for the various dropped digit cases
 let FIRST_GROUP_ALL_NUM_ETHERNET_ADDRESS_STRING: String =

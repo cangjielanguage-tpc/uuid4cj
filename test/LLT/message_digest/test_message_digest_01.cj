@@ -1,8 +1,8 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
-from encoding import hex.*
+import uuid4cj.uuid4cj.*
+import encoding.hex.*
 
 main() {    
     let messageDigest1: MessageDigest = MessageDigest(DigestType.MD5)
