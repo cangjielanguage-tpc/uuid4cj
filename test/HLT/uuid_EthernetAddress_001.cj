@@ -1,12 +1,12 @@
 //3rd_party_lib:uuid4cj/build/uuid4cj
 //3rd_party_lib:uuid4cj/ci_lib/crypto4cj
-//3rd_party_lib:uuid4cj/ci_lib/charset
+//3rd_party_lib:uuid4cj/ci_lib/charset4cj
 
-from std import unittest.*
-from std import unittest.testmacro.*
-from uuid4cj import uuid4cj.*
-from std import random.*
-from crypto import crypto.*
+import std.unittest.*
+import std.unittest.testmacro.*
+import uuid4cj.uuid4cj.*
+import std.random.*
+import crypto.crypto.*
 
 @Test
 public class uuid_EthernetAddress_001{
@@ -295,8 +295,8 @@ public class uuid_EthernetAddress_001{
     @TestCase
     public func uuid_EthernetAddress_constructMulticastAddress_SecureRandom_001():Unit{
         println("---------------------------------uuid_EthernetAddress_constructMulticastAddress_SecureRandom_001------------------------------")
-        var ethernetAddress = EthernetAddress.constructMulticastAddress(crypto.SecureRandom())
-        var ethernetAddress2 = EthernetAddress.constructMulticastAddress(crypto.SecureRandom())
+        var ethernetAddress = EthernetAddress.constructMulticastAddress(SecureRandom())
+        var ethernetAddress2 = EthernetAddress.constructMulticastAddress(SecureRandom())
         println("ethernetAddress: ${ethernetAddress.toString()}")
         println("ethernetAddress2: ${ethernetAddress2.toString()}")
         @Assert(ethernetAddress.toString()==ethernetAddress2.toString(),false)
@@ -304,8 +304,8 @@ public class uuid_EthernetAddress_001{
     @TestCase
     public func uuid_EthernetAddress_constructMulticastAddress_SecureRandom_002():Unit{
         println("---------------------------------uuid_EthernetAddress_constructMulticastAddress_SecureRandom_002------------------------------")
-        var ethernetAddress = EthernetAddress.constructMulticastAddress(crypto.SecureRandom(priv: true))
-        var ethernetAddress2 = EthernetAddress.constructMulticastAddress(crypto.SecureRandom(priv: true))
+        var ethernetAddress = EthernetAddress.constructMulticastAddress(SecureRandom(priv: true))
+        var ethernetAddress2 = EthernetAddress.constructMulticastAddress(SecureRandom(priv: true))
         println("ethernetAddress: ${ethernetAddress.toString()}")
         println("ethernetAddress2: ${ethernetAddress2.toString()}")
         @Assert(ethernetAddress.toString()==ethernetAddress2.toString(),false)
@@ -313,8 +313,8 @@ public class uuid_EthernetAddress_001{
     @TestCase
     public func uuid_EthernetAddress_constructMulticastAddress_SecureRandom_003():Unit{
         println("---------------------------------uuid_EthernetAddress_constructMulticastAddress_SecureRandom_003------------------------------")
-        var ethernetAddress = EthernetAddress.constructMulticastAddress(crypto.SecureRandom(priv: false))
-        var ethernetAddress2 = EthernetAddress.constructMulticastAddress(crypto.SecureRandom(priv: false))
+        var ethernetAddress = EthernetAddress.constructMulticastAddress(SecureRandom(priv: false))
+        var ethernetAddress2 = EthernetAddress.constructMulticastAddress(SecureRandom(priv: false))
         println("ethernetAddress: ${ethernetAddress.toString()}")
         println("ethernetAddress2: ${ethernetAddress2.toString()}")
         @Assert(ethernetAddress.toString()==ethernetAddress2.toString(),false)

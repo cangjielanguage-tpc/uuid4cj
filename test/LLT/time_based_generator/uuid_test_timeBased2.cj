@@ -2,10 +2,10 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
-from crypto import crypto.SecureRandom
-from std import random.*
-from std import time.*
+import uuid4cj.uuid4cj.*
+import crypto.crypto.SecureRandom
+import std.random.*
+import std.time.*
 
 main() {
 

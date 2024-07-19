@@ -2,12 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2024. All rights reserved.
  */
 
-package uuid4cj
-
-from std import fs.*
-from std import unicode.*
-from std import convert.*
-from std import io.SeekPosition
+package uuid4cj.uuid4cj
 
 /*
  * The class is timeStamp generators
@@ -69,11 +64,11 @@ class LockedFile {
             return READ_ERROR
         }
 
-        var charArray: Array<Char> = Array<Char>(uArray.size, item: Char(0))
+        var charArray: Array<Rune> = Array<Rune>(uArray.size, item: Rune(0))
 
         for( i in 0..uArray.size) {
             // uint8 -> char
-           charArray[i] = Char(uArray[i])
+           charArray[i] = Rune(uArray[i])
         }
         // charArray -> String
         var dataStr: String = String(charArray)
@@ -82,7 +77,7 @@ class LockedFile {
         var result: Int64 = -1
         var err: String = ""
 
-        if ((!dataStr.startsWith("[0")) || (dataStr.size < 3) || (dataStr.toRuneArray()[2].toLowerCase() != 'x')) {
+        if ((!dataStr.startsWith("[0")) || (dataStr.size < 3) || (dataStr.toRuneArray()[2].toLowerCase() != r'x')) {
             err = "does not start with '[0x' prefix"
         } else {
             let ix: Int64 = dataStr.indexOf("]", 3).getOrThrow()
@@ -122,12 +117,12 @@ class LockedFile {
             }
         }
 
-        mWriteArray[0] = UInt8(UInt32('['))
-        mWriteArray[1] = UInt8(UInt32('0'))
-        mWriteArray[2] = UInt8(UInt32('x'))
-        mWriteArray[19] = UInt8(UInt32(']'))
-        mWriteArray[20] = UInt8(UInt32('\r'))
-        mWriteArray[21] = UInt8(UInt32('\n'))
+        mWriteArray[0] = UInt8(UInt32(r'['))
+        mWriteArray[1] = UInt8(UInt32(r'0'))
+        mWriteArray[2] = UInt8(UInt32(r'x'))
+        mWriteArray[19] = UInt8(UInt32(r']'))
+        mWriteArray[20] = UInt8(UInt32(r'\r'))
+        mWriteArray[21] = UInt8(UInt32(r'\n'))
 
         var stampTemp: Int64 = stamp
         for(i in 18..2 : -1) {

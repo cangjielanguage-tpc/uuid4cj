@@ -1,14 +1,14 @@
 //3rd_party_lib:uuid4cj/build/uuid4cj
 //3rd_party_lib:uuid4cj/ci_lib/crypto4cj
-//3rd_party_lib:uuid4cj/ci_lib/charset
+//3rd_party_lib:uuid4cj/ci_lib/charset4cj
 
-from std import unittest.*
-from std import unittest.testmacro.*
-from uuid4cj import uuid4cj.*
-from std import collection.*
-from std import time.*
-from std import sync.*
-from std import random.*
+import std.unittest.*
+import std.unittest.testmacro.*
+import uuid4cj.uuid4cj.*
+import std.collection.*
+import std.time.*
+import std.sync.*
+import std.random.*
 @Test
 public class uuid_Reliability_timeBasedEpochGenerator_002{
     @TestCase

@@ -2,7 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2024. All rights reserved.
  */
 
-package uuid4cj
+package uuid4cj.uuid4cj
 
 /*
  * The class is UUIDUtil
@@ -61,21 +61,21 @@ public class UUIDUtil {
             }
             // Need to bypass hyphens:
             if( i == 8 || i == 13 || i == 18 || i == 23) {
-                if (id.toRuneArray()[i] != '-') {
+                if (id.toRuneArray()[i] != r'-') {
                         throw NumberFormatException("UUID has to be represented by the standard 36-char representation")
                     }
                 i++
             }
 
             var curr: Int32 = 0
-            var c: Char = id.toRuneArray()[i]
+            var c: Rune = id.toRuneArray()[i]
 
-            if (c >= '0' && c <= '9') {
-                curr = Int32(UInt32(c) - UInt32('0'))
-            } else if (c >= 'a' && c <= 'f') {
-                curr = Int32(UInt32(c) - UInt32('a') + 10)
-            } else if (c >= 'A' && c <= 'F') {
-                curr = Int32(UInt32(c) - UInt32('A') + 10)
+            if (c >= r'0' && c <= r'9') {
+                curr = Int32(UInt32(c) - UInt32(r'0'))
+            } else if (c >= r'a' && c <= r'f') {
+                curr = Int32(UInt32(c) - UInt32(r'a') + 10)
+            } else if (c >= r'A' && c <= r'F') {
+                curr = Int32(UInt32(c) - UInt32(r'A') + 10)
             } else {
                 throw NumberFormatException("Non-hex character at #${i}: '${c}' (value ${UInt32(c).format("0x")})")
             }
@@ -83,12 +83,12 @@ public class UUIDUtil {
             i++
             c = id.toRuneArray()[i]
 
-            if (c >= '0' && c <= '9') {
-                curr |= Int32(UInt32(c) - UInt32('0'))
-            } else if (c >= 'a' && c <= 'f') {
-                curr |= Int32(UInt32(c) - UInt32('a') + 10)
-            } else if (c >= 'A' && c <= 'F') {
-                curr |= Int32(UInt32(c) - UInt32('A') + 10)
+            if (c >= r'0' && c <= r'9') {
+                curr |= Int32(UInt32(c) - UInt32(r'0'))
+            } else if (c >= r'a' && c <= r'f') {
+                curr |= Int32(UInt32(c) - UInt32(r'a') + 10)
+            } else if (c >= r'A' && c <= r'F') {
+                curr |= Int32(UInt32(c) - UInt32(r'A') + 10)
             } else {
                 throw NumberFormatException("Non-hex character at #${i}: '${c}' (value ${UInt32(c).format("0x")})")
             }

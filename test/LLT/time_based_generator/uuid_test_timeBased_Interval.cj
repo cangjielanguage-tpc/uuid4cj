@@ -2,14 +2,14 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
-from crypto import crypto.SecureRandom
-from std import random.*
-from std import time.*
-from std import fs.*
-from std import format.Formatter
-from std import io.SeekPosition
-from std import sync.sleep
+import uuid4cj.uuid4cj.*
+import crypto.crypto.SecureRandom
+import std.random.*
+import std.time.*
+import std.fs.*
+import std.format.Formatter
+import std.io.SeekPosition
+import std.sync.sleep
 
 
 main() {  

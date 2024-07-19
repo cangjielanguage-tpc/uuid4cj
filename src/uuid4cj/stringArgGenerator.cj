@@ -10,7 +10,7 @@
  */
 
  
-package uuid4cj
+package uuid4cj.uuid4cj
 
 public abstract class StringArgGenerator <: UUIDGenerator {
 

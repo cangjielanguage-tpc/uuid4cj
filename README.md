@@ -5,7 +5,7 @@
 <p align="center">
 <img alt="" src="https://img.shields.io/badge/release-v0.0.1-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v0.51.4-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v0.53.4-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjcov-94.2%25-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
@@ -129,6 +129,7 @@ UUID（通用唯一标识符），也称为GUID（全局唯一标识符）。UUI
 ├── doc
 ├── src
 │   ├── uuid4cj
+│   └── package.cj
 └── test
 │   ├── FUZZ
 │   ├── HLT
@@ -136,9 +137,8 @@ UUID（通用唯一标识符），也称为GUID（全局唯一标识符）。UUI
 │   ├── Reliability
 │   └── UT
 ├── CHANGELOG.md
-├── gitee_gate.cfg
 ├── LICENSE.txt
-├── module.json
+├── cjpm.toml
 ├── README.md
 ├── README.OpenSource
 ```
@@ -154,35 +154,16 @@ UUID（通用唯一标识符），也称为GUID（全局唯一标识符）。UUI
 ## <img alt="" src="./doc/assets/readme-icon-compile.png" style="display: inline-block;" width=3%/> 使用说明
 
 ### 编译
-
-1. `uuid4cj` 依赖 `crypto4cj` 和 `charset`，请下载指定版本到 `uuid4cj` 的根目录进行编译，编译方式参考各自库的编译方式,地址
-
-    https://gitee.com/HW-PLLab/crypto4cj
-    https://gitee.com/HW-PLLab/charset
-
-
     ```
-    cd uuid4cj
-    git clone https://gitee.com/HW-PLLab/crypto4cj.git
-    git clone https://gitee.com/HW-PLLab/charset.git
+    cjpm build
     ```
-
-2. 编译 `uuid4cj`
-
-    ```
-    cd uuid4cj
-    cjpm build -V
-    ```
-
-
-    
 
 ### 功能示例
 
 #### 基于名称 MD5 生成 UUID 使用样例
 
 ```cangjie
-from uuid4cj import uuid4cj.*
+import uuid4cj.uuid4cj.*
 
 main() {   
     var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
@@ -203,7 +184,7 @@ UUIDType: 3
 #### 基于名称 SHA1 生成 UUID 使用样例
 
 ```cangjie
-from uuid4cj import uuid4cj.*
+import uuid4cj.uuid4cj.*
 
 main() {   
     var name: NameBasedGenerator = Generators.nameBasedGenerator()
@@ -221,7 +202,7 @@ UUIDType: 5
 ```
 
 ```cangjie
-from uuid4cj import uuid4cj.*
+import uuid4cj.uuid4cj.*
 
 main() {   
     var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
@@ -240,7 +221,7 @@ UUIDType: 5
 ```
 
 ```cangjie
-from uuid4cj import uuid4cj.*
+import uuid4cj.uuid4cj.*
 
 main() {   
     var namespace: UUID = NameBasedGenerator.NAMESPACE_DNS
@@ -260,9 +241,9 @@ UUIDType: 5
 #### 基于随机数 生成 UUID 使用样例
 
 ```cangjie
-from uuid4cj import uuid4cj.*
-from crypto import crypto.SecureRandom
-from std import random.*
+import uuid4cj.uuid4cj.*
+import crypto.crypto.SecureRandom
+import std.random.*
 
 main() {  
     
@@ -283,9 +264,9 @@ UUIDType: 4
 基于SecureRandom随机生成的UUID: 1c290f65-05c7-4426-a90f-6505c7f426e6
 ```
 ```cangjie
-from uuid4cj import uuid4cj.*
-from crypto import crypto.SecureRandom
-from std import random.*
+import uuid4cj.uuid4cj.*
+import crypto.crypto.SecureRandom
+import std.random.*
 
 main() {  
 
@@ -307,9 +288,9 @@ UUIDType: 4
 基于Random随机生成的UUID: c259ecfd-bbf0-4e28-8ea2-03d10194b80a
 ```
 ```cangjie
-from uuid4cj import uuid4cj.*
-from crypto import crypto.SecureRandom
-from std import random.*
+import uuid4cj.uuid4cj.*
+import crypto.crypto.SecureRandom
+import std.random.*
 
 main() {  
     
@@ -335,7 +316,7 @@ UUIDType: 4
 样例一
 
 ```
-from uuid4cj import uuid4cj.*
+import uuid4cj.uuid4cj.*
 
 main() {  
     var time: TimeBasedReorderedGenerator = Generators.timeBasedReorderedGenerator()
@@ -355,7 +336,7 @@ UUIDType: 6
 样例二
 
 ```
-from uuid4cj import uuid4cj.*
+import uuid4cj.uuid4cj.*
 
 main() {  
     var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
@@ -376,8 +357,8 @@ UUIDType: 6
 样例三
 
 ```
-from uuid4cj import uuid4cj.*
-from crypto import crypto.SecureRandom
+import uuid4cj.uuid4cj.*
+import crypto.crypto.SecureRandom
 
 main() {  
     var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
@@ -401,7 +382,7 @@ UUIDType: 6
 样例一
 
 ```
-from uuid4cj import uuid4cj.*
+import uuid4cj.uuid4cj.*
 
 main() {  
     var time: TimeBasedEpochGenerator = Generators.timeBasedEpochGenerator()
@@ -421,8 +402,8 @@ UUIDType: 7
 样例二
 
 ```
-from uuid4cj import uuid4cj.*
-from std import random.*
+import uuid4cj.uuid4cj.*
+import std.random.*
 
 main() {  
     var time: TimeBasedEpochGenerator = Generators.timeBasedEpochGenerator(Random())
@@ -444,7 +425,7 @@ UUIDType: 7
 样例一
 
 ```
-from uuid4cj import uuid4cj.*
+import uuid4cj.uuid4cj.*
 
 main() {  
     let time: TimeBasedGenerator = Generators.timeBasedGenerator()
@@ -465,12 +446,12 @@ UUIDType: 1
 样例二
 
 ```
-from uuid4cj import uuid4cj.*
-from crypto import crypto.SecureRandom
-from std import random.*
-from std import time.*
-from std import fs.*
-from std import format.Formatter
+import uuid4cj.uuid4cj.*
+import crypto.crypto.SecureRandom
+import std.random.*
+import std.time.*
+import std.fs.*
+import std.format.Formatter
 
 main() {  
     let filePath1: String = "./ggg_readTest.txt"
@@ -528,10 +509,10 @@ UUIDType: 1
 样例三
 
 ```
-from uuid4cj import uuid4cj.*
-from crypto import crypto.SecureRandom
-from std import random.*
-from std import time.*
+import uuid4cj.uuid4cj.*
+import crypto.crypto.SecureRandom
+import std.random.*
+import std.time.*
 
 main() {
 
@@ -568,11 +549,10 @@ UUIDType: 1
 
 在下述版本验证通过：
 
-    Cangjie Version: 0.51.4
+    Cangjie Version: 0.53.4
 
 ## 开源协议
-
-Apache License 2.0
+本项目基于 [Apache License 2.0](./LICENSE)，请自由的享受和参与开源。
 
 ## 参与贡献
 

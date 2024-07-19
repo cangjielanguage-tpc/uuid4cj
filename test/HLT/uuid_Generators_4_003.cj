@@ -1,17 +1,17 @@
 //3rd_party_lib:uuid4cj/build/uuid4cj
 //3rd_party_lib:uuid4cj/ci_lib/crypto4cj
-//3rd_party_lib:uuid4cj/ci_lib/charset
+//3rd_party_lib:uuid4cj/ci_lib/charset4cj
 
-from std import unittest.*
-from std import unittest.testmacro.*
-from uuid4cj import uuid4cj.*
-from crypto import crypto.*
+import std.unittest.*
+import std.unittest.testmacro.*
+import uuid4cj.uuid4cj.*
+import crypto.crypto.*
 
 @Test
 public class uuid_Generators_4_003{
     @TestCase
     public func uuid_Generators_4_SecureRandom_001():Unit{
-        var randuuid: RandomBasedGenerator = Generators.randomBasedGenerator(crypto.SecureRandom())
+        var randuuid: RandomBasedGenerator = Generators.randomBasedGenerator(SecureRandom())
         let uuid: UUID = randuuid.generate()
         let uuid2: UUID = randuuid.generate()
         println("UUIDType: ${randuuid.getType().raw()}")
@@ -23,7 +23,7 @@ public class uuid_Generators_4_003{
     }
     @TestCase
     public func uuid_Generators_4_SecureRandom_002():Unit{
-        var randuuid: RandomBasedGenerator = Generators.randomBasedGenerator(crypto.SecureRandom(priv: true))
+        var randuuid: RandomBasedGenerator = Generators.randomBasedGenerator(SecureRandom(priv: true))
         let uuid: UUID = randuuid.generate()
         let uuid2: UUID = randuuid.generate()
         println("UUIDType: ${randuuid.getType().raw()}")
@@ -35,7 +35,7 @@ public class uuid_Generators_4_003{
     }
     @TestCase
     public func uuid_Generators_4_SecureRandom_003():Unit{
-        var randuuid: RandomBasedGenerator = Generators.randomBasedGenerator(crypto.SecureRandom(priv: false))
+        var randuuid: RandomBasedGenerator = Generators.randomBasedGenerator(SecureRandom(priv: false))
         let uuid: UUID = randuuid.generate()
         let uuid2: UUID = randuuid.generate()
         println("UUIDType: ${randuuid.getType().raw()}")

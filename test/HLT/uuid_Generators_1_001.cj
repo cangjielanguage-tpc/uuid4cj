@@ -1,10 +1,10 @@
 //3rd_party_lib:uuid4cj/build/uuid4cj
 //3rd_party_lib:uuid4cj/ci_lib/crypto4cj
-//3rd_party_lib:uuid4cj/ci_lib/charset
+//3rd_party_lib:uuid4cj/ci_lib/charset4cj
 
-from std import unittest.*
-from std import unittest.testmacro.*
-from uuid4cj import uuid4cj.*
+import std.unittest.*
+import std.unittest.testmacro.*
+import uuid4cj.uuid4cj.*
 
 @Test
 public class uuid_Generators_1_001{

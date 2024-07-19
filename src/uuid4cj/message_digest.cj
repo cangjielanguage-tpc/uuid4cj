@@ -2,14 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2024. All rights reserved.
  */
 
-package uuid4cj
-
-from crypto4cj import md5cj.*
-from crypto4cj import sha1cj.*
-from crypto4cj import sha224cj.*
-from crypto4cj import sha256cj.*
-from crypto4cj import sha384cj.*
-from crypto4cj import sha512cj.*
+package uuid4cj.uuid4cj
 
 /*
  * The class is digest type

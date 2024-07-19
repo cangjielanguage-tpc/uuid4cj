@@ -2,10 +2,7 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2024. All rights reserved.
  */
 
-package uuid4cj
-
-from std import sync.*
-from std import collection.*
+package uuid4cj.uuid4cj
 
 /**
  * EthernetAddress encapsulates the 6-byte MAC address defined in
@@ -15,7 +12,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
 
     private static let serialVersionUID:Int64 = 1
 
-    private static let HEX_CHARS:Array<Char> = "0123456789abcdefABCDEF".toRuneArray()
+    private static let HEX_CHARS:Array<Rune> = "0123456789abcdefABCDEF".toRuneArray()
 
     protected static var _rnd = Option<SecureRandom>.None
 
@@ -50,18 +47,18 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
                 throw NumberFormatException("Incomplete ethernet address (missing one or more digits")
             }
 
-            var c : Char = addrStr.toRuneArray()[i]
+            var c : Rune = addrStr.toRuneArray()[i]
             i++
             var value:Int64 = 0
-            if(c == ':'){
+            if(c == r':'){
                 value = 0
             }else{
-                if(c >= '0' && c <= '9'){
-                    value = Int64(charToUInt32(c)-charToUInt32('0'))
-                }else if (c >= 'a' && c <= 'f') {
-                    value = Int64((charToUInt32(c) - charToUInt32('a') + 10))
-                }else if (c >= 'A' && c <= 'F') {
-                    value = Int64((charToUInt32(c) - charToUInt32('A') + 10))
+                if(c >= r'0' && c <= r'9'){
+                    value = Int64(charToUInt32(c)-charToUInt32(r'0'))
+                }else if (c >= r'a' && c <= r'f') {
+                    value = Int64((charToUInt32(c) - charToUInt32(r'a') + 10))
+                }else if (c >= r'A' && c <= r'F') {
+                    value = Int64((charToUInt32(c) - charToUInt32(r'A') + 10))
                 }else{
                      throw NumberFormatException("Non-hex character '"+c.toString()+"'")
                 }
@@ -69,14 +66,14 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
                 if(i < len){
                     c = addrStr.toRuneArray()[i]
                     i++
-                    if(c != ':'){
+                    if(c != r':'){
                          value = (value << 4)
-                        if (c >= '0' && c <= '9') {
-                            value |= Int64((charToUInt32(c) - charToUInt32('0')))
-                        }else if (c >= 'a' && c <= 'f') {
-                            value |= Int64((charToUInt32(c) - charToUInt32('a') + 10))
-                        }else if (c >= 'A' && c <= 'F') {
-                            value |= Int64((charToUInt32(c) - charToUInt32('A') + 10))
+                        if (c >= r'0' && c <= r'9') {
+                            value |= Int64((charToUInt32(c) - charToUInt32(r'0')))
+                        }else if (c >= r'a' && c <= r'f') {
+                            value |= Int64((charToUInt32(c) - charToUInt32(r'a') + 10))
+                        }else if (c >= r'A' && c <= r'F') {
+                            value |= Int64((charToUInt32(c) - charToUInt32(r'A') + 10))
                         }else{
                             throw NumberFormatException("Non-hex character '"+c.toString()+"'")
                         }
@@ -86,9 +83,9 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
 
             addr = (addr << 8) | value
 
-            if (c != ':') {
+            if (c != r':') {
                 if (i < len) {
-                    if (addrStr.toRuneArray()[i] != ':') {
+                    if (addrStr.toRuneArray()[i] != r':') {
                         throw NumberFormatException("Expected ':', got ('"+ addrStr.toRuneArray()[i].toString()+"')")
                     }
                     i++
@@ -101,7 +98,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
     }
 
 
-    func charToUInt32(char:Char):UInt32{
+    func charToUInt32(char:Rune):UInt32{
         return UInt32(char)
     }
 

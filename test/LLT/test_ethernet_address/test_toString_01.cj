@@ -1,8 +1,8 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
-from std import unicode.*
+import uuid4cj.uuid4cj.*
+import std.unicode.*
 
 main() {    
     var ethernet_address: EthernetAddress =  EthernetAddress(0)

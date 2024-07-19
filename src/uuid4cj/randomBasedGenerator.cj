@@ -1,7 +1,7 @@
 /*
  * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2024. All rights reserved.
  */
-package uuid4cj
+package uuid4cj.uuid4cj
 
 /**
  * Implementation of UUID generator that uses generation method 4.

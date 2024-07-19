@@ -2,12 +2,8 @@
  * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2024. All rights reserved.
  */
 
-package uuid4cj
+package uuid4cj.uuid4cj
 
-from std import format.Formatter
-from crypto import crypto.SecureRandom
-from encoding import hex.toHexString
-from encoding import hex.fromHexString
 
 /*
  * The class is uuid base class

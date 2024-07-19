@@ -1,7 +1,7 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
+import uuid4cj.uuid4cj.*
 
 let UUID_BYTE_ARRAY_LENGTH: Int64 = 16
 let EXTRA_DATA_LENGTH: Int64 = 9
@@ -81,7 +81,7 @@ func testToByteArrayNonNullUuid(): Int32 {
 // test a null uuid case with extra data in the array
 func testToByteArrayNullUuidExtra(): Int32 {
     let test_uuid = UUIDUtil.nilUUID()
-    let test_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH, item: Int8(UInt32('x')))
+    let test_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH, item: Int8(UInt32(r'x')))
     UUIDUtil.toByteArray(test_uuid, test_array)
     for(k in 0..UUID_BYTE_ARRAY_LENGTH) {
         if(NULL_UUID_BYTE_ARRAY[k] != test_array[k]) {
@@ -89,7 +89,7 @@ func testToByteArrayNullUuidExtra(): Int32 {
         }
     }
     for(k in 0..EXTRA_DATA_LENGTH) {
-        if(Int8(UInt32('x')) != test_array[k + UUID_BYTE_ARRAY_LENGTH]) {
+        if(Int8(UInt32(r'x')) != test_array[k + UUID_BYTE_ARRAY_LENGTH]) {
             return -1
         }
     }
@@ -101,7 +101,7 @@ func testToByteArrayNullUuidExtra(): Int32 {
 @OverflowWrapping
 func testToByteArrayNonNullUuidExtra(): Int32 {
     let test_uuid = UUIDUtil.uuid(MIXED_CASE_VALID_UUID_STRING)
-    let test_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH, item: Int8(UInt32('x')))
+    let test_array: Array<Int8> = Array<Int8>(UUID_BYTE_ARRAY_LENGTH + EXTRA_DATA_LENGTH, item: Int8(UInt32(r'x')))
     UUIDUtil.toByteArray(test_uuid, test_array)
     for(k in 0..UUID_BYTE_ARRAY_LENGTH) {
         if(Int8(VALID_UUID_BYTE_ARRAY[k]) != test_array[k]) {
@@ -109,7 +109,7 @@ func testToByteArrayNonNullUuidExtra(): Int32 {
         }
     }
     for(k in 0..EXTRA_DATA_LENGTH) {
-        if(Int8(UInt32('x')) != test_array[k + UUID_BYTE_ARRAY_LENGTH]) {
+        if(Int8(UInt32(r'x')) != test_array[k + UUID_BYTE_ARRAY_LENGTH]) {
             return -1
         }
     }

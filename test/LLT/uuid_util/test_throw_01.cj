@@ -1,7 +1,7 @@
 // EXEC: cjc %import-path %L %l %f
 // EXEC: ./main
 
-from uuid4cj import uuid4cj.*
+import uuid4cj.uuid4cj.*
 
 main() {    
     var s: Array<Int8> = [104, 101, 108, 108, 111, 119, 111, 114, 108]
