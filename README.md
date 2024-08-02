@@ -14,8 +14,6 @@
 
 UUID（通用唯一标识符），也称为GUID（全局唯一标识符）。UUID长度为128位，可以保证跨空间和时间的唯一性。
 
-参考地址：https://github.com/cowtowncoder/java-uuid-generator 版本 4.1.0 
-
 **特性**：
 
 - 🚀 基于时间/位置生成 UUID 
