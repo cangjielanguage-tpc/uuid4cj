@@ -31,7 +31,7 @@ public class TimeBasedGenerator <: NoArgGenerator{
      */
     @OverflowWrapping
     public init(ethAddr:Option<EthernetAddress>,timer: UUIDTimer){
-        var uuidBytes: Array<UInt8> = Array<UInt8>(16,item:0)
+        var uuidBytes: Array<UInt8> = Array<UInt8>(16,repeat:0)
         var ethAddrTemp = ethAddr
         if (ethAddr == None) {
             ethAddrTemp = EthernetAddress.constructMulticastAddress()

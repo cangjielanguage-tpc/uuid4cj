@@ -16,7 +16,7 @@ public class UUIDUtil {
     public static let BYTE_OFFSET_CLOCK_SEQUENCE: Int32 = 8
     public static let BYTE_OFFSET_VARIATION: Int32 = 8
     private static let NIL_UUID: UUID = UUID.nilUUID()
-    private static let MAX_UUID: UUID = UUID(Array(16, item: 0xff))
+    private static let MAX_UUID: UUID = UUID(Array(16, repeat: 0xff))
     
     /**
      * one that is all zeroes.
@@ -272,7 +272,7 @@ public class UUIDUtil {
      */
     @OverflowWrapping
     public static func int64asByteArray(hi: Int64, lo: Int64): Array<Int8> {
-        var result: Array<Int8> = Array<Int8>(16, item: 0)
+        var result: Array<Int8> = Array<Int8>(16, repeat: 0)
         appendInt(Int32(hi >> 32), result, 0)
         appendInt(Int32(hi), result, 4)
         appendInt(Int32(lo >> 32), result, 8)

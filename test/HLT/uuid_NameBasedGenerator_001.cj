@@ -9,7 +9,7 @@ import uuid4cj.uuid4cj.*
 @Test
 public class uuid_NameBasedGenerator_001{
     func UInt8ToInt8(arr: Array<UInt8>): Array<Int8> {
-        var res: Array<Int8> = Array<Int8>(arr.size, item: 0)
+        var res: Array<Int8> = Array<Int8>(arr.size, repeat: 0)
         for( i in 0..arr.size) {
             res[i] = Int8(arr[i])
         }
@@ -197,7 +197,7 @@ public class uuid_NameBasedGenerator_001{
     public func uuid_NameBasedGenerator_generate_():Unit{
         var name: NameBasedGenerator = NameBasedGenerator(Option<UUID>.None,Option<MessageDigest>.None,Option<UUIDType>.None)
         var eMessage = ""
-        var array:Array<Int8> = Array<Int8>(0,item:0)
+        var array:Array<Int8> = Array<Int8>(0,repeat:0)
         try {
             name.generate(array)
         } catch (e:Exception) {

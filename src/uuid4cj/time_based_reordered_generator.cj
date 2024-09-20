@@ -35,7 +35,7 @@ public class TimeBasedReorderedGenerator <: NoArgGenerator{
      */
     @OverflowWrapping
     public init(ethAddr: ?EthernetAddress, timer: UUIDTimer) {
-        let uuidBytes:Array<UInt8> = Array<UInt8>(16, item: 0)
+        let uuidBytes:Array<UInt8> = Array<UInt8>(16, repeat: 0)
         match(ethAddr) {
             case None =>
                 _ethernetAddress = EthernetAddress.constructMulticastAddress() 

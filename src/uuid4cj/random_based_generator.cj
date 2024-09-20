@@ -77,7 +77,7 @@ public class RandomBasedGenerator <: NoArgGenerator{
         let r2: Int64
         
        if (_secureRandom) {
-            let buffer: Array<UInt8> = Array<UInt8>(_sRandom.nextBytes(16))
+            let buffer: Array<UInt8> = _sRandom.nextBytes(16).toArray()
             r1 = _toLong(buffer, 0);
             r2 = _toLong(buffer, 1);
         } else {

@@ -19,7 +19,7 @@ main() {
 
 @OverflowWrapping
 func UInt8ToInt8(arr: Array<UInt8>): Array<Int8> {
-    var res: Array<Int8> = Array<Int8>(arr.size, item: 0)
+    var res: Array<Int8> = Array<Int8>(arr.size, repeat: 0)
     for( i in 0..arr.size) {
         res[i] = Int8(arr[i])
     }

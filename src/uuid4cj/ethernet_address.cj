@@ -164,7 +164,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
      */
     @OverflowWrapping 
     public static func valueOf(addr:Array<Int32>):EthernetAddress{
-        var bAddr:Array<UInt8> = Array<UInt8>(addr.size,item:0)
+        var bAddr:Array<UInt8> = Array<UInt8>(addr.size,repeat:0)
         for (i in 0..addr.size) {
             bAddr[i] = UInt8(addr[i])
         }
@@ -229,7 +229,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
      * @return EthernetAddress
      */
     public static func constructMulticastAddress(rnd:SecureRandom):EthernetAddress{
-        var dummy:Array<UInt8> =  Array<UInt8>(6,item:0)
+        var dummy:Array<UInt8> =  Array<UInt8>(6,repeat:0)
         synchronized(m1){
             dummy = rnd.nextBytes(6)
         }
@@ -245,7 +245,7 @@ public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>
      * @return 6 UInt8 array that contains the binary representation
      */
     public func asByteArray():Array<UInt8>{
-        var result:Array<UInt8> = Array<UInt8>(6,item:0)
+        var result:Array<UInt8> = Array<UInt8>(6,repeat:0)
         toByteArray(result)
         return result
     }
