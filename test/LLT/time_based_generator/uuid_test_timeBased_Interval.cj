@@ -9,7 +9,7 @@ import std.time.*
 import std.fs.*
 import std.format.Formatter
 import std.io.SeekPosition
-import std.sync.sleep
+import std.core.sleep
 
 
 main() {  

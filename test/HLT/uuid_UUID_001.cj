@@ -25,7 +25,7 @@ public class uuid_UUID_001{
     @TestCase
     public func uuid_UUID_init():Unit{
         println("---------------------------------uuid_UUID_init------------------------------")
-        let uuid: UUID = UUID(Array(16, item: 0xff))
+        let uuid: UUID = UUID(Array(16, repeat: 0xff))
         println("uuid: ${uuid.toString()}")
         @Assert(uuid.toString(),"ffffffff-ffff-ffff-ffff-ffffffffffff")
 
@@ -72,7 +72,7 @@ public class uuid_UUID_001{
     @TestCase
     public func uuid_UUID_Array_002():Unit{
         println("---------------------------------uuid_UUID_Array_002------------------------------")
-        var arry: Array<Int8> = Array<Int8>(0,item:0)
+        var arry: Array<Int8> = Array<Int8>(0,repeat:0)
         var eMessage = ""
         try{
             UUID.nameUUIDFromBytes(arry)
@@ -273,7 +273,7 @@ public class uuid_UUID_001{
 
 @OverflowWrapping
 func Int8ToUInt8(arr: Array<Int8>): Array<UInt8> {
-    var res: Array<UInt8> = Array<UInt8>(arr.size, item: 0)
+    var res: Array<UInt8> = Array<UInt8>(arr.size, repeat: 0)
     for( i in 0..arr.size) {
         res[i] = UInt8(arr[i])
     }
@@ -282,7 +282,7 @@ func Int8ToUInt8(arr: Array<Int8>): Array<UInt8> {
 
 @OverflowWrapping
 func UInt8ToInt8(arr: Array<UInt8>): Array<Int8> {
-    var res: Array<Int8> = Array<Int8>(arr.size, item: 0)
+    var res: Array<Int8> = Array<Int8>(arr.size, repeat: 0)
     for( i in 0..arr.size) {
         res[i] = Int8(arr[i])
     }

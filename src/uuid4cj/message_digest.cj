@@ -95,11 +95,11 @@ public class MessageDigest {
     func digestProcess(): Array<UInt8> {
         match (this.algorithm) {
             case DigestType.MD5 => 
-                var md: Array<UInt8> = Array<UInt8>(MD5_DIGEST_LENGTH, item: 0)
+                var md: Array<UInt8> = Array<UInt8>(MD5_DIGEST_LENGTH, repeat: 0)
                 md5Final(md, (this.c as MD5CTX).getOrThrow())
                 return md
             case DigestType.SHA1 => 
-                var md: Array<UInt8> = Array<UInt8>(SHA_DIGEST_LENGTH, item: 0)
+                var md: Array<UInt8> = Array<UInt8>(SHA_DIGEST_LENGTH, repeat: 0)
                 sha1Final(md, (this.c as SHACTX).getOrThrow())
                 return md
         }
@@ -109,11 +109,11 @@ public class MessageDigest {
     func digestAll(input: Array<Int8>): Array<UInt8> {
         match (this.algorithm) {
             case DigestType.MD5 => 
-                var md: Array<UInt8> = Array<UInt8>(MD5_DIGEST_LENGTH, item: 0)
+                var md: Array<UInt8> = Array<UInt8>(MD5_DIGEST_LENGTH, repeat: 0)
                 md5(Int8ToUInt8(input), md)
                 return md
             case DigestType.SHA1 => 
-                var md: Array<UInt8> = Array<UInt8>(SHA_DIGEST_LENGTH, item: 0)
+                var md: Array<UInt8> = Array<UInt8>(SHA_DIGEST_LENGTH, repeat: 0)
                 sha1(Int8ToUInt8(input), md)
                 return md
         }

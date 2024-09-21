@@ -32,7 +32,7 @@ func testByteArrayEthernetAddressConstructor1(): Int32 {
 
 // now an array thsat is too small
 func testByteArrayEthernetAddressConstructor2(): Int32 {
-    var arr: Array<UInt8> = Array<UInt8>(5, item: 0)
+    var arr: Array<UInt8> = Array<UInt8>(5, repeat: 0)
     try {
         EthernetAddress(arr)
     }catch(e: NumberFormatException) {
@@ -46,7 +46,7 @@ func testByteArrayEthernetAddressConstructor2(): Int32 {
 
 // now an array thsat is too big
 func testByteArrayEthernetAddressConstructor3(): Int32 {
-    var arr: Array<UInt8> = Array<UInt8>(7, item: 0)
+    var arr: Array<UInt8> = Array<UInt8>(7, repeat: 0)
     try {
         EthernetAddress(arr)
     }catch(e: NumberFormatException) {
@@ -61,7 +61,7 @@ func testByteArrayEthernetAddressConstructor3(): Int32 {
 // let's test that creating a EthernetAddress from an zero'd array
 // gives us a null EthernetAddress (definition of null EthernetAddress)
 func testByteArrayEthernetAddressConstructor4(): Int32 {
-    var arr: Array<UInt8> = Array<UInt8>(6, item: 0)
+    var arr: Array<UInt8> = Array<UInt8>(6, repeat: 0)
     if(EthernetAddress(arr).toLong() != 0) {
         return -1
     }

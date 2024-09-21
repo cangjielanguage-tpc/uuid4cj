@@ -33,7 +33,7 @@ public class UUIDTest {
     @TestCase
     public func test1(): Unit {
         let uuid = UUID.nilUUID()
-        let uuid2 = UUID(Array(16, item: 0xff))
+        let uuid2 = UUID(Array(16, repeat: 0xff))
 
         @Assert(uuid.toString(), "00000000-0000-0000-0000-000000000000")
         @Assert(uuid2.toString(), "ffffffff-ffff-ffff-ffff-ffffffffffff")

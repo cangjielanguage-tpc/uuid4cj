@@ -6,7 +6,7 @@ import uuid4cj.uuid4cj.*
 let UUID_BYTE_ARRAY_LENGTH: Int64 = 16
 let EXTRA_DATA_LENGTH: Int64 = 9
 let MIXED_CASE_VALID_UUID_STRING: String = "4d687664-3A1e-4F30-aCc1-87F59306d30C"
-let NULL_UUID_BYTE_ARRAY: Array<UInt8> = Array<UInt8>(UUID_BYTE_ARRAY_LENGTH, item: 0)
+let NULL_UUID_BYTE_ARRAY: Array<UInt8> = Array<UInt8>(UUID_BYTE_ARRAY_LENGTH, repeat: 0)
 let VALID_UUID_BYTE_ARRAY: Array<UInt8> = [
         0x4d, 0x68, 0x76, 0x64,
         0x3a, 0x1e, 0x4f, 0x30,
