@@ -16,7 +16,7 @@ internal import std.unicode.*
 internal import std.convert.*
 internal import std.io.SeekPosition
 internal import std.time.*
-internal import std.log.*
+internal import log.*
 internal import std.format.Formatter
 internal import crypto.crypto.SecureRandom
 internal import encoding.hex.toHexString
@@ -28,7 +28,3 @@ internal import crypto4cj.sha224cj.*
 internal import crypto4cj.sha256cj.*
 internal import crypto4cj.sha384cj.*
 internal import crypto4cj.sha512cj.*
-
-internal import charset4cj.charset.*
-internal import charset4cj.charset.unicode.*
-internal import charset4cj.charset.encoding.*

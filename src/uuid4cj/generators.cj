@@ -92,6 +92,10 @@ public class Generators{
         return NameBasedGenerator(namespace, digester, Option<UUIDType>.None)
     }
 
+    public static func nameBasedGenerator(digester: MessageDigest): NameBasedGenerator {
+        return NameBasedGenerator(Option<UUID>.None, digester, Option<UUIDType>.None)
+    }
+
     /**
      * Factory method for constructing UUID generator that generates UUID using
      * variant 1 (time+location based).

@@ -13,8 +13,7 @@ package uuid4cj.uuid4cj
  * @since 37.2
  */
 public class NameBasedGenerator <: StringArgGenerator {
-    public static let  _utf8 = UTF8Charset.instance
-    private let logger: SimpleLogger = SimpleLogger()
+    private let logger = getGlobalLogger()
     /**
      * Namespace used when name is a DNS name.
      */
@@ -99,7 +98,7 @@ public class NameBasedGenerator <: StringArgGenerator {
      */  
     @OverflowWrapping  
     public override func generate(name: String): UUID {
-        return generate(UInt8ToInt8(_utf8.newEncoder().encode(name)))
+        return generate(UInt8ToInt8(name.toArray()))
     }
     
     /**

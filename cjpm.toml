@@ -1,5 +1,4 @@
 [dependencies]
-  charset4cj = {branch = "v0.0.1.B002", git = "https://gitcode.com/Cangjie-TPC/charset4cj.git", version = "0.0.1"}
   crypto4cj = {branch = "v0.0.1.B002", git = "https://gitcode.com/Cangjie-TPC/crypto4cj.git", version = "0.0.1"}
 
 [package]

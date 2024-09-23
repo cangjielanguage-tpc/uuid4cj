@@ -10,7 +10,7 @@ package uuid4cj.uuid4cj
  */
 public class UUIDTimer {
 
-    private let _logger: SimpleLogger = SimpleLogger()
+    private let _logger = getGlobalLogger()
 
     private static let kClockOffset:Int64 = 0x01b21dd213814000
 
