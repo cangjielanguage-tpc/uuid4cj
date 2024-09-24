@@ -10,8 +10,6 @@ package uuid4cj.uuid4cj
  */
 public class EthernetAddress <: Hashable & ToString & Equatable<EthernetAddress>{
 
-    private static let serialVersionUID:Int64 = 1
-
     private static let HEX_CHARS:Array<Rune> = "0123456789abcdefABCDEF".toRuneArray()
 
     protected static var _rnd = Option<SecureRandom>.None

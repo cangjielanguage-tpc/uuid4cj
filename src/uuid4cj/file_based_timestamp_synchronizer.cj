@@ -10,7 +10,7 @@ package uuid4cj.uuid4cj
  */
 public class FileBasedTimestampSynchronizer {
 
-    private let logger: SimpleLogger = SimpleLogger()
+    private let logger = getGlobalLogger()
     
     static let DEFAULT_UPDATE_INTERVAL: Int64 = 10 * 1000
 

@@ -10,9 +10,7 @@ package uuid4cj.uuid4cj
  */
 class LockedFile {
 
-    private let logger: SimpleLogger = SimpleLogger()
-
-    static let DEFAULT_LENGTH: Int32 = 22
+    private let logger = getGlobalLogger()
 
     static let READ_ERROR: Int64 = 0
 
