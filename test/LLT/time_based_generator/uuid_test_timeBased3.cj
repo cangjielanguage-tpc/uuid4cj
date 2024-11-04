@@ -68,7 +68,7 @@ main() {
 public func openFile (filePath: String): File {
     var file: File
 
-    if (File.exists(filePath)) {
+    if (exists(filePath)) {
         file = File(filePath, OpenOption.Open(true, true))
     } else {
         file = File(filePath, OpenOption.Create(true))
