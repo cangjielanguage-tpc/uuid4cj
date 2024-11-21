@@ -142,7 +142,7 @@ public class FileBasedTimestampSynchronizer {
 
     private static func openFile(filePath: String): File{
         let file: File
-        if (exists(filePath)) {
+        if (File.exists(filePath)) {
             file = File(filePath, OpenOption.Open(true, true))
         } else {
             file = File(filePath, OpenOption.Create(true))
