@@ -13,8 +13,8 @@ public class uuid_FileBasedTimestampSynchronizer_001{
     @TestCase
     public func uuid_FileBasedTimestampSynchronizer_001():Unit{
         println("---------------------------------uuid_FileBasedTimestampSynchronizer_001------------------------------")
-        var file = File("uuid_UUIDTimer_001.txt", OpenOption.CreateOrTruncate(true))
-        var file2 = File("uuid_UUIDTimer_001_2.txt", OpenOption.CreateOrTruncate(true))
+        var file = File("uuid_UUIDTimer_001.txt", OpenMode.ReadWrite)
+        var file2 = File("uuid_UUIDTimer_001_2.txt", OpenMode.ReadWrite)
         var fbts = FileBasedTimestampSynchronizer(file,file2)     
         println("fbts.update(1000): ${fbts.update(1000)}")
         println("fbts.update(2000): ${fbts.update(2000)}")
@@ -45,8 +45,8 @@ public class uuid_FileBasedTimestampSynchronizer_001{
     @TestCase
     public func uuid_FileBasedTimestampSynchronizer_003():Unit{
         println("---------------------------------uuid_FileBasedTimestampSynchronizer_003------------------------------")
-        var file = File("uuid_UUIDTimer_003.txt", OpenOption.CreateOrTruncate(true))
-        var file2 = File("uuid_UUIDTimer_003_2.txt", OpenOption.CreateOrTruncate(true))
+        var file = File("uuid_UUIDTimer_003.txt", OpenMode.ReadWrite)
+        var file2 = File("uuid_UUIDTimer_003_2.txt", OpenMode.ReadWrite)
         var fbts = FileBasedTimestampSynchronizer(file,file2,1000)  
         println("fbts.update(1000): ${fbts.update(1000)}")
         println("fbts.update(2000): ${fbts.update(2000)}")
@@ -62,8 +62,8 @@ public class uuid_FileBasedTimestampSynchronizer_001{
     @TestCase
     public func uuid_FileBasedTimestampSynchronizer_004():Unit{
         println("---------------------------------uuid_FileBasedTimestampSynchronizer_004------------------------------")
-        var file = File("uuid_UUIDTimer_004.txt", OpenOption.CreateOrTruncate(true))
-        var file2 = File("uuid_UUIDTimer_004_2.txt", OpenOption.CreateOrTruncate(true))
+        var file = File("uuid_UUIDTimer_004.txt", OpenMode.ReadWrite)
+        var file2 = File("uuid_UUIDTimer_004_2.txt", OpenMode.ReadWrite)
         var fbts = FileBasedTimestampSynchronizer(file,file2) 
         fbts.setUpdateInterval(1000)
         println("fbts.update(1000): ${fbts.update(1000)}")
@@ -80,8 +80,8 @@ public class uuid_FileBasedTimestampSynchronizer_001{
     @TestCase
     public func uuid_FileBasedTimestampSynchronizer_005():Unit{
         println("---------------------------------uuid_FileBasedTimestampSynchronizer_005------------------------------")
-        var file = File("uuid_UUIDTimer_005.txt", OpenOption.CreateOrTruncate(true))
-        var file2 = File("uuid_UUIDTimer_005_2.txt", OpenOption.CreateOrTruncate(true))
+        var file = File("uuid_UUIDTimer_005.txt", OpenMode.ReadWrite)
+        var file2 = File("uuid_UUIDTimer_005_2.txt", OpenMode.ReadWrite)
         var fbts = FileBasedTimestampSynchronizer(file,file2) 
         fbts.setUpdateInterval(1000*1000*1000*2)
         println("fbts.update(1000): ${fbts.update(1000)}")
@@ -98,8 +98,8 @@ public class uuid_FileBasedTimestampSynchronizer_001{
     @TestCase
     public func uuid_FileBasedTimestampSynchronizer_006():Unit{
         println("---------------------------------uuid_FileBasedTimestampSynchronizer_006------------------------------")
-        var file = File("uuid_UUIDTimer_006.txt", OpenOption.CreateOrTruncate(true))
-        var file2 = File("uuid_UUIDTimer_006_2.txt", OpenOption.CreateOrTruncate(true))
+        var file = File("uuid_UUIDTimer_006.txt", OpenMode.ReadWrite)
+        var file2 = File("uuid_UUIDTimer_006_2.txt", OpenMode.ReadWrite)
         var fbts = FileBasedTimestampSynchronizer(file,file2) 
         fbts.setUpdateInterval(1000*1000*1000*2)
         println("fbts.update(1000): ${fbts.update(1000)}")

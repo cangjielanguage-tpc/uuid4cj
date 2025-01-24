@@ -17,7 +17,7 @@ internal import std.convert.*
 internal import std.io.SeekPosition
 internal import std.time.*
 internal import log.*
-internal import std.format.Formatter
+internal import std.convert.Formattable
 internal import crypto.crypto.SecureRandom
 internal import encoding.hex.toHexString
 internal import encoding.hex.fromHexString

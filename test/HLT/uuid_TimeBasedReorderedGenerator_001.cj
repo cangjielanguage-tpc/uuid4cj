@@ -16,8 +16,8 @@ public class uuid_TimeBasedReorderedGenerator_001{
     @TestCase
     public func uuid_TimeBasedReorderedGenerator_001():Unit{
         println("---------------------------------uuid_TimeBasedReorderedGenerator_001------------------------------")
-        var file1 = File("uuid_TimeBasedReorderedGenerator_001.txt", OpenOption.CreateOrTruncate(true))
-        var file2 = File("uuid_TimeBasedReorderedGenerator_001_2.txt", OpenOption.CreateOrTruncate(true))
+        var file1 = File("uuid_TimeBasedReorderedGenerator_001.txt", OpenMode.ReadWrite)
+        var file2 = File("uuid_TimeBasedReorderedGenerator_001_2.txt", OpenMode.ReadWrite)
         var fbts = FileBasedTimestampSynchronizer(file1,file2) 
         var timeBasedReorderedGenerator = TimeBasedReorderedGenerator(Option<EthernetAddress>.None,UUIDTimer(SecureRandom(),fbts))
 
@@ -84,8 +84,8 @@ public class uuid_TimeBasedReorderedGenerator_001{
     @TestCase
     public func uuid_TimeBasedReorderedGenerator_002():Unit{
         println("---------------------------------uuid_TimeBasedReorderedGenerator_002------------------------------")
-        var file1 = File("uuid_TimeBasedReorderedGenerator_002.txt", OpenOption.CreateOrTruncate(true))
-        var file2 = File("uuid_TimeBasedReorderedGenerator_002_2.txt", OpenOption.CreateOrTruncate(true))
+        var file1 = File("uuid_TimeBasedReorderedGenerator_002.txt", OpenMode.ReadWrite)
+        var file2 = File("uuid_TimeBasedReorderedGenerator_002_2.txt", OpenMode.ReadWrite)
         var fbts = FileBasedTimestampSynchronizer(file1,file2) 
         var timeBasedReorderedGenerator = TimeBasedReorderedGenerator(EthernetAddress("00:C0:F0:3D:5B:7C"),UUIDTimer(SecureRandom(),fbts))
         println("TimeBasedReorderedGenerator.getType():${timeBasedReorderedGenerator.getType().raw()}")

@@ -1,4 +1,8 @@
-#### V0.0.1
+## v1.0.0
+
+1. 更新到cjc_0.58.3
+
+## v0.0.1
 - 基于名称（MD5、SHA1）生成唯一UUID
 - 基于随机数（Random、SecureRandom）生成唯一UUID
 - 基于时间/位置生成 UUID 
