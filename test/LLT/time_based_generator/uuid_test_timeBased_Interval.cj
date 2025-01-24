@@ -7,15 +7,15 @@ import crypto.crypto.SecureRandom
 import std.random.*
 import std.time.*
 import std.fs.*
-import std.format.Formatter
+import std.convert.Formattable
 import std.io.SeekPosition
 import std.core.sleep
 
 
 main() {  
 
-    var file1: File = File("gggg_delay.txt", OpenOption.CreateOrTruncate(true))
-    var file2: File = File("zzzz_delay.txt", OpenOption.CreateOrTruncate(true))
+    var file1: File = File("gggg_delay.txt", OpenMode.ReadWrite)
+    var file2: File = File("zzzz_delay.txt", OpenMode.ReadWrite)
 
     var oFile: Option<FileBasedTimestampSynchronizer> =  FileBasedTimestampSynchronizer(file1, file2)
     oFile.getOrThrow().setUpdateInterval(10 * 1000) // 10s update

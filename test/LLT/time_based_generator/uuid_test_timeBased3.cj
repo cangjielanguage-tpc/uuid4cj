@@ -7,7 +7,7 @@ import crypto.crypto.SecureRandom
 import std.random.*
 import std.time.*
 import std.fs.*
-import std.format.Formatter
+import std.convert.Formattable
 
 main() {  
     let filePath1: String = "./ggg_3.txt"
@@ -69,9 +69,9 @@ public func openFile (filePath: String): File {
     var file: File
 
     if (exists(filePath)) {
-        file = File(filePath, OpenOption.Open(true, true))
+        file = File(filePath, OpenMode.ReadWrite)
     } else {
-        file = File(filePath, OpenOption.Create(true))
+        file = File.create(filePath)
     }
     return file
 }

@@ -15,8 +15,8 @@ public class uuid_UUIDTimer_001{
     @TestCase
     public func uuid_UUIDTimer_001():Unit{
         println("---------------------------------uuid_UUIDTimer_001------------------------------")
-        var file = File("UUIDTimer_001.txt", OpenOption.CreateOrTruncate(true))
-        var file2 = File("UUIDTimer_001_2.txt", OpenOption.CreateOrTruncate(true))
+        var file = File("UUIDTimer_001.txt", OpenMode.ReadWrite)
+        var file2 = File("UUIDTimer_001_2.txt", OpenMode.ReadWrite)
         var fbts = FileBasedTimestampSynchronizer(file,file2,1000) 
         var uuidTimer = UUIDTimer(SecureRandom(),fbts)
         println("uuidTimer.getClockSequence(): ${uuidTimer.getClockSequence()} ${uuidTimer.getClockSequence()}")
@@ -40,8 +40,8 @@ public class uuid_UUIDTimer_001{
     @TestCase
     public func uuid_UUIDTimer_003():Unit{
         println("---------------------------------uuid_UUIDTimer_003------------------------------")
-        var file = File("UUIDTimer_001.txt", OpenOption.CreateOrTruncate(true))
-        var file2 = File("UUIDTimer_001_2.txt", OpenOption.CreateOrTruncate(true))
+        var file = File("UUIDTimer_001.txt", OpenMode.ReadWrite)
+        var file2 = File("UUIDTimer_001_2.txt", OpenMode.ReadWrite)
         var fbts = FileBasedTimestampSynchronizer(file,file2,1000) 
         var uuidTimer = UUIDTimer(SecureRandom(),fbts,UUIDClock())
         println("uuidTimer.getClockSequence(): ${uuidTimer.getClockSequence()} ${uuidTimer.getClockSequence()}")
