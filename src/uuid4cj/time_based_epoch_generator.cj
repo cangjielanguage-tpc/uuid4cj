@@ -53,7 +53,7 @@ public class TimeBasedEpochGenerator <: NoArgGenerator {
         var rnd: Array<UInt8> = Array<UInt8>(10, repeat: 0)
         match(_random) {
             case Some(_) => 
-                rnd = _random.getOrThrow().nextBytes(10)
+                rnd = _random.getOrThrow().nextBytesNew(10)
             case None => 
                 rnd = _srandom.getOrThrow().nextBytes(10)
         }

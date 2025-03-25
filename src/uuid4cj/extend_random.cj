@@ -10,7 +10,7 @@ package uuid4cj.uuid4cj
  */
 extend Random {
     @OverflowWrapping
-    func nextBytes(length: Int32): Array<UInt8> {
+    func nextBytesNew(length: Int32): Array<UInt8> {
         var bytes: Array<UInt8> = Array<UInt8>(Int64(length), repeat: 0)
         var i: Int64 = 0
         for(_ in 0..bytes.size) {
