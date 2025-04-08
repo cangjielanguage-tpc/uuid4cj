@@ -7,7 +7,7 @@ import crypto.crypto.SecureRandom
 import std.random.*
 import std.time.*
 import std.fs.*
-import std.convert.Formattable
+import std.format.Formatter
 
 main() {  
 

@@ -50,10 +50,10 @@ public class TimeBasedEpochGenerator <: NoArgGenerator {
      */
     public func generate(): UUID {
         let rawTimestamp: Int64 = UUIDClock().currentTimeMillis()
-        var rnd: Array<UInt8> = Array<UInt8>(10, repeat: 0)
+        var rnd: Array<UInt8> = Array<UInt8>(10, item: 0)
         match(_random) {
             case Some(_) => 
-                rnd = _random.getOrThrow().nextBytesNew(10)
+                rnd = _random.getOrThrow().nextBytes(10)
             case None => 
                 rnd = _srandom.getOrThrow().nextBytes(10)
         }

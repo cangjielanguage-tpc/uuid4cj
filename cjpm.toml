@@ -1,8 +1,8 @@
 [dependencies]
-  crypto4cj = {branch = "v0.0.1.B005", git = "https://gitcode.com/Cangjie-TPC/crypto4cj.git"}
+  crypto4cj = {branch = "crypto-1.0.2_cangjie-0.53.18", git = "https://gitcode.com/Cangjie-TPC/crypto4cj.git"}
 
 [package]
-  cjc-version = "0.59.6"
+  cjc-version = "0.53.18"
   compile-option = "-O2"
   description = ""
   link-option = ""

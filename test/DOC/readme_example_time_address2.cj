@@ -8,7 +8,7 @@ import crypto.crypto.SecureRandom
 import std.random.*
 import std.time.*
 import std.fs.*
-import std.convert.Formattable
+import std.format.Formatter
 
 main() {   
     let testReadmeExample = TestReadmeExample()
@@ -63,10 +63,10 @@ public class TestReadmeExample {
     public func openFile (filePath: String): File {
         var file: File
 
-        if (exists(filePath)) {
-            file = File(filePath, OpenMode.ReadWrite)
+        if (File.exists(filePath)) {
+            file = File(filePath, OpenOption.Open(true, true))
         } else {
-            file = File.create(filePath)
+            file = File(filePath, OpenOption.Create(true))
         }
         return file
     }

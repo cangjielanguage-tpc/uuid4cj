@@ -11,7 +11,7 @@ package uuid4cj.uuid4cj
  */
 public class UUID <: ToString {
 
-    private let bytes: Array<Byte> = Array(16, repeat: 0)
+    private let bytes: Array<Byte> = Array(16, item: 0)
 
     public init(data: Array<Byte>) {
         if(data.size != 16) {
@@ -186,7 +186,7 @@ public class UUID <: ToString {
         if (version() != 1) {
             throw UnsupportedOperationException("Not a time-based UUID")
         }
-        let timestampBytes = Array<Byte>(8, repeat: 0)
+        let timestampBytes = Array<Byte>(8, item: 0)
         this.bytes.copyTo(timestampBytes, 6, 0, 2)
         this.bytes.copyTo(timestampBytes, 4, 2, 2)
         this.bytes.copyTo(timestampBytes, 0, 4, 4)
@@ -212,7 +212,7 @@ public class UUID <: ToString {
             throw UnsupportedOperationException ("Not a time-based UUID")
         }
 
-        let clockSequenceBytes = Array<Byte>(2, repeat: 0)
+        let clockSequenceBytes = Array<Byte>(2, item: 0)
         this.bytes.copyTo(clockSequenceBytes, 8, 0, 2)
         clockSequenceBytes[0] &= 0x3f
         return Int32.parse("0x" + toHexString(clockSequenceBytes))
