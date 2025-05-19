@@ -3,7 +3,7 @@
 
 import uuid4cj.uuid4cj.*
 import std.random.*
-import crypto.crypto.SecureRandom
+import stdx.crypto.crypto.SecureRandom
 import std.unicode.*
 
 main() {    

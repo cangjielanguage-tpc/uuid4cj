@@ -3,8 +3,8 @@
 
 import uuid4cj.uuid4cj.*
 
-import encoding.hex.*
-import crypto.digest.*
+import stdx.encoding.hex.*
+import stdx.crypto.digest.*
 
 main() {    
 

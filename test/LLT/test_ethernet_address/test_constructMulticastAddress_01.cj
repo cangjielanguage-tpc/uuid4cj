@@ -2,7 +2,7 @@
 // EXEC: ./main
 
 import uuid4cj.uuid4cj.*
-import crypto.crypto.*
+import stdx.crypto.crypto.*
 
 
 main() {   

@@ -8,7 +8,7 @@ import uuid4cj.uuid4cj.*
 import std.collection.*
 import std.time.*
 import std.sync.*
-import crypto.crypto.*
+import stdx.crypto.crypto.*
 
 @Test
 public class uuid_Reliability_timeBasedGenerator_004{

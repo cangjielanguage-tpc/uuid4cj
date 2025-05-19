@@ -3,12 +3,12 @@
 
 import uuid4cj.uuid4cj.*
 
-internal import crypto4cj.md5cj.*
-internal import crypto4cj.sha1cj.*
-internal import crypto4cj.sha224cj.*
-internal import crypto4cj.sha256cj.*
-internal import crypto4cj.sha384cj.*
-internal import crypto4cj.sha512cj.*
+internal import crypto_ffi.md5cj.*
+internal import crypto_ffi.sha1cj.*
+internal import crypto_ffi.sha224cj.*
+internal import crypto_ffi.sha256cj.*
+internal import crypto_ffi.sha384cj.*
+internal import crypto_ffi.sha512cj.*
 
 main() {    
 

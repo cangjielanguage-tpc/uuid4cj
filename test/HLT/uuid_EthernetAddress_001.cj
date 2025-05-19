@@ -6,7 +6,7 @@ import std.unittest.*
 import std.unittest.testmacro.*
 import uuid4cj.uuid4cj.*
 import std.random.*
-import crypto.crypto.*
+import stdx.crypto.crypto.*
 
 @Test
 public class uuid_EthernetAddress_001{

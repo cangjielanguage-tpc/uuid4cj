@@ -9,7 +9,7 @@ import std.random.*
 import std.fs.*
 import std.time.*
 import std.core.sleep
-import crypto.crypto.*
+import stdx.crypto.crypto.*
 
 @Test
 public class uuid_TimeBasedReorderedGenerator_001{

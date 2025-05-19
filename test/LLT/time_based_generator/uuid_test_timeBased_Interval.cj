@@ -3,7 +3,7 @@
 // EXEC: ./main
 
 import uuid4cj.uuid4cj.*
-import crypto.crypto.SecureRandom
+import stdx.crypto.crypto.SecureRandom
 import std.random.*
 import std.time.*
 import std.fs.*
