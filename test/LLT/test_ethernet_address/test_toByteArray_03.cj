@@ -14,7 +14,7 @@ main() {
 }
 
 func testToByteArray1(): Int32 {
-    var arr: Array<UInt8> =  Array<UInt8>(5, repeat: 0)
+    var arr: Array<UInt8> =  Array<UInt8>(5, item: 0)
     try {
         EthernetAddress(0).toByteArray(arr)
     }catch(e: IllegalArgumentException) {

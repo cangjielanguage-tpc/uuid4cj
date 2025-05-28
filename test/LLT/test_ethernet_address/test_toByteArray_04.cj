@@ -15,9 +15,9 @@ main() {
 
 func testToByteArray1(): Int32 {
     var ethernet_address: EthernetAddress = EthernetAddress(0)
-    var test_array: Array<UInt8> = Array<UInt8>(6, repeat: UInt8(UInt32(r'x')))
+    var test_array: Array<UInt8> = Array<UInt8>(6, item: UInt8(UInt32(r'x')))
     ethernet_address.toByteArray(test_array)
-    if(assertEthernetAddressArraysAreEqual(Array<UInt8>(6, repeat: 0), 0, test_array, 0) != 0) {
+    if(assertEthernetAddressArraysAreEqual(Array<UInt8>(6, item: 0), 0, test_array, 0) != 0) {
         return -1
     }
     return 0

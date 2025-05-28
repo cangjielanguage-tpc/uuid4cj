@@ -13,8 +13,8 @@ internal import crypto4cj.sha512cj.*
 main() {    
 
     var s = "hello".toArray()
-    var md: Array<UInt8> = Array<UInt8>(16, repeat: 0)
-    var sh: Array<UInt8> = Array<UInt8>(20, repeat: 0)
+    var md: Array<UInt8> = Array<UInt8>(16, item: 0)
+    var sh: Array<UInt8> = Array<UInt8>(20, item: 0)
     if (s.toString() != "[104, 101, 108, 108, 111]") {
         return 1
     }

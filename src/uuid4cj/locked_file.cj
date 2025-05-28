@@ -16,7 +16,7 @@ class LockedFile {
 
     var mFile: File 
 
-    var mWriteArray: Array<UInt8> = Array<UInt8>(22, repeat: 0)
+    var mWriteArray: Array<UInt8> = Array<UInt8>(22, item: 0)
     
     var mLastTimestamp: Int64 = 0
 
@@ -54,7 +54,7 @@ class LockedFile {
             size = 100
         }
 
-        var uArray: Array<UInt8> = Array<UInt8>(mFile.length, repeat: 0)
+        var uArray: Array<UInt8> = Array<UInt8>(mFile.length, item: 0)
         try {
             mFile.read(uArray)
         } catch (ie: FSException | IllegalArgumentException) {
@@ -62,7 +62,7 @@ class LockedFile {
             return READ_ERROR
         }
 
-        var charArray: Array<Rune> = Array<Rune>(uArray.size, repeat: Rune(0))
+        var charArray: Array<Rune> = Array<Rune>(uArray.size, item: Rune(0))
 
         for( i in 0..uArray.size) {
             // uint8 -> char

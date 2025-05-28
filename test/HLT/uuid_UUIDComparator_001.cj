@@ -35,7 +35,7 @@ public class uuid_UUIDComparator_001{
 }
 @OverflowWrapping
 func Int8ToUInt8(arr: Array<Int8>): Array<UInt8> {
-    var res: Array<UInt8> = Array<UInt8>(arr.size, repeat: 0)
+    var res: Array<UInt8> = Array<UInt8>(arr.size, item: 0)
     for( i in 0..arr.size) {
         res[i] = UInt8(arr[i])
     }

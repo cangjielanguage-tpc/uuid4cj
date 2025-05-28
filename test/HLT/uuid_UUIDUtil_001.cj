@@ -99,7 +99,7 @@ public class uuid_UUIDUtil_001{
     @TestCase
     public func uuid_UUIDUtil_uuid_Array_002():Unit{
         println("---------------------------------uuid_UUIDUtil_uuid_Array_002------------------------------")
-        var arry: Array<Int8> = Array<Int8>(0,repeat:0)
+        var arry: Array<Int8> = Array<Int8>(0,item:0)
         var eMessage = ""
         try{
             UUIDUtil.uuid(arry)
@@ -114,7 +114,7 @@ public class uuid_UUIDUtil_001{
         println("---------------------------------uuid_UUIDUtil_uuid_Array_003------------------------------")
         var name: NameBasedGenerator = Generators.nameBasedGenerator()
         let uuid: UUID = name.generate("hello world")
-        var arry: Array<Int8> = Array<Int8>(20,repeat:0)
+        var arry: Array<Int8> = Array<Int8>(20,item:0)
         println("arry: ${arry}")
         println("arry.size: ${arry.size}")
         var j:Int64 = 4
@@ -136,7 +136,7 @@ public class uuid_UUIDUtil_001{
         println("---------------------------------uuid_UUIDUtil_uuid_Array_004------------------------------")
         var name: NameBasedGenerator = Generators.nameBasedGenerator()
         let uuid: UUID = name.generate("hello world")
-        var arry: Array<Int8> = Array<Int8>(20,repeat:0)
+        var arry: Array<Int8> = Array<Int8>(20,item:0)
         println("arry: ${arry}")
         println("arry.size: ${arry.size}")
         var j:Int64 = 4
@@ -219,7 +219,7 @@ public class uuid_UUIDUtil_001{
     @TestCase
     public func uuid_UUIDUtil_constructUUID_007():Unit{
         println("---------------------------------uuid_UUIDUtil_constructUUID_007------------------------------")
-        var arry: Array<Int8> = Array<Int8>(0,repeat:0)
+        var arry: Array<Int8> = Array<Int8>(0,item:0)
         
         var eMessage = ""
         try{
@@ -416,7 +416,7 @@ public class uuid_UUIDUtil_001{
     public func uuid_UUIDUtil_toByteArray_001():Unit{
         println("---------------------------------uuid_UUIDUtil_toByteArray_001------------------------------")
         var uuid = UUID.nilUUID()
-        var array: Array<Int8> = Array<Int8>(16,repeat:0)
+        var array: Array<Int8> = Array<Int8>(16,item:0)
         UUIDUtil.toByteArray(uuid,array)
         println("array: ${array}")
         @Assert(array.toString(),"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]")
@@ -430,7 +430,7 @@ public class uuid_UUIDUtil_001{
     public func uuid_UUIDUtil_toByteArray_002():Unit{
         println("---------------------------------uuid_UUIDUtil_toByteArray_002------------------------------")
         var uuid = UUID.nilUUID()
-        var array: Array<Int8> = Array<Int8>(0,repeat:0)
+        var array: Array<Int8> = Array<Int8>(0,item:0)
         
         var eMessage = ""
         try{
@@ -441,7 +441,7 @@ public class uuid_UUIDUtil_001{
         println("eMessage: ${eMessage}")
         @Assert(eMessage,"Invalid bytes passed: can not be null")
 
-        var array2: Array<Int8> = Array<Int8>(15,repeat:0)
+        var array2: Array<Int8> = Array<Int8>(15,item:0)
         eMessage = ""
         try{
             UUIDUtil.toByteArray(uuid,array2)
@@ -455,7 +455,7 @@ public class uuid_UUIDUtil_001{
     public func uuid_UUIDUtil_toByteArray_003():Unit{
         println("---------------------------------uuid_UUIDUtil_toByteArray_003------------------------------")
         var uuid = UUID.nilUUID()
-        var array: Array<Int8> = Array<Int8>(17,repeat:0)
+        var array: Array<Int8> = Array<Int8>(17,item:0)
         UUIDUtil.toByteArray(uuid,array,1)
         println("array: ${array}")
         @Assert(array.toString(),"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]")
@@ -465,7 +465,7 @@ public class uuid_UUIDUtil_001{
         println("array: ${array}")
         @Assert(array.toString(),"[0, -79, -111, -119, -7, 69, 72, 58, -85, -71, 35, 71, -82, -5, -51, -48, -89]")
 
-        var array2: Array<Int8> = Array<Int8>(17,repeat:0)
+        var array2: Array<Int8> = Array<Int8>(17,item:0)
         UUIDUtil.toByteArray(UUID.nilUUID(),array2,0)
         println("array: ${array2}")
         @Assert(array2.toString(),"[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]")
@@ -479,7 +479,7 @@ public class uuid_UUIDUtil_001{
     public func uuid_UUIDUtil_toByteArray_004():Unit{
         println("---------------------------------uuid_UUIDUtil_toByteArray_004------------------------------")
         var uuid = UUID.nilUUID()
-        var array: Array<Int8> = Array<Int8>(0,repeat:0)
+        var array: Array<Int8> = Array<Int8>(0,item:0)
         
         var eMessage = ""
         try{
@@ -490,7 +490,7 @@ public class uuid_UUIDUtil_001{
         println("eMessage: ${eMessage}")
         @Assert(eMessage,"Invalid bytes passed: can not be null")
 
-        var array2: Array<Int8> = Array<Int8>(16,repeat:0)
+        var array2: Array<Int8> = Array<Int8>(16,item:0)
         eMessage = ""
         try{
             UUIDUtil.toByteArray(uuid,array2,1)
@@ -515,7 +515,7 @@ public class uuid_UUIDUtil_001{
 
 @OverflowWrapping
 func UInt8ToInt8(arr: Array<UInt8>): Array<Int8> {
-    var res: Array<Int8> = Array<Int8>(arr.size, repeat: 0)
+    var res: Array<Int8> = Array<Int8>(arr.size, item: 0)
     for( i in 0..arr.size) {
         res[i] = Int8(arr[i])
     }

@@ -363,7 +363,7 @@ public class uuid_EthernetAddress_001{
     public func uuid_EthernetAddress_toByteArray_003():Unit{
         println("---------------------------------uuid_EthernetAddress_toByteArray_003------------------------------")
         var ethernetAddress = EthernetAddress("00:c0:f0:3D:5B:7c")
-        var array = Array<UInt8>(6,repeat:0)
+        var array = Array<UInt8>(6,item:0)
         ethernetAddress.toByteArray(array)
         println("ethernetAddress: ${ethernetAddress.toString()}")
         println("array: ${array.toString()}")
@@ -374,7 +374,7 @@ public class uuid_EthernetAddress_001{
     public func uuid_EthernetAddress_toByteArray_004():Unit{
         println("---------------------------------uuid_EthernetAddress_toByteArray_004------------------------------")
         var ethernetAddress = EthernetAddress("00:c0:f0:3D:5B:7c")
-        var array = Array<UInt8>(0,repeat:0)
+        var array = Array<UInt8>(0,item:0)
         var eMessage = ""
         try{
             ethernetAddress.toByteArray(array)
@@ -388,7 +388,7 @@ public class uuid_EthernetAddress_001{
     public func uuid_EthernetAddress_toByteArray_005():Unit{
         println("---------------------------------uuid_EthernetAddress_toByteArray_005------------------------------")
         var ethernetAddress = EthernetAddress("00:c0:f0:3D:5B:7c")
-        var array = Array<UInt8>(8,repeat:100)
+        var array = Array<UInt8>(8,item:100)
         ethernetAddress.toByteArray(array,1)
         println("ethernetAddress: ${ethernetAddress.toString()}")
         println("array: ${array.toString()}")
@@ -399,7 +399,7 @@ public class uuid_EthernetAddress_001{
     public func uuid_EthernetAddress_toByteArray_006():Unit{
         println("---------------------------------uuid_EthernetAddress_toByteArray_006------------------------------")
         var ethernetAddress = EthernetAddress("00:c0:f0:3D:5B:7c")
-        var array = Array<UInt8>(8,repeat:100)
+        var array = Array<UInt8>(8,item:100)
         var eMessage = ""
         try{
             ethernetAddress.toByteArray(array,3)

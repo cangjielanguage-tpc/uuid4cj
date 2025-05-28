@@ -5,7 +5,7 @@ import uuid4cj.uuid4cj.*
 
 
 main() {   
-    var arr: Array<UInt8> = Array<UInt8>(5, repeat: 0)
+    var arr: Array<UInt8> = Array<UInt8>(5, item: 0)
     try {
         EthernetAddress.valueOf(arr)
     }catch(e: NumberFormatException) {

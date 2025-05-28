@@ -19,7 +19,7 @@ func testAsByteArray1(): Int32 {
     if(ethernet_address.asByteArray().size != 6) {
         return -1
     }
-    assertEthernetAddressArraysAreEqual(Array<UInt8>(6, repeat: 0), 0, ethernet_address.asByteArray(), 0)
+    assertEthernetAddressArraysAreEqual(Array<UInt8>(6, item: 0), 0, ethernet_address.asByteArray(), 0)
     return 0
  }
 
