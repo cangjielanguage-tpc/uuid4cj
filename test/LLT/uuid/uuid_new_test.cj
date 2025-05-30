@@ -3,7 +3,7 @@
 
 import uuid4cj.uuid4cj.*
 import std.convert.Formattable
-import crypto.crypto.SecureRandom
+import stdx.crypto.crypto.SecureRandom
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*

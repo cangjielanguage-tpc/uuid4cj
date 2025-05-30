@@ -2,7 +2,7 @@
 // EXEC: ./main
 
 import uuid4cj.uuid4cj.*
-import encoding.hex.*
+import stdx.encoding.hex.*
 
 main() {    
     let messageDigest1: MessageDigest = MessageDigest(DigestType.MD5)

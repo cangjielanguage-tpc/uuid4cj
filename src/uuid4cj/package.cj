@@ -16,15 +16,15 @@ internal import std.unicode.*
 internal import std.convert.*
 internal import std.io.SeekPosition
 internal import std.time.*
-internal import log.*
+internal import stdx.log.*
 internal import std.convert.Formattable
-internal import crypto.crypto.SecureRandom
-internal import encoding.hex.toHexString
-internal import encoding.hex.fromHexString
+internal import stdx.crypto.crypto.SecureRandom
+internal import stdx.encoding.hex.toHexString
+internal import stdx.encoding.hex.fromHexString
 
-internal import crypto4cj.md5cj.*
-internal import crypto4cj.sha1cj.*
-internal import crypto4cj.sha224cj.*
-internal import crypto4cj.sha256cj.*
-internal import crypto4cj.sha384cj.*
-internal import crypto4cj.sha512cj.*
+internal import crypto_ffi.md5cj.*
+internal import crypto_ffi.sha1cj.*
+internal import crypto_ffi.sha224cj.*
+internal import crypto_ffi.sha256cj.*
+internal import crypto_ffi.sha384cj.*
+internal import crypto_ffi.sha512cj.*

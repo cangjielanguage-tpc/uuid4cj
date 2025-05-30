@@ -5,7 +5,7 @@
 import std.unittest.*
 import std.unittest.testmacro.*
 import uuid4cj.uuid4cj.*
-import crypto.crypto.*
+import stdx.crypto.crypto.*
 
 @Test
 public class uuid_Standard_013{

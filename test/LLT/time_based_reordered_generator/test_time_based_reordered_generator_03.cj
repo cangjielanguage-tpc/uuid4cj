@@ -3,7 +3,7 @@
 
 import uuid4cj.uuid4cj.*
 import std.random.*
-import crypto.crypto.SecureRandom
+import stdx.crypto.crypto.SecureRandom
 
 main() {    
     var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")

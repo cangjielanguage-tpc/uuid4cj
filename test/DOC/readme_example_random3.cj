@@ -4,7 +4,7 @@
 import uuid4cj.uuid4cj.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import crypto.crypto.SecureRandom
+import stdx.crypto.crypto.SecureRandom
 import std.random.*
 
 main() {   

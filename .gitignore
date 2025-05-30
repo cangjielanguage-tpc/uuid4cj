@@ -20,3 +20,4 @@ cjpm.lock
 target/
 test_temp/
 *.macrocall
+.cache/

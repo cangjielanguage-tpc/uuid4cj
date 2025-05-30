@@ -8,7 +8,7 @@ import uuid4cj.uuid4cj.*
 import std.random.*
 import std.fs.*
 import std.math.*
-import crypto.crypto.*
+import stdx.crypto.crypto.*
 
 @Test
 public class uuid_UUIDTimer_001{
