@@ -22,9 +22,4 @@ internal import stdx.crypto.crypto.SecureRandom
 internal import stdx.encoding.hex.toHexString
 internal import stdx.encoding.hex.fromHexString
 
-internal import crypto_ffi.md5cj.*
-internal import crypto_ffi.sha1cj.*
-internal import crypto_ffi.sha224cj.*
-internal import crypto_ffi.sha256cj.*
-internal import crypto_ffi.sha384cj.*
-internal import crypto_ffi.sha512cj.*
+internal import uuid4cj.digest.*
