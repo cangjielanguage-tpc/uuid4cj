@@ -1,6 +1,4 @@
-/*
- * @Copyright (c) Huawei Technologies Co., Ltd. 2023-2024. All rights reserved.
- */
+
 
 package uuid4cj.uuid4cj
 
@@ -9,7 +7,7 @@ package uuid4cj.uuid4cj
  * @since 0.37.2
  */
 public enum DigestType <: ToString{
-    | MD5 
+    | MD5
     | SHA1
 
     /*
@@ -59,7 +57,7 @@ public class MessageDigest {
     public func getAlgorithm(): DigestType {
         return this.algorithm
     }
-    
+
     func update(input: Array<UInt8>): Unit {
         this.state = 1
         if(input.size == 0) {
@@ -69,7 +67,7 @@ public class MessageDigest {
             case DigestType.MD5 =>
                 md5Update((this.c as MD5CTX).getOrThrow(), input)
             case DigestType.SHA1 =>
-                sha1Update((this.c as SHACTX).getOrThrow(), input) 
+                sha1Update((this.c as SHACTX).getOrThrow(), input)
         }
     }
 
@@ -94,11 +92,11 @@ public class MessageDigest {
 
     func digestProcess(): Array<UInt8> {
         match (this.algorithm) {
-            case DigestType.MD5 => 
+            case DigestType.MD5 =>
                 var md: Array<UInt8> = Array<UInt8>(MD5_DIGEST_LENGTH, repeat: 0)
                 md5Final(md, (this.c as MD5CTX).getOrThrow())
                 return md
-            case DigestType.SHA1 => 
+            case DigestType.SHA1 =>
                 var md: Array<UInt8> = Array<UInt8>(SHA_DIGEST_LENGTH, repeat: 0)
                 sha1Final(md, (this.c as SHACTX).getOrThrow())
                 return md
@@ -108,11 +106,11 @@ public class MessageDigest {
     @OverflowWrapping
     func digestAll(input: Array<Int8>): Array<UInt8> {
         match (this.algorithm) {
-            case DigestType.MD5 => 
+            case DigestType.MD5 =>
                 var md: Array<UInt8> = Array<UInt8>(MD5_DIGEST_LENGTH, repeat: 0)
                 md5(Int8ToUInt8(input), md)
                 return md
-            case DigestType.SHA1 => 
+            case DigestType.SHA1 =>
                 var md: Array<UInt8> = Array<UInt8>(SHA_DIGEST_LENGTH, repeat: 0)
                 sha1(Int8ToUInt8(input), md)
                 return md
