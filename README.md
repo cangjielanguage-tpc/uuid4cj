@@ -3,9 +3,9 @@
 </div>
 
 <p align="center">
-<img alt="" src="https://img.shields.io/badge/release-v1.0.2-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/release-v1.0.3-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v1.0.0-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v1.0.5-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjcov-94.2%25-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
@@ -152,9 +152,9 @@ UUID（通用唯一标识符），也称为GUID（全局唯一标识符）。UUI
 ## <img alt="" src="./doc/assets/readme-icon-compile.png" style="display: inline-block;" width=3%/> 使用说明
 
 ### 编译
-    ```
-    cjpm build
-    ```
+
+- 该三方库依赖stdx，请参考[stdx](https://gitcode.com/Cangjie/Cangjie-STDX#%E4%BD%BF%E7%94%A8%E6%8C%87%E5%AF%BC)文档配置`CANGJIE_STDX_PATH`路径
+- 该三方库调用stdx.crypto.digest包，需要外部依赖 OpenSSL 3 的 crypto 动态库文件，具体细节参考stdx文档
 
 ### 功能示例
 
@@ -240,7 +240,7 @@ UUIDType: 5
 
 ```cangjie
 import uuid4cj.uuid4cj.*
-import crypto.crypto.SecureRandom
+import stdx.crypto.crypto.SecureRandom
 import std.random.*
 
 main() {  
@@ -263,7 +263,7 @@ UUIDType: 4
 ```
 ```cangjie
 import uuid4cj.uuid4cj.*
-import crypto.crypto.SecureRandom
+import stdx.crypto.crypto.SecureRandom
 import std.random.*
 
 main() {  
@@ -287,7 +287,7 @@ UUIDType: 4
 ```
 ```cangjie
 import uuid4cj.uuid4cj.*
-import crypto.crypto.SecureRandom
+import stdx.crypto.crypto.SecureRandom
 import std.random.*
 
 main() {  
@@ -356,7 +356,7 @@ UUIDType: 6
 
 ```
 import uuid4cj.uuid4cj.*
-import crypto.crypto.SecureRandom
+import stdx.crypto.crypto.SecureRandom
 
 main() {  
     var address: EthernetAddress = EthernetAddress("87:f5:93:06:D3:0C")
@@ -445,7 +445,7 @@ UUIDType: 1
 
 ```
 import uuid4cj.uuid4cj.*
-import crypto.crypto.SecureRandom
+import stdx.crypto.crypto.SecureRandom
 import std.random.*
 import std.time.*
 import std.fs.*
@@ -508,7 +508,7 @@ UUIDType: 1
 
 ```
 import uuid4cj.uuid4cj.*
-import crypto.crypto.SecureRandom
+import stdx.crypto.crypto.SecureRandom
 import std.random.*
 import std.time.*
 
@@ -547,7 +547,7 @@ UUIDType: 1
 
 在下述版本验证通过：
 
-    Cangjie Version: 1.0.0
+    Cangjie Version: 1.0.5
 
 ## 开源协议
 本项目基于 [Apache License 2.0](./LICENSE)，请自由的享受和参与开源。
